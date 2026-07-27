@@ -1186,7 +1186,7 @@ button {
 
   body {
     word-break: normal;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
     line-break: strict;
   }
 
@@ -1292,6 +1292,11 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .work-card__tags {
+    flex-wrap: wrap;
+    row-gap: var(--m-space-1);
+  }
+
   .timeline__row,
   .news-item {
     grid-template-columns: 1fr;
@@ -1317,9 +1322,15 @@ button {
   }
 
   .heading {
+    flex-wrap: wrap;
+    row-gap: var(--m-space-1);
     margin-bottom: var(--m-space-3);
     gap: var(--m-space-2);
     padding-bottom: var(--m-space-1);
+  }
+
+  .heading__en {
+    flex-basis: 100%;
   }
 
   .heading__watermark {
@@ -1343,7 +1354,7 @@ button {
       "body body";
     column-gap: var(--m-space-3);
     row-gap: var(--m-space-4);
-    align-items: start;
+    align-items: stretch;
   }
 
   .profile > div:nth-child(2) {
@@ -1352,6 +1363,8 @@ button {
 
   .profile__portrait {
     grid-area: photo;
+    aspect-ratio: auto;
+    height: 100%;
   }
 
   .profile > div:nth-child(2) > div:nth-child(1) {
@@ -1391,9 +1404,13 @@ button {
   }
 
   .rq-list__item {
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: auto 1fr;
     gap: var(--m-space-2);
     padding: var(--m-space-2) 0;
+  }
+
+  .rq-list__tag {
+    white-space: nowrap;
   }
 
   .work-grid {
@@ -1415,6 +1432,17 @@ button {
     min-height: 420px;
     border: 1px solid var(--c-line);
     background: var(--c-surface);
+  }
+
+  .site-footer__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--m-space-2);
+  }
+
+  .site-footer__socials {
+    flex-wrap: wrap;
+    gap: var(--m-space-2);
   }
 }
 
