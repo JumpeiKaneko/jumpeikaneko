@@ -1145,10 +1145,15 @@ button {
 
 @media (max-width: 720px) {
   :root {
-    --gutter: 20px;
-    --fs-xxl: clamp(2rem, 10vw, 2.6rem);
-    --fs-xl: clamp(1.7rem, 8vw, 2.4rem);
-    --fs-lg: 1.3rem;
+    --gutter: 24px;
+    --fs-xxl: clamp(1.9rem, 9vw, 2.4rem);
+    --fs-xl: clamp(1.6rem, 7vw, 2.2rem);
+    --fs-lg: 1.25rem;
+  }
+
+  .section {
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-4);
   }
 
   .site-header__row {
@@ -1237,16 +1242,23 @@ button {
   }
 
   .heading {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     gap: var(--space-2);
+    padding-bottom: var(--space-1);
   }
 
   .heading__watermark {
-    display: none;
+    font-size: 2.6rem;
+    top: 44%;
+    opacity: 0.55;
   }
 
   .heading__title {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
+  }
+
+  .heading__en {
+    font-size: var(--fs-xs);
   }
 
   .profile {
@@ -1255,11 +1267,45 @@ button {
 
   .profile__portrait {
     max-width: 140px;
-    margin-bottom: var(--space-1);
+    margin: 0 auto var(--space-2);
+  }
+
+  .profile__fields,
+  .profile__meta {
+    text-align: center;
+  }
+
+  .marquee {
+    padding: var(--space-2) 0;
+  }
+
+  .marquee__track {
+    gap: var(--space-3);
   }
 
   .marquee__track span {
     font-size: var(--fs-sm);
+  }
+
+  .pickup {
+    margin-top: var(--space-3);
+    padding: var(--space-3);
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+
+  .rq-list__item {
+    grid-template-columns: 44px 1fr;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+  }
+
+  .work-grid {
+    gap: var(--space-4);
+  }
+
+  .photo-stream {
+    gap: var(--space-3);
   }
 }
 
