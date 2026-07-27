@@ -4,46 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Jumpei Kaneko</title>
+<meta name="description" content="金子淳平へのご依頼・ご相談はこちらから。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="contact">
 
 <header class="site-header">
-  <div class="container site-header__inner">
-    <a href="index.html" class="site-title">JUMPEI KANEKO 金子淳平</a>
-    <nav class="main-nav">
-      <a href="index.html" class="nav-link">About</a>
-      <a href="work.html" class="nav-link">Work</a>
-      <a href="news.html" class="nav-link">News</a>
-      <a href="contact.html" class="nav-link active">Contact</a>
+  <div class="wrap site-header__row">
+    <a href="index.html" class="brand">
+      JUMPEI KANEKO
+      <span class="brand-jp">金子淳平</span>
+    </a>
+    <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="nav">
+      <span class="menu-toggle__bars"><span></span><span></span><span></span></span>
+      MENU
+    </button>
+    <nav class="nav" id="nav">
+      <ul class="nav__list">
+        <li><a href="index.html" class="nav__link" data-nav-key="about">About</a></li>
+        <li><a href="work.html" class="nav__link" data-nav-key="work">Work</a></li>
+        <li><a href="news.html" class="nav__link" data-nav-key="news">News</a></li>
+        <li><a href="contact.html" class="nav__link" data-nav-key="contact">Contact</a></li>
+      </ul>
     </nav>
-    <button id="menu-btn" class="mobile-menu-button">MENU</button>
   </div>
 </header>
-<div id="mobile-menu" class="mobile-menu-panel"></div>
 
 <main>
-  <section class="hero container">
-    <span class="hero__eyebrow">Get in touch</span>
-    <h1 class="hero__title" data-scramble>Contact</h1>
-    <p class="hero__lead">お仕事のご依頼、展示・出演のご相談などお気軽にご連絡ください。</p>
 
-    <div class="contact-links">
-      <a href="mailto:junkaneko8@gmail.com">junkaneko8@gmail.com</a>
-      <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram ↗</a>
-      <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud ↗</a>
+  <section class="contact-block wrap reveal">
+    <p class="hero__eyebrow">Get in touch</p>
+    <h1 class="hero__title" style="font-size: var(--fs-xl); margin-bottom: var(--space-4);" data-scramble>Contact</h1>
+    <p class="contact-block__lead">
+      ご依頼、ご相談など、お気軽にご連絡ください。
+    </p>
+    <a href="mailto:junkaneko8@gmail.com" class="contact-block__mail">junkaneko8@gmail.com</a>
+
+    <div class="project-links" style="margin-top: var(--space-5);">
+      <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
     </div>
   </section>
+
 </main>
 
-<footer class="site-footer container">
-  <p>© <span id="year">2026</span> JUMPEI KANEKO</p>
-  <div>
-    <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
+<footer class="site-footer">
+  <div class="wrap site-footer__row">
+    <span>© 2026 JUMPEI KANEKO</span>
+    <div class="site-footer__socials">
+      <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
+    </div>
   </div>
 </footer>
 

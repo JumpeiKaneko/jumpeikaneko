@@ -4,73 +4,112 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>News — Jumpei Kaneko</title>
+<meta name="description" content="金子淳平の活動記録。展示、ワークショップ、登壇、受賞などのお知らせ。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="news">
 
 <header class="site-header">
-  <div class="container site-header__inner">
-    <a href="index.html" class="site-title">JUMPEI KANEKO 金子淳平</a>
-    <nav class="main-nav">
-      <a href="index.html" class="nav-link">About</a>
-      <a href="work.html" class="nav-link">Work</a>
-      <a href="news.html" class="nav-link active">News</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+  <div class="wrap site-header__row">
+    <a href="index.html" class="brand">
+      JUMPEI KANEKO
+      <span class="brand-jp">金子淳平</span>
+    </a>
+    <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="nav">
+      <span class="menu-toggle__bars"><span></span><span></span><span></span></span>
+      MENU
+    </button>
+    <nav class="nav" id="nav">
+      <ul class="nav__list">
+        <li><a href="index.html" class="nav__link" data-nav-key="about">About</a></li>
+        <li><a href="work.html" class="nav__link" data-nav-key="work">Work</a></li>
+        <li><a href="news.html" class="nav__link" data-nav-key="news">News</a></li>
+        <li><a href="contact.html" class="nav__link" data-nav-key="contact">Contact</a></li>
+      </ul>
     </nav>
-    <button id="menu-btn" class="mobile-menu-button">MENU</button>
   </div>
 </header>
-<div id="mobile-menu" class="mobile-menu-panel"></div>
 
 <main>
-  <section class="hero container">
-    <span class="hero__eyebrow">Updates</span>
-    <h1 class="hero__title" data-scramble>News</h1>
+
+  <section class="hero wrap reveal" style="padding-bottom: var(--space-4);">
+    <p class="hero__eyebrow">Updates</p>
+    <h1 class="hero__title" style="font-size: var(--fs-xl);" data-scramble>News</h1>
   </section>
 
-  <section class="container reveal" style="padding-bottom: var(--space-6);">
-    <a class="news-item" href="work-detail-resonance.html">
-      <span class="news-item__date">2025</span>
-      <span>鯖江市制70周年記念 まちなか芸術祭2025に「Resonance－響き合い」を出展</span>
-      <span class="news-item__arrow">→</span>
-    </a>
-    <a class="news-item" href="work-detail-kiku.html">
-      <span class="news-item__date">2026.05</span>
-      <span>ASIBA Creative League 4期 MIDTERM DEMO DAYで「絵画を聴く」を初披露</span>
-      <span class="news-item__arrow">→</span>
-    </a>
-    <a class="news-item" href="work-detail-kikue.html">
-      <span class="news-item__date">2026.06</span>
-      <span>「聴く絵画をつくる」を美学校にて開講</span>
-      <span class="news-item__arrow">→</span>
-    </a>
-    <a class="news-item" href="work-detail-museum.html">
-      <span class="news-item__date">2025</span>
-      <span>「大学生の放課後ミュージアム」を実施</span>
-      <span class="news-item__arrow">→</span>
-    </a>
-    <a class="news-item" href="work-detail-mimi.html">
-      <span class="news-item__date">2026</span>
-      <span>「耳を澄ますための装置」を制作・発表</span>
-      <span class="news-item__arrow">→</span>
-    </a>
-    <a class="news-item" href="index.html">
-      <span class="news-item__date">2026.07</span>
-      <span>「絵画を聴く〜ミキキの交差点〜」を100BANCHにて出展</span>
-      <span class="news-item__arrow">→</span>
-    </a>
+  <section class="wrap section" style="padding-top: 0;">
+    <div class="news-list reveal-stagger">
+
+      <a href="index.html" class="news-item">
+        <span class="news-item__date">2026.07</span>
+        <span class="news-item__text">ポートフォリオサイトをリニューアルしました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="work-detail-kiku.html" class="news-item">
+        <span class="news-item__date">2026.07.19</span>
+        <span class="news-item__text">金工作家・長谷川純暖氏との共同展示「絵画を聴く〜ミキキの交差点〜」を100BANCH（渋谷）にて開催しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="work-detail-kikue.html" class="news-item">
+        <span class="news-item__date">2026.06.30</span>
+        <span class="news-item__text">ワークショップ「聴く絵画をつくる」を美学校にて開催しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="work-detail-kiku.html" class="news-item">
+        <span class="news-item__date">2026.05.23–24</span>
+        <span class="news-item__text">ASIBA Creative League 4期 MIDTERM DEMO DAYにて「印象派絵画の音を聴く」を発表しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="index.html" class="news-item">
+        <span class="news-item__date">2026.02</span>
+        <span class="news-item__text">浪江学生デジタルアート道場2025にゲスト・クリエイターとして登壇しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="work-detail-museum.html" class="news-item">
+        <span class="news-item__date">2026.01</span>
+        <span class="news-item__text">とびらプロジェクトフォーラムに登壇しました（東京都美術館）。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="work-detail-museum.html" class="news-item">
+        <span class="news-item__date">2025.12.29</span>
+        <span class="news-item__text">「大学生の放課後ミュージアム」を東京都美術館にて開催しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="work-detail-resonance.html" class="news-item">
+        <span class="news-item__date">2025.08.06</span>
+        <span class="news-item__text">鯖江市制70周年記念 まちなか芸術祭2025 に出品しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+      <a href="index.html" class="news-item">
+        <span class="news-item__date">2025.08.06</span>
+        <span class="news-item__text">ポートフォリオサイトを公開しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
+
+    </div>
   </section>
+
 </main>
 
-<footer class="site-footer container">
-  <p>© <span id="year">2026</span> JUMPEI KANEKO</p>
-  <div>
-    <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
-    <a href="contact.html">Contact</a>
+<footer class="site-footer">
+  <div class="wrap site-footer__row">
+    <span>© 2026 JUMPEI KANEKO</span>
+    <div class="site-footer__socials">
+      <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
+      <a href="contact.html">Contact</a>
+    </div>
   </div>
 </footer>
 
