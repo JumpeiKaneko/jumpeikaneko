@@ -307,7 +307,6 @@ button {
   font-size: var(--fs-md);
   line-height: var(--lh-body);
   color: var(--c-fg-soft);
-  font-style: italic;
 }
 
 /* ---------- 5b. Hero image strip (top of About) ---------- */
