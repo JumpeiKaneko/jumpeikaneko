@@ -1146,34 +1146,62 @@ button {
 @media (max-width: 720px) {
   :root {
     --gutter: 20px;
+    --fs-xxl: clamp(2rem, 10vw, 2.6rem);
+    --fs-xl: clamp(1.7rem, 8vw, 2.4rem);
+    --fs-lg: 1.3rem;
   }
 
   .site-header__row {
-    height: 64px;
+    height: 56px;
+    flex-wrap: nowrap;
+  }
+
+  .brand {
+    font-size: var(--fs-xs);
+    min-width: 0;
+    max-width: 60%;
+    overflow: hidden;
+  }
+
+  .brand-jp {
+    font-size: 0.62rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  .nav__link {
+    white-space: nowrap;
   }
 
   .nav {
     position: fixed;
-    inset: 64px 0 0 0;
+    inset: 56px 0 0 0;
     background: var(--c-bg);
     flex-direction: column;
     align-items: flex-start;
     padding: var(--space-5) var(--gutter);
     transform: translateY(-8px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 400ms var(--ease), transform 400ms var(--ease);
+    transition: opacity 300ms var(--ease), transform 300ms var(--ease), visibility 300ms;
+    z-index: 200;
   }
 
   .nav-open .nav {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
   }
 
   .nav__list {
     flex-direction: column;
-    gap: var(--space-4);
+    align-items: flex-start;
+    gap: var(--space-3);
+    width: 100%;
   }
 
   .nav__link {
@@ -1182,6 +1210,7 @@ button {
 
   .menu-toggle {
     display: inline-flex;
+    flex-shrink: 0;
   }
 
   .work-grid {
@@ -1199,6 +1228,48 @@ button {
   }
 
   .hero {
-    padding-top: var(--space-6);
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-4);
+  }
+
+  .hero__lead {
+    font-size: var(--fs-base);
+  }
+
+  .heading {
+    margin-bottom: var(--space-4);
+    gap: var(--space-2);
+  }
+
+  .heading__watermark {
+    font-size: clamp(3rem, 20vw, 4.5rem);
+    left: -0.03em;
+  }
+
+  .heading__title {
+    font-size: 1.3rem;
+  }
+
+  .profile {
+    gap: var(--space-3);
+  }
+
+  .profile__portrait {
+    max-width: 140px;
+    margin-bottom: var(--space-1);
+  }
+
+  .marquee__track span {
+    font-size: var(--fs-sm);
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --fs-xxl: clamp(1.8rem, 11vw, 2.2rem);
+  }
+
+  .heading__watermark {
+    font-size: clamp(2.4rem, 22vw, 3.4rem);
   }
 }
