@@ -705,6 +705,12 @@ button {
   gap: var(--space-2);
 }
 
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
 /* generic aspect-ratio box, reused for single images and inside grids */
 .aspect {
   aspect-ratio: 4 / 3;
@@ -1151,6 +1157,12 @@ button {
     --fs-lg: 1.25rem;
   }
 
+  body {
+    word-break: normal;
+    overflow-wrap: anywhere;
+    line-break: strict;
+  }
+
   .section {
     padding-top: var(--space-5);
     padding-bottom: var(--space-5);
@@ -1237,6 +1249,11 @@ button {
 
   .project-media-grid {
     grid-template-columns: 1fr;
+  }
+
+  .flow-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 
   .hero {
