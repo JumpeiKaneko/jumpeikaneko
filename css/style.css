@@ -1242,8 +1242,7 @@ button {
   }
 
   .heading__watermark {
-    font-size: clamp(3rem, 20vw, 4.5rem);
-    left: -0.03em;
+    display: none;
   }
 
   .heading__title {
@@ -1267,9 +1266,5 @@ button {
 @media (max-width: 420px) {
   :root {
     --fs-xxl: clamp(1.8rem, 11vw, 2.2rem);
-  }
-
-  .heading__watermark {
-    font-size: clamp(2.4rem, 22vw, 3.4rem);
   }
 }
