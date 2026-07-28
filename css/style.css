@@ -1355,40 +1355,25 @@ button {
   }
 
   .profile {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "photo info"
-      "body body";
-    column-gap: var(--m-space-3);
-    row-gap: var(--m-space-4);
-    align-items: stretch;
-  }
-
-  .profile > div:nth-child(2) {
-    display: contents;
+    display: block;
   }
 
   .profile__portrait {
-    grid-area: photo;
     aspect-ratio: auto;
-    height: 100%;
+    max-width: 300px;
+    margin: 0 auto var(--m-space-4);
   }
 
-  .profile > div:nth-child(2) > div:nth-child(1) {
-    grid-area: info;
-  }
-
-  .profile > div:nth-child(2) > div:nth-child(2) {
-    grid-area: body;
-    margin-top: 0 !important;
+  .profile__portrait img {
+    height: auto;
   }
 
   .profile__meta {
-    font-size: var(--fs-xs);
+    font-size: var(--fs-sm);
   }
 
   .profile__fields {
-    font-size: var(--fs-xs);
+    font-size: var(--fs-sm);
   }
 
   .marquee {
