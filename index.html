@@ -35,76 +35,49 @@
 
 <main>
 
-  <!-- Hero -->
+  <!-- Hero: 球体状に浮かぶ作品写真を背景に配置 -->
   <section class="hero wrap reveal">
-    <p class="hero__eyebrow"><span class="hero__eyebrow-mark" aria-hidden="true">—</span>Sound Art ／ Media Art<br>— Research &amp; Practice</p>
-    <h1 class="hero__title" data-scramble>金子 淳平</h1>
-    <p class="hero__title-en">Jumpei Kaneko</p>
-
-    <div class="hero__fields reveal" style="margin-top: var(--space-4);">
-      <div class="profile__fields">
-        <span>主な専門領域</span>
-        <span>サウンド・アート／メディアアート</span>
-        <span>仏近現代美術史研究／アートコミュニケーション</span>
+    <div class="hero__bg">
+      <div class="hero3d__stage" id="hero3dStage">
+        <div class="hero3d__ring" id="hero3dRing">
+          <div class="hero3d__tilt">
+            <a class="hero3d__tile" href="work-detail-kiku.html" style="--ry:90deg; --rx:53.1deg; --delay:0s;">
+              <img src="images/kiku-01.jpg" alt="絵画を聴く" loading="lazy">
+            </a>
+            <a class="hero3d__tile" href="work-detail-kikue.html" style="--ry:-47.5deg; --rx:23.6deg; --delay:0.6s;">
+              <img src="images/kikue-06.jpg" alt="聴く絵画をつくる" loading="lazy">
+            </a>
+            <a class="hero3d__tile" href="work-detail-resonance.html" style="--ry:175deg; --rx:0deg; --delay:1.2s;">
+              <img src="images/resonance-01.jpg" alt="Resonance" loading="lazy">
+            </a>
+            <a class="hero3d__tile" href="work-detail-mimi.html" style="--ry:37.5deg; --rx:-23.6deg; --delay:1.8s;">
+              <img src="images/mimi-01.jpg" alt="耳を澄ますための装置" loading="lazy">
+            </a>
+            <a class="hero3d__tile" href="work-detail-museum.html" style="--ry:-100deg; --rx:-53.1deg; --delay:2.4s;">
+              <img src="images/museum-04.jpg" alt="大学生の放課後ミュージアム" loading="lazy">
+            </a>
+          </div>
+        </div>
       </div>
-      <p class="profile__meta">
-        2005年生まれ<br>
-        明治学院大学 文学部 フランス文学科 3年生<br>
-        東京都美術館×東京藝術大学「とびらプロジェクト」13期とびラー
-      </p>
     </div>
-  </section>
 
-  <!-- Selected works: 3D gallery（既存の作品画像のみを使用） -->
-  <section class="hero3d wrap reveal" aria-label="作品ギャラリー">
-    <div class="hero3d__stage" id="hero3dStage">
-      <ul class="hero3d__ring" id="hero3dRing" style="--count:9;">
-        <li class="hero3d__tile" style="--i:0;">
-          <a class="hero3d__tile-inner" href="work-detail-mimi.html" style="--delay:0s;">
-            <img src="images/mimi-01.jpg" alt="耳を澄ますための装置" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:1;">
-          <a class="hero3d__tile-inner" href="work-detail-resonance.html" style="--delay:0.4s;">
-            <img src="images/resonance-01.jpg" alt="Resonance" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:2;">
-          <a class="hero3d__tile-inner" href="work-detail-kiku.html" style="--delay:0.8s;">
-            <img src="images/kiku-01.jpg" alt="絵画を聴く" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:3;">
-          <a class="hero3d__tile-inner" href="work-detail-kikue.html" style="--delay:1.2s;">
-            <img src="images/kikue-01.jpg" alt="聴く絵画をつくる" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:4;">
-          <a class="hero3d__tile-inner" href="work-detail-museum.html" style="--delay:1.6s;">
-            <img src="images/museum-04.jpg" alt="大学生の放課後ミュージアム" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:5;">
-          <a class="hero3d__tile-inner" href="work-detail-mimi.html" style="--delay:2.0s;">
-            <img src="images/mimi-02.jpg" alt="耳を澄ますための装置" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:6;">
-          <a class="hero3d__tile-inner" href="work-detail-resonance.html" style="--delay:2.4s;">
-            <img src="images/resonance-02.jpg" alt="Resonance" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:7;">
-          <a class="hero3d__tile-inner" href="work-detail-kiku.html" style="--delay:2.8s;">
-            <img src="images/kiku-02.jpg" alt="絵画を聴く" loading="lazy">
-          </a>
-        </li>
-        <li class="hero3d__tile" style="--i:8;">
-          <a class="hero3d__tile-inner" href="work-detail-kikue.html" style="--delay:3.2s;">
-            <img src="images/kikue-02.jpg" alt="聴く絵画をつくる" loading="lazy">
-          </a>
-        </li>
-      </ul>
+    <div class="hero__content">
+      <p class="hero__eyebrow"><span class="hero__eyebrow-mark" aria-hidden="true">—</span>Sound Art ／ Media Art<br>— Research &amp; Practice</p>
+      <h1 class="hero__title" data-scramble>金子 淳平</h1>
+      <p class="hero__title-en">Jumpei Kaneko</p>
+
+      <div class="hero__fields reveal" style="margin-top: var(--space-4);">
+        <div class="profile__fields">
+          <span>サウンド・アート／メディアアート</span>
+          <span>仏近現代美術史研究</span>
+          <span>アートコミュニケーション</span>
+        </div>
+        <p class="profile__meta">
+          2005年生まれ<br>
+          明治学院大学 文学部 フランス文学科 3年生<br>
+          東京都美術館×東京藝術大学「とびらプロジェクト」13期とびラー
+        </p>
+      </div>
     </div>
   </section>
 
@@ -160,14 +133,24 @@
       <span class="heading__en">Activities</span>
     </div>
 
-    <div class="reveal">
-      <p class="prose">
-        2022年、国立新美術館ユースプログラム「第1期新美塾」を修了。2024年より明治学院大学文学部
-        フランス文学科に在籍しながら、東京都美術館×東京藝術大学「とびらプロジェクト」アートコミュニ
-        ケータ13期としても活動を続けている。2026年からはASIBA Creative League 4期に採択され、
-        現在に至る。
-      </p>
-    </div>
+    <ul class="timeline reveal">
+      <li class="timeline__row">
+        <span class="timeline__date">2022</span>
+        <span class="timeline__text">国立新美術館ユースプログラム「第1期新美塾」修了</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2024 –</span>
+        <span class="timeline__text">明治学院大学 文学部 フランス文学科 在籍</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2024 –</span>
+        <span class="timeline__text">東京都美術館×東京藝術大学「とびらプロジェクト」アートコミュニケータ13期</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2026 –</span>
+        <span class="timeline__text">ASIBA Creative League 4期 採択</span>
+      </li>
+    </ul>
   </section>
 
   <!-- 展示・受賞歴 -->
@@ -179,16 +162,40 @@
       <span class="heading__en">Exhibitions &amp; Awards</span>
     </div>
 
-    <div class="reveal">
-      <p class="prose">
-        2025年、鯖江市制70周年記念まちなか芸術祭2025に出展し、tornad2025では企業賞を受賞した。同年、
-        Sasebo Sound Chronicle Awardのファイナリストに選出されたほか、させぼピース展―海からたどる、
-        時の旅にも参加している。2026年にはNEW SCHOOL成果展「希望の野帖」（Art Center NEW）で発表し、
-        5月にはASIBA Creative League 4期MIDTERM DEMO DAYにて「絵画を聴く」を出展した。6月には美学校
-        でワークショップ「聴く絵画をつくる」を、7月には100BANCHで「絵画を聴く〜ミキキの交差点〜」を
-        開催。9月には第31回日本バーチャルリアリティ学会大会での論文発表を予定している。
-      </p>
-    </div>
+    <ul class="timeline reveal">
+      <li class="timeline__row">
+        <span class="timeline__date">2025</span>
+        <span class="timeline__text">鯖江市制70周年記念まちなか芸術祭2025 出展／tornad2025 企業賞受賞</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2025</span>
+        <span class="timeline__text">Sasebo Sound Chronicle Award ファイナリスト選出</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2025</span>
+        <span class="timeline__text">させぼピース展―海からたどる、時の旅 参加</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2026</span>
+        <span class="timeline__text">NEW SCHOOL成果展「希望の野帖」（Art Center NEW）</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2026.5</span>
+        <span class="timeline__text">ASIBA Creative League 4期 MIDTERM DEMO DAYにて「絵画を聴く」出展</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2026.6</span>
+        <span class="timeline__text">美学校 ワークショップ「聴く絵画をつくる」開催</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2026.7</span>
+        <span class="timeline__text">100BANCHにて「絵画を聴く〜ミキキの交差点〜」開催</span>
+      </li>
+      <li class="timeline__row">
+        <span class="timeline__date">2026.9</span>
+        <span class="timeline__text">第31回日本バーチャルリアリティ学会大会 論文発表予定</span>
+      </li>
+    </ul>
   </section>
 
 </main>

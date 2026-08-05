@@ -178,7 +178,7 @@ function initScrambleText() {
 }
 
 /* 6b) Hero 3Dギャラリー — ホバー/フォーカス中は回転を一時停止 ------
-   CSSアニメーション（.hero3d__ring / .hero3d__tile-inner）はそのままに、
+   CSSアニメーション（.hero3d__ring / .hero3d__tilt / .hero3d__tile）はそのままに、
    JSは「is-paused」クラスの付け外しだけを担当する（実際の停止はCSS側）。 */
 function initHero3D() {
   const stage = document.getElementById("hero3dStage");

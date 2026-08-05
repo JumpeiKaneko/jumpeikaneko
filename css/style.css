@@ -267,8 +267,44 @@ button {
 
 /* ---------- 5. Hero ---------- */
 .hero {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(440px, 62vh, 680px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-top: var(--space-7);
   padding-bottom: var(--space-6);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__content::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(140%, 900px);
+  height: 140%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(253, 253, 252, 0.92) 0%,
+    rgba(253, 253, 252, 0.72) 45%,
+    rgba(253, 253, 252, 0) 75%
+  );
+  z-index: -1;
+  pointer-events: none;
 }
 
 .hero__eyebrow {
@@ -309,17 +345,15 @@ button {
   color: var(--c-fg-soft);
 }
 
-/* ---------- 5b. Hero 3D gallery (top of About) ----------
-   既存の作品画像のみを使い、CSS 3D Transformでリング状に配置して
-   自動回転させる軽量実装。Three.js等の外部ライブラリは使用しない。 */
-.hero3d {
-  padding-bottom: var(--space-6);
-}
-
+/* ---------- 5b. Hero 3D gallery — 球体状に浮かぶ作品写真（Heroの背景） ----------
+   work.html のサムネイルと同じ5枚のみを使用。フィボナッチ球面分布で配置し、
+   リング全体のY軸回転＋ゆるいX軸チルトを重ねて「宇宙的」な多軸モーションにする。
+   CSS 3D Transformのみで実装し、Three.js等の外部ライブラリは使用しない。 */
 .hero3d__stage {
   position: relative;
-  height: clamp(220px, 32vw, 460px);
-  perspective: 1400px;
+  width: 100%;
+  height: 100%;
+  perspective: 1600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -329,12 +363,16 @@ button {
   position: relative;
   width: 1px;
   height: 1px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
   transform-style: preserve-3d;
-  animation: hero3d-spin 42s linear infinite;
+  animation: hero3d-spin 90s linear infinite;
   will-change: transform;
+}
+
+.hero3d__tilt {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: hero3d-tumble 26s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
 }
 
 @keyframes hero3d-spin {
@@ -342,11 +380,15 @@ button {
   to   { transform: rotateY(360deg); }
 }
 
+@keyframes hero3d-tumble {
+  from { transform: rotateX(-9deg); }
+  to   { transform: rotateX(9deg); }
+}
+
 .hero3d__tile {
-  --radius: clamp(150px, 26vw, 420px);
-  --tile-w: clamp(110px, 15vw, 220px);
+  --radius: clamp(170px, 24vw, 440px);
+  --tile-w: clamp(84px, 11vw, 176px);
   --tile-h: calc(var(--tile-w) * 0.75);
-  --angle-step: 40deg; /* 360deg / 9 tiles */
 
   position: absolute;
   top: 0;
@@ -355,58 +397,54 @@ button {
   height: var(--tile-h);
   margin-top: calc(var(--tile-h) / -2);
   margin-left: calc(var(--tile-w) / -2);
-  transform: rotateY(calc(var(--i) * var(--angle-step))) translateZ(var(--radius));
-  backface-visibility: hidden;
-}
-
-.hero3d__tile-inner {
   display: block;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
   background: var(--c-surface);
   border: 1px solid var(--c-line);
-  animation: hero3d-float 6s var(--ease) infinite;
+  pointer-events: auto;
+  transform: rotateY(var(--ry)) rotateX(var(--rx)) translateZ(var(--radius));
+  backface-visibility: hidden;
+  animation: hero3d-float 7s var(--ease) infinite;
   animation-delay: var(--delay, 0s);
 }
 
 @keyframes hero3d-float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -8px; }
 }
 
-.hero3d__tile-inner img {
+.hero3d__tile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(20%);
-  transition: filter 400ms var(--ease);
+  filter: grayscale(25%);
+  transition: filter 500ms var(--ease), opacity 500ms var(--ease);
 }
 
-.hero3d__tile-inner:hover img,
-.hero3d__tile-inner:focus-visible img {
+.hero3d__tile:hover img,
+.hero3d__tile:focus-visible img {
   filter: grayscale(0%);
 }
 
-/* ホバー/フォーカス中は回転を止め、じっくり見られるようにする（main.js側でクラス付与） */
-.hero3d__stage.is-paused .hero3d__ring {
-  animation-play-state: paused;
-}
-.hero3d__stage.is-paused .hero3d__tile-inner {
+/* ホバー/フォーカス/タップ中は回転を止め、じっくり見られるようにする（main.js側でクラス付与） */
+.hero3d__stage.is-paused .hero3d__ring,
+.hero3d__stage.is-paused .hero3d__tilt,
+.hero3d__stage.is-paused .hero3d__tile {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero3d__ring,
-  .hero3d__tile-inner {
+  .hero3d__tilt,
+  .hero3d__tile {
     animation: none;
   }
 }
 
 @media (max-width: 720px) {
-  .hero3d__stage {
-    height: clamp(200px, 60vw, 320px);
+  .hero__content::before {
+    width: 160%;
   }
 }
 
@@ -1247,12 +1285,12 @@ button {
     line-break: strict;
   }
 
-  a, button, .nav__link, .work-card, .hero3d__tile-inner, .menu-toggle, .back-link, .pickup__link {
+  a, button, .nav__link, .work-card, .hero3d__tile, .menu-toggle, .back-link, .pickup__link {
     transition: opacity var(--m-dur) var(--m-ease), background-color var(--m-dur) var(--m-ease);
     -webkit-tap-highlight-color: transparent;
   }
 
-  a:active, button:active, .nav__link:active, .work-card:active, .hero3d__tile-inner:active, .pickup__link:active {
+  a:active, button:active, .nav__link:active, .work-card:active, .hero3d__tile:active, .pickup__link:active {
     opacity: 0.6;
   }
 
