@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollProgress();
   initScrambleText();
   initWatermarkCount();
+  initHero3D();
 });
 
 /* 0) 全ページ共通のオーバーレイ要素を注入 -------------------------- */
@@ -174,6 +175,31 @@ function initScrambleText() {
   );
 
   els.forEach((el) => observer.observe(el));
+}
+
+/* 6b) Hero 3Dギャラリー — ホバー/フォーカス中は回転を一時停止 ------
+   CSSアニメーション（.hero3d__ring / .hero3d__tile-inner）はそのままに、
+   JSは「is-paused」クラスの付け外しだけを担当する（実際の停止はCSS側）。 */
+function initHero3D() {
+  const stage = document.getElementById("hero3dStage");
+  if (!stage) return;
+
+  const pause = () => stage.classList.add("is-paused");
+  const resume = () => stage.classList.remove("is-paused");
+
+  stage.addEventListener("mouseenter", pause);
+  stage.addEventListener("mouseleave", resume);
+  stage.addEventListener("focusin", pause);
+  stage.addEventListener("focusout", (e) => {
+    // ステージの外にフォーカスが移動したときだけ再開する
+    if (!stage.contains(e.relatedTarget)) resume();
+  });
+
+  // タッチ操作: タップ中は回転を止め、指を離したら再開
+  stage.addEventListener("touchstart", pause, { passive: true });
+  stage.addEventListener("touchend", () => {
+    setTimeout(resume, 1500);
+  });
 }
 
 /* 6) 見出しの背景連番（heading__watermark）をカウントアップさせる ------ */
