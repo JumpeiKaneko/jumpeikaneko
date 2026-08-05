@@ -392,8 +392,8 @@ button {
 }
 
 .hero3d__tile {
-  --radius: clamp(190px, 26vw, 460px);
-  --tile-w: clamp(70px, 9vw, 150px);
+  --radius: clamp(200px, 27vw, 480px);
+  --tile-w: clamp(58px, 7.5vw, 128px);
   --tile-h: calc(var(--tile-w) * 0.75);
 
   position: absolute;
@@ -433,17 +433,20 @@ button {
   filter: grayscale(0%);
 }
 
-/* ホバー/フォーカス/タップ中は回転を止め、じっくり見られるようにする（main.js側でクラス付与） */
-.hero3d__stage.is-paused .hero3d__ring,
-.hero3d__stage.is-paused .hero3d__tilt,
-.hero3d__stage.is-paused .hero3d__tile {
-  animation-play-state: paused;
+/* ホバー/フォーカス/タップ中は回転が加速する（main.js側でクラス付与） */
+.hero3d__stage.is-fast .hero3d__ring {
+  animation-duration: 10s;
+}
+.hero3d__stage.is-fast .hero3d__tilt {
+  animation-duration: 7s;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero3d__ring,
   .hero3d__tilt,
-  .hero3d__tile {
+  .hero3d__tile,
+  .hero3d__stage.is-fast .hero3d__ring,
+  .hero3d__stage.is-fast .hero3d__tilt {
     animation: none;
   }
 }

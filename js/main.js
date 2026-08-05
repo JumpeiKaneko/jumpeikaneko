@@ -177,28 +177,28 @@ function initScrambleText() {
   els.forEach((el) => observer.observe(el));
 }
 
-/* 6b) Hero 3Dギャラリー — ホバー/フォーカス中は回転を一時停止 ------
-   CSSアニメーション（.hero3d__ring / .hero3d__tilt / .hero3d__tile）はそのままに、
-   JSは「is-paused」クラスの付け外しだけを担当する（実際の停止はCSS側）。 */
+/* 6b) Hero 3Dギャラリー — 触れる（ホバー/フォーカス/タップ）と回転が加速する ------
+   CSSアニメーション（.hero3d__ring / .hero3d__tilt）の速度自体はCSS側の
+   .is-fast修飾で切り替え、JSは「is-fast」クラスの付け外しだけを担当する。 */
 function initHero3D() {
   const stage = document.getElementById("hero3dStage");
   if (!stage) return;
 
-  const pause = () => stage.classList.add("is-paused");
-  const resume = () => stage.classList.remove("is-paused");
+  const speedUp = () => stage.classList.add("is-fast");
+  const normalSpeed = () => stage.classList.remove("is-fast");
 
-  stage.addEventListener("mouseenter", pause);
-  stage.addEventListener("mouseleave", resume);
-  stage.addEventListener("focusin", pause);
+  stage.addEventListener("mouseenter", speedUp);
+  stage.addEventListener("mouseleave", normalSpeed);
+  stage.addEventListener("focusin", speedUp);
   stage.addEventListener("focusout", (e) => {
-    // ステージの外にフォーカスが移動したときだけ再開する
-    if (!stage.contains(e.relatedTarget)) resume();
+    // ステージの外にフォーカスが移動したときだけ通常速度に戻す
+    if (!stage.contains(e.relatedTarget)) normalSpeed();
   });
 
-  // タッチ操作: タップ中は回転を止め、指を離したら再開
-  stage.addEventListener("touchstart", pause, { passive: true });
+  // タッチ操作: 触れている間だけ加速し、離したら通常速度に戻す
+  stage.addEventListener("touchstart", speedUp, { passive: true });
   stage.addEventListener("touchend", () => {
-    setTimeout(resume, 1500);
+    setTimeout(normalSpeed, 600);
   });
 }
 
