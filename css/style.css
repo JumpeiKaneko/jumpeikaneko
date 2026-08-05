@@ -267,14 +267,20 @@ button {
 
 /* ---------- 5. Hero ---------- */
 .hero {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+}
+
+/* .hero--gallery: index.htmlの3D球体ギャラリーを背景に持つHeroのみに適用。
+   work.html / news.html も .hero を共有しているため、位置指定や高さの
+   強制はここに限定し、他ページのヒーローに影響しないようにする。 */
+.hero--gallery {
   position: relative;
   overflow: hidden;
   min-height: clamp(440px, 62vh, 680px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: var(--space-7);
-  padding-bottom: var(--space-6);
 }
 
 .hero__bg {
@@ -386,8 +392,8 @@ button {
 }
 
 .hero3d__tile {
-  --radius: clamp(170px, 24vw, 440px);
-  --tile-w: clamp(84px, 11vw, 176px);
+  --radius: clamp(190px, 26vw, 460px);
+  --tile-w: clamp(70px, 9vw, 150px);
   --tile-h: calc(var(--tile-w) * 0.75);
 
   position: absolute;
@@ -443,8 +449,25 @@ button {
 }
 
 @media (max-width: 720px) {
+  .hero--gallery {
+    min-height: clamp(380px, 58vh, 540px);
+  }
+
   .hero__content::before {
     width: 160%;
+  }
+
+  .hero3d__stage {
+    perspective: 900px;
+  }
+
+  .hero3d__tile {
+    --radius: clamp(120px, 34vw, 220px);
+    --tile-w: clamp(56px, 15vw, 96px);
+  }
+
+  .hero3d__tilt {
+    animation-duration: 20s;
   }
 }
 
