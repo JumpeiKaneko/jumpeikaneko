@@ -356,13 +356,27 @@ button {
 }
 
 @media (max-width: 720px) {
+  /* 代表作3枚：1枚ずつ全幅で見せつつ、横スワイプで3枚に辿り着ける
+     スクロールスナップのカルーセルにする（デスクトップの3列に近い体験） */
   .hero-strip {
-    grid-template-columns: 1fr;
-    gap: var(--m-space-3);
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: var(--m-space-2);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hero-strip::-webkit-scrollbar {
+    display: none;
   }
 
   .hero-strip__item {
-    aspect-ratio: 16 / 9;
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    aspect-ratio: 4 / 3;
   }
 }
 
@@ -496,18 +510,20 @@ button {
 
 @media (max-width: 720px) {
   .hero--gallery {
-    min-height: clamp(440px, 64vh, 600px);
+    min-height: clamp(420px, 60vh, 560px);
   }
 
+  /* デスクトップは写真がほぼそのまま見えているので、モバイルも
+     テキストの真後ろだけを軽く覆う程度に留め、周辺の写真は
+     はっきり見えるようにする */
   .hero__content::before {
-    width: 108%;
-    height: 108%;
+    width: 94%;
+    height: 94%;
     background: radial-gradient(
       ellipse at center,
-      rgba(253, 253, 252, 0.98) 0%,
-      rgba(253, 253, 252, 0.94) 55%,
-      rgba(253, 253, 252, 0.5) 80%,
-      rgba(253, 253, 252, 0) 100%
+      rgba(253, 253, 252, 0.9) 0%,
+      rgba(253, 253, 252, 0.6) 42%,
+      rgba(253, 253, 252, 0) 70%
     );
   }
 
@@ -516,12 +532,12 @@ button {
   }
 
   .hero3d__tile {
-    --radius: clamp(150px, 46vw, 240px);
-    --tile-w: clamp(44px, 12vw, 76px);
+    --radius: clamp(150px, 44vw, 230px);
+    --tile-w: clamp(52px, 13vw, 84px);
   }
 
   .hero3d__tile img {
-    opacity: 0.55;
+    opacity: 0.85;
   }
 
   .hero3d__tilt {
@@ -1543,13 +1559,9 @@ button {
     height: auto;
   }
 
-  .profile__meta {
-    font-size: var(--fs-sm);
-  }
-
-  .profile__fields {
-    font-size: var(--fs-sm);
-  }
+  /* profile__meta / profile__fields はベース側の var(--fs-xs) を
+     そのまま使う（= モバイルでは12px）。ここでfs-smに拡大していたのが
+     文字が大きすぎて改行が汚くなる原因だったため、上書きをやめる。 */
 
   .marquee {
     padding: var(--m-space-2) 0;
