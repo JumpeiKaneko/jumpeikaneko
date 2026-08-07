@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollProgress();
   initScrambleText();
   initWatermarkCount();
+  initHeroStripDots();
 });
 
 /* 0) 全ページ共通のオーバーレイ要素を注入 -------------------------- */
@@ -174,6 +175,26 @@ function initScrambleText() {
   );
 
   els.forEach((el) => observer.observe(el));
+}
+
+/* 5b) 代表作3枚の横スクロールカルーセル — 今どの写真を見ているかを
+   下の小さいドットで示す（モバイルのみCSSで表示）。 */
+function initHeroStripDots() {
+  const strip = document.querySelector(".hero-strip");
+  const dots = document.querySelectorAll(".hero-strip__dot");
+  if (!strip || !dots.length) return;
+
+  const update = () => {
+    const width = strip.clientWidth || 1;
+    const index = Math.round(strip.scrollLeft / width);
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("is-active", i === index);
+    });
+  };
+
+  strip.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
 }
 
 /* 6) 見出しの背景連番（heading__watermark）をカウントアップさせる ------ */

@@ -378,6 +378,32 @@ button {
     scroll-snap-align: center;
     aspect-ratio: 4 / 3;
   }
+
+  .hero-strip__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding-top: var(--m-space-2);
+  }
+
+  .hero-strip__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--c-line-strong);
+    opacity: 0.22;
+    transition: opacity 250ms var(--m-ease);
+  }
+
+  .hero-strip__dot.is-active {
+    opacity: 1;
+  }
+}
+
+/* デスクトップでは3枚とも並んで見えているため現在地ドットは不要 */
+.hero-strip__dots {
+  display: none;
 }
 
 .hero__eyebrow {
@@ -1523,6 +1549,12 @@ button {
     margin-top: var(--m-space-4);
   }
 
+  /* ワークス詳細ページ：形態・発表日・リンク類の文字が大きすぎたため縮小 */
+  .project-head__meta,
+  .project-links a {
+    font-size: var(--fs-xs);
+  }
+
   .project-media-grid {
     grid-template-columns: 1fr;
   }
@@ -1568,24 +1600,22 @@ button {
     font-size: var(--fs-xs);
   }
 
-  /* モバイル：写真+metaは横並び（デスクトップと同じ発想。写真は約4割）。
-     本文（bio）だけは列の外に全幅で折り返す。写真の横に文章を置くと
-     幅が狭すぎて読みづらくなるため、本文だけモバイルでは分離する。 */
+  /* モバイル：写真の横にmeta文を並べると幅が狭すぎて改行が汚くなるため、
+     写真→meta→本文の縦積みにする（写真は控えめなサイズで中央寄せ）。 */
   .profile {
     display: grid;
-    grid-template-columns: 42% 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "portrait intro"
-      "bio bio";
-    column-gap: var(--m-space-3);
+      "portrait"
+      "intro"
+      "bio";
     row-gap: 0;
-    align-items: start;
   }
 
   .profile__portrait {
     aspect-ratio: 3 / 4;
-    max-width: none;
-    margin: 0;
+    max-width: min(240px, 60%);
+    margin: 0 auto var(--m-space-4);
   }
 
   .profile__portrait img {
@@ -1597,7 +1627,6 @@ button {
   }
 
   .profile__bio {
-    grid-column: 1 / -1;
     width: 100%;
     margin-top: var(--m-space-4);
   }
