@@ -646,16 +646,24 @@ button {
 }
 
 /* ---------- 7. Profile / bio blocks ----------
-   写真の横に肩書き・基本情報（fields/meta）を並べ、
-   本文（bio）はその下にフルワイドで続ける構成。 */
+   デスクトップ：写真の右側に基本情報（meta）と本文（bio）を縦に並べる
+   （＝本文も写真の横に来る）。
+   モバイル：写真＋metaは横並びのまま、本文（bio）だけ全幅に折り返す。
+   grid-template-areas で portrait / intro / bio の3つを配置し、
+   ブレークポイントごとに area の組み方だけを変える。 */
 .profile {
   display: grid;
   grid-template-columns: 220px 1fr;
-  gap: var(--space-6);
+  grid-template-areas:
+    "portrait intro"
+    "portrait bio";
+  column-gap: var(--space-6);
+  row-gap: 0;
   align-items: start;
 }
 
 .profile__portrait {
+  grid-area: portrait;
   aspect-ratio: 3 / 4;
   background: var(--c-surface);
   overflow: hidden;
@@ -668,27 +676,19 @@ button {
 }
 
 .profile__intro {
+  grid-area: intro;
   padding-top: var(--space-1);
 }
 
 .profile__meta {
-  margin-top: var(--space-3);
   font-size: var(--fs-xs);
   color: var(--c-gray);
   line-height: var(--lh-tight);
 }
 
-.profile__fields {
-  font-size: var(--fs-xs);
-  color: var(--c-gray);
-}
-
-.profile__fields span {
-  display: block;
-}
-
 .profile__bio {
-  margin-top: var(--space-5);
+  grid-area: bio;
+  margin-top: var(--space-4);
 }
 
 /* ---------- 8. Timeline (活動略歴 / 受賞歴) ----------
@@ -1346,6 +1346,14 @@ button {
 @media (max-width: 900px) {
   .profile {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "portrait"
+      "intro"
+      "bio";
+  }
+  .profile__intro,
+  .profile__bio {
+    margin-top: var(--space-3);
   }
   .profile__portrait {
     max-width: 220px;
@@ -1556,12 +1564,17 @@ button {
     font-size: var(--fs-xs);
   }
 
-  /* モバイルでもデスクトップと同じく写真+テキストの2カラムを維持する
-     （全幅の縦積みにはしない）。写真は約4割、残りをfields/metaに使う。 */
+  /* モバイル：写真+metaは横並び（デスクトップと同じ発想。写真は約4割）。
+     本文（bio）だけは列の外に全幅で折り返す。写真の横に文章を置くと
+     幅が狭すぎて読みづらくなるため、本文だけモバイルでは分離する。 */
   .profile {
     display: grid;
     grid-template-columns: 42% 1fr;
-    gap: var(--m-space-3);
+    grid-template-areas:
+      "portrait intro"
+      "bio bio";
+    column-gap: var(--m-space-3);
+    row-gap: 0;
     align-items: start;
   }
 
@@ -1583,8 +1596,8 @@ button {
     margin-top: var(--m-space-4);
   }
 
-  /* profile__meta / profile__fields はベース側の var(--fs-xs) を
-     そのまま使う（= モバイルでは12px）。ここでfs-smに拡大していたのが
+  /* profile__meta はベース側の var(--fs-xs) をそのまま使う
+     （= モバイルでは12px）。ここでfs-smに拡大していたのが
      文字が大きすぎて改行が汚くなる原因だったため、上書きをやめる。 */
 
   /* プロフィール本文（自己紹介文）は活動歴と同じ文字サイズにする */
