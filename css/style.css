@@ -1511,8 +1511,12 @@ button {
   .timeline__row,
   .news-item {
     grid-template-columns: 1fr;
-    gap: var(--m-space-1);
-    padding: var(--m-space-2) 0;
+    gap: 4px;
+    padding: var(--m-space-1) 0;
+  }
+
+  .timeline__text {
+    font-size: var(--fs-xs);
   }
 
   .prose + .prose {
@@ -1593,6 +1597,8 @@ button {
   }
 
   .profile__bio {
+    grid-column: 1 / -1;
+    width: 100%;
     margin-top: var(--m-space-4);
   }
 
@@ -1600,9 +1606,11 @@ button {
      （= モバイルでは12px）。ここでfs-smに拡大していたのが
      文字が大きすぎて改行が汚くなる原因だったため、上書きをやめる。 */
 
-  /* プロフィール本文（自己紹介文）は活動歴と同じ文字サイズにする */
+  /* プロフィール本文（自己紹介文）は活動歴と同じ文字サイズにする。
+     max-widthのキャップも外し、画面幅いっぱいまで使う（半分幅に見えないように）。 */
   .profile__bio .prose {
     font-size: var(--fs-sm);
+    max-width: none;
   }
 
   .marquee {
