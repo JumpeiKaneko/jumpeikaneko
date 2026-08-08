@@ -36,7 +36,7 @@
 
   /* Layout */
   --maxw: 1180px;
-  --maxw-text: 640px;
+  --maxw-text: 760px;
   --gutter: clamp(24px, 6vw, 72px);
   --space-1: 8px;
   --space-2: 16px;
