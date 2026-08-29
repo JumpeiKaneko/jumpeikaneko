@@ -37,7 +37,7 @@
   --fs-md: 1.15rem;
   --fs-lg: 1.6rem;
   --fs-xl: clamp(2rem, 5vw, 3.2rem);
-  --fs-xxl: clamp(2.6rem, 8vw, 5.6rem);
+  --fs-xxl: clamp(2.2rem, 4.5vw, 3.4rem);
 
   --lh-body: 2;
   --lh-tight: 1.5;
@@ -167,6 +167,18 @@ button {
 
 .section + .section {
   border-top: 1px solid var(--c-line);
+}
+
+/* Hero直後のセクションだけ、上の余白を詰める（Heroとの間に不要な空白が
+   できてしまうのを防ぐため） */
+.section--tight-top {
+  padding-top: var(--space-4);
+}
+
+@media (max-width: 720px) {
+  .section--tight-top {
+    padding-top: var(--m-space-3);
+  }
 }
 
 .hr {
@@ -306,19 +318,16 @@ button {
 
 /* ---------- 5. Hero ---------- */
 .hero {
-  padding-top: var(--space-7);
-  padding-bottom: var(--space-6);
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-4);
 }
 
 /* .hero--gallery: index.htmlのHeroのみに適用。写真やスライドショーは置かず、
-   ページ全体のグラデーション（bodyの背景）の上に、名前まわりへ大きく余白を
-   取ったシンプルなタイポグラフィだけを置く。 */
+   ページ全体のグラデーション（bodyの背景）の上に、名前まわりのシンプルな
+   タイポグラフィだけを置く。中央寄せの高さ確保はせず、内容に応じて
+   自然な高さで流す（無駄な空白の原因になっていたため撤去）。 */
 .hero--gallery {
   position: relative;
-  min-height: clamp(420px, 54vh, 620px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .hero__content {
@@ -352,7 +361,7 @@ button {
 .hero__title-en {
   margin-top: var(--space-2);
   font-family: var(--font-en);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   letter-spacing: var(--ls-wide);
   color: var(--c-gray);
   text-transform: uppercase;
@@ -366,11 +375,6 @@ button {
   color: var(--c-fg-soft);
 }
 
-@media (max-width: 720px) {
-  .hero--gallery {
-    min-height: clamp(340px, 46vh, 480px);
-  }
-}
 
 /* ---------- 6. Section headings ---------- */
 .heading {
@@ -387,23 +391,6 @@ button {
   font-size: var(--fs-xs);
   color: var(--c-gray-light);
   letter-spacing: var(--ls-wide);
-}
-
-/* 少し変な、大きすぎる背景の連番。装飾としてだけ機能する。 */
-.heading__watermark {
-  position: absolute;
-  left: -0.06em;
-  top: 50%;
-  transform: translateY(-46%);
-  font-family: var(--font-en);
-  font-size: clamp(4.5rem, 14vw, 11rem);
-  font-weight: 500;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--c-line);
-  z-index: -1;
-  pointer-events: none;
-  white-space: nowrap;
 }
 
 .heading__title {
@@ -511,9 +498,9 @@ button {
 }
 
 .profile__meta {
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   color: var(--c-gray);
-  line-height: var(--lh-tight);
+  line-height: 2;
 }
 
 .profile__bio {
@@ -1836,8 +1823,8 @@ button {
   }
 
   .hero {
-    padding-top: var(--m-space-6);
-    padding-bottom: var(--m-space-5);
+    padding-top: var(--m-space-4);
+    padding-bottom: var(--m-space-3);
   }
 
 
@@ -1855,12 +1842,6 @@ button {
 
   .heading__en {
     flex-basis: 100%;
-  }
-
-  .heading__watermark {
-    font-size: 2.6rem;
-    top: 44%;
-    opacity: 0.55;
   }
 
   .heading__title {
@@ -1902,9 +1883,7 @@ button {
     margin-top: var(--m-space-4);
   }
 
-  /* profile__meta はベース側の var(--fs-xs) をそのまま使う
-     （= モバイルでは12px）。ここでfs-smに拡大していたのが
-     文字が大きすぎて改行が汚くなる原因だったため、上書きをやめる。 */
+  /* profile__meta はベース側の var(--fs-sm) をそのまま使う（モバイル上書きなし） */
 
   /* プロフィール本文（自己紹介文）は活動歴と同じ文字サイズにする。
      max-widthのキャップも外し、画面幅いっぱいまで使う（半分幅に見えないように）。 */
