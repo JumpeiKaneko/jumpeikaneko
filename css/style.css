@@ -61,6 +61,10 @@
   --dur: 900ms;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 /* ---------- 2. Reset ---------- */
 *,
 *::before,
@@ -1637,13 +1641,15 @@ button {
 
 @media (max-width: 720px) {
   :root {
-    /* モバイル専用スペーシングスケール（さらに大胆に余白を取り、上品に見せる方針） */
+    /* モバイル専用スペーシングスケール（段落まわりは余白広め、セクション間の
+       大きい値は2回連続で拡大した結果カード同士や本文間が間延びして見えたため
+       やや抑えて再調整） */
     --m-space-1: 14px;
     --m-space-2: 32px;
     --m-space-3: 52px;
-    --m-space-4: 80px;
-    --m-space-5: 108px;
-    --m-space-6: 152px;
+    --m-space-4: 64px;
+    --m-space-5: 88px;
+    --m-space-6: 120px;
 
     /* モバイル専用タイポグラフィスケール（少し小さめに抑えて上品に） */
     --m-fs-xs: 11px;
@@ -1779,8 +1785,13 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .work-card {
+    padding: var(--m-space-2);
+  }
+
   .work-card__tags {
     flex-wrap: wrap;
+    gap: var(--m-space-1);
     row-gap: var(--m-space-1);
   }
 
@@ -1933,7 +1944,11 @@ button {
   }
 
   .work-grid {
-    gap: var(--m-space-4);
+    gap: var(--m-space-1);
+  }
+
+  .work-card--banner {
+    padding: var(--m-space-2);
   }
 
   .photo-stream {
