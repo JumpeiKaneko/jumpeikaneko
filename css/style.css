@@ -7,19 +7,25 @@
 
 /* ---------- 1. Design tokens ---------- */
 :root {
-  /* Color: 白・黒・グレーのみ */
-  --c-bg: #fdfdfc;
+  /* Color: 白ベース＋淡い黄・淡い青のグラデーションアクセント */
+  --c-bg: #fefdfb;
   --c-fg: #111111;
   --c-fg-soft: #4a4a4a;
   --c-gray: #8a8a8a;
   --c-gray-light: #c9c9c7;
   --c-line: #dcdcda;
-  --c-line-strong: #111111;
-  --c-surface: #f4f4f2;
+  --c-line-strong: #5a75ae;
+  --c-surface: linear-gradient(135deg, #fff7de 0%, #eef2fa 60%, #e4eaf6 100%);
+
+  /* Accent gradient（Instagram参考の配色） */
+  --c-tint-yellow: #fff2c9;
+  --c-tint-blue: #cbd7ef;
+  --c-gradient: linear-gradient(135deg, #ffffff 0%, #fff2c9 50%, #cbd7ef 100%);
+  --c-gradient-soft: linear-gradient(160deg, #ffffff 0%, #fffaef 45%, #f2f5fb 100%);
 
   /* Typography */
-  --font-jp: "Zen Old Mincho", "Shippori Mincho", "Noto Serif JP", serif;
-  --font-en: "EB Garamond", "Zen Old Mincho", serif;
+  --font-jp: "Zen Kaku Gothic Antique", "Shippori Mincho", "Noto Serif JP", sans-serif;
+  --font-en: "Zen Kaku Gothic Antique", "EB Garamond", sans-serif;
 
   --fs-xs: 0.72rem;
   --fs-sm: 0.82rem;
@@ -34,17 +40,17 @@
   --ls-jp: 0.06em;
   --ls-wide: 0.22em;
 
-  /* Layout */
+  /* Layout（余白を全体的に拡大） */
   --maxw: 1180px;
   --maxw-text: 760px;
-  --gutter: clamp(24px, 6vw, 72px);
-  --space-1: 8px;
-  --space-2: 16px;
-  --space-3: 24px;
-  --space-4: 40px;
-  --space-5: 64px;
-  --space-6: 96px;
-  --space-7: 140px;
+  --gutter: clamp(28px, 6.5vw, 84px);
+  --space-1: 10px;
+  --space-2: 20px;
+  --space-3: 30px;
+  --space-4: 48px;
+  --space-5: 80px;
+  --space-6: 120px;
+  --space-7: 168px;
 
   /* Motion */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -271,13 +277,13 @@ button {
   padding-bottom: var(--space-6);
 }
 
-/* .hero--gallery: index.htmlの3D球体ギャラリーを背景に持つHeroのみに適用。
+/* .hero--gallery: index.htmlのスライドショーを背景に持つHeroのみに適用。
    work.html / news.html も .hero を共有しているため、位置指定や高さの
    強制はここに限定し、他ページのヒーローに影響しないようにする。 */
 .hero--gallery {
   position: relative;
   overflow: hidden;
-  min-height: clamp(440px, 62vh, 680px);
+  min-height: clamp(460px, 66vh, 720px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -288,6 +294,7 @@ button {
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  background: var(--c-gradient-soft);
 }
 
 .hero__content {
@@ -305,105 +312,12 @@ button {
   height: 140%;
   background: radial-gradient(
     ellipse at center,
-    rgba(253, 253, 252, 0.92) 0%,
-    rgba(253, 253, 252, 0.72) 45%,
-    rgba(253, 253, 252, 0) 75%
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(255, 250, 235, 0.78) 45%,
+    rgba(255, 250, 235, 0) 75%
   );
   z-index: -1;
   pointer-events: none;
-}
-
-/* ---------- 5b. Hero image strip (代表作3枚。前バージョンのまま復元) ---------- */
-.hero-strip {
-  padding-bottom: var(--space-6);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-2);
-}
-
-.hero-strip__item {
-  position: relative;
-  display: block;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--c-surface);
-}
-
-.hero-strip__item::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--c-line-strong);
-  opacity: 0;
-  z-index: 2;
-  transition: opacity 400ms var(--ease);
-  pointer-events: none;
-}
-
-.hero-strip__item:hover::before {
-  opacity: 1;
-}
-
-.hero-strip__item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1200ms var(--ease);
-}
-
-.hero-strip__item:hover img {
-  transform: scale(1.04);
-}
-
-@media (max-width: 720px) {
-  /* 代表作3枚：1枚ずつ全幅で見せつつ、横スワイプで3枚に辿り着ける
-     スクロールスナップのカルーセルにする（デスクトップの3列に近い体験） */
-  .hero-strip {
-    display: flex;
-    grid-template-columns: none;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: var(--m-space-2);
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .hero-strip::-webkit-scrollbar {
-    display: none;
-  }
-
-  .hero-strip__item {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
-    aspect-ratio: 4 / 3;
-  }
-
-  .hero-strip__dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding-top: var(--m-space-2);
-  }
-
-  .hero-strip__dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--c-line-strong);
-    opacity: 0.22;
-    transition: opacity 250ms var(--m-ease);
-  }
-
-  .hero-strip__dot.is-active {
-    opacity: 1;
-  }
-}
-
-/* デスクトップでは3枚とも並んで見えているため現在地ドットは不要 */
-.hero-strip__dots {
-  display: none;
 }
 
 .hero__eyebrow {
@@ -444,130 +358,68 @@ button {
   color: var(--c-fg-soft);
 }
 
-/* ---------- 5b. Hero 3D gallery — 球体状に浮かぶ作品写真（Heroの背景） ----------
-   work.html のサムネイルと同じ5枚のみを使用。フィボナッチ球面分布で配置し、
-   リング全体のY軸回転＋ゆるいX軸チルトを重ねて「宇宙的」な多軸モーションにする。
-   CSS 3D Transformのみで実装し、Three.js等の外部ライブラリは使用しない。 */
-.hero3d__stage {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  perspective: 1600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero3d__ring {
-  position: relative;
-  width: 1px;
-  height: 1px;
-  transform-style: preserve-3d;
-  animation: hero3d-spin 55s linear infinite;
-  will-change: transform;
-}
-
-.hero3d__tilt {
+/* ---------- 5b. Hero slideshow — 作品サムネイルをゆっくりクロスフェードさせる
+   シンプルなスライドショー（JS不要、CSSアニメーションのみ）。 ---------- */
+.hero-slideshow {
   position: absolute;
   inset: 0;
-  transform-style: preserve-3d;
-  animation: hero3d-tumble 17s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
 }
 
-@keyframes hero3d-spin {
-  from { transform: rotateY(0deg); }
-  to   { transform: rotateY(360deg); }
-}
-
-@keyframes hero3d-tumble {
-  from { transform: rotateX(-9deg); }
-  to   { transform: rotateX(9deg); }
-}
-
-.hero3d__tile {
-  --radius: clamp(180px, 20vw, 380px);
-  --tile-w: clamp(50px, 5vw, 90px);
-  --tile-h: calc(var(--tile-w) * 0.75);
-
+.hero-slideshow__slide {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--tile-w);
-  height: var(--tile-h);
-  margin-top: calc(var(--tile-h) / -2);
-  margin-left: calc(var(--tile-w) / -2);
+  inset: 0;
   display: block;
-  overflow: hidden;
-  background: var(--c-surface);
-  border: 1px solid var(--c-line);
-  pointer-events: auto;
-  transform: rotateY(var(--ry)) rotateX(var(--rx)) translateZ(var(--radius));
-  backface-visibility: hidden;
-  animation: hero3d-float 7s var(--ease) infinite;
-  animation-delay: var(--delay, 0s);
+  opacity: 0;
+  animation: hero-slideshow-fade 25s ease-in-out infinite;
+  animation-delay: calc(var(--delay, 0s) * -1);
 }
 
-@keyframes hero3d-float {
-  0%, 100% { translate: 0 0; }
-  50%      { translate: 0 -8px; }
-}
-
-.hero3d__tile img {
+.hero-slideshow__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(25%);
-  transition: filter 500ms var(--ease), opacity 500ms var(--ease);
+  filter: grayscale(10%);
+  transition: filter 600ms var(--ease);
 }
 
-.hero3d__tile:hover img,
-.hero3d__tile:focus-visible img {
+.hero-slideshow__slide:hover img,
+.hero-slideshow__slide:focus-visible img {
   filter: grayscale(0%);
 }
 
+@keyframes hero-slideshow-fade {
+  0%   { opacity: 0; }
+  3%   { opacity: 1; }
+  17%  { opacity: 1; }
+  22%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero3d__ring,
-  .hero3d__tilt,
-  .hero3d__tile {
+  .hero-slideshow__slide {
     animation: none;
+    opacity: 0;
+  }
+  .hero-slideshow__slide:first-child {
+    opacity: 1;
   }
 }
 
 @media (max-width: 720px) {
   .hero--gallery {
-    min-height: clamp(420px, 60vh, 560px);
+    min-height: clamp(420px, 58vh, 560px);
   }
 
-  /* デスクトップは写真がほぼそのまま見えているので、モバイルも
-     テキストの真後ろだけを軽く覆う程度に留め、周辺の写真は
-     はっきり見えるようにする */
   .hero__content::before {
-    width: 94%;
-    height: 94%;
+    width: 96%;
+    height: 96%;
     background: radial-gradient(
       ellipse at center,
-      rgba(253, 253, 252, 0.9) 0%,
-      rgba(253, 253, 252, 0.6) 42%,
-      rgba(253, 253, 252, 0) 70%
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(255, 250, 235, 0.68) 42%,
+      rgba(255, 250, 235, 0) 70%
     );
-  }
-
-  .hero3d__stage {
-    perspective: 900px;
-  }
-
-  .hero3d__tile {
-    --radius: clamp(150px, 44vw, 230px);
-    --tile-w: clamp(52px, 13vw, 84px);
-  }
-
-  .hero3d__tile img {
-    opacity: 0.85;
-  }
-
-  .hero3d__tilt {
-    animation-duration: 20s;
   }
 }
 
@@ -925,6 +777,17 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-2);
+}
+
+/* リンク付きの project-media-grid（実践一覧など）。<a>が直接グリッドの
+   子になる場合、ブロック要素として振る舞わせ、ホバー時に少し透明度を落とす。 */
+.project-media-grid > a {
+  display: block;
+  transition: opacity 300ms var(--ease);
+}
+
+.project-media-grid > a:hover {
+  opacity: 0.72;
 }
 
 .flow-grid {
@@ -1368,6 +1231,388 @@ button {
   }
 }
 
+/* ---------- 16b. Project overview extras（project-kaiga-wo-kiku.html専用の図解・強調コンポーネント） ---------- */
+
+/* 大きな一文で言い切る、リード文 */
+.lead {
+  max-width: var(--maxw-text);
+  font-size: var(--fs-md);
+  line-height: var(--lh-tight);
+  font-weight: 500;
+  color: var(--c-fg);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 720px) {
+  .lead {
+    font-size: var(--m-fs-lg);
+    line-height: 1.6;
+  }
+}
+
+/* 収束型フロー図（絵画を聴く → 作品／研究／プロダクト）。SVGを使わず、
+   罫線とflexだけで組む — コンテンツ量が変わっても崩れないようにするため。 */
+.flow {
+  margin-top: var(--space-5);
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-4);
+}
+
+.flow__core {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--c-line-strong);
+  padding: var(--space-3);
+}
+
+.flow__core-label {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  letter-spacing: var(--ls-wide);
+}
+
+.flow__core-sub {
+  margin-top: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--c-gray);
+  line-height: var(--lh-tight);
+}
+
+.flow__arrow {
+  flex: 0 0 32px;
+  position: relative;
+}
+
+.flow__arrow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 6px;
+  top: 50%;
+  height: 1px;
+  background: var(--c-line-strong);
+}
+
+.flow__arrow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-style: solid;
+  border-width: 4px 0 4px 6px;
+  border-color: transparent transparent transparent var(--c-line-strong);
+}
+
+.flow__nodes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.flow__node {
+  border-left: 1px solid var(--c-line-strong);
+  padding: var(--space-1) 0 var(--space-1) var(--space-3);
+}
+
+.flow__node-label {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.flow__node-sub {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--c-gray);
+  line-height: var(--lh-tight);
+}
+
+@media (max-width: 720px) {
+  .flow {
+    margin-top: var(--m-space-4);
+    flex-direction: column;
+    gap: var(--m-space-3);
+  }
+  .flow__core {
+    flex: none;
+    padding: var(--m-space-3);
+  }
+  .flow__core-sub {
+    margin-top: var(--m-space-1);
+  }
+  .flow__arrow {
+    flex: none;
+    height: 28px;
+  }
+  .flow__arrow::before {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 6px;
+    height: auto;
+    width: 1px;
+  }
+  .flow__arrow::after {
+    left: 50%;
+    top: auto;
+    bottom: 0;
+    right: auto;
+    transform: translateX(-50%);
+    border-width: 6px 4px 0 4px;
+    border-color: var(--c-line-strong) transparent transparent transparent;
+  }
+  .flow__nodes {
+    gap: var(--m-space-3);
+  }
+  .flow__node {
+    padding: var(--m-space-1) 0 var(--m-space-1) var(--m-space-3);
+  }
+  .flow__node-sub {
+    margin-top: 4px;
+  }
+}
+
+/* 作曲法：4ステップの連結プロセス図（横一列の線＋ドット） */
+.process {
+  margin-top: var(--space-4);
+}
+
+.process__track {
+  display: flex;
+  gap: 0;
+}
+
+.process__step {
+  flex: 1;
+  position: relative;
+  padding-top: var(--space-4);
+  padding-right: var(--space-3);
+}
+
+.process__step::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--c-line-strong);
+}
+
+.process__step:last-child::before {
+  right: auto;
+  width: 10px;
+}
+
+.process__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-en);
+  font-size: 10px;
+  color: var(--c-fg);
+  z-index: 1;
+}
+
+.process__title {
+  margin-top: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.process__desc {
+  margin-top: 6px;
+  font-size: var(--fs-xs);
+  color: var(--c-fg-soft);
+  line-height: var(--lh-tight);
+}
+
+@media (max-width: 720px) {
+  .process {
+    margin-top: var(--m-space-4);
+  }
+  .process__track {
+    flex-direction: column;
+  }
+  .process__step {
+    padding-top: 0;
+    padding-left: var(--m-space-4);
+    padding-right: 0;
+    padding-bottom: var(--m-space-4);
+    margin-left: 9px;
+    border-left: 1px solid var(--c-line-strong);
+  }
+  .process__step:last-child {
+    border-left-color: transparent;
+    padding-bottom: 0;
+  }
+  .process__step::before {
+    display: none;
+  }
+  .process__dot {
+    top: -1px;
+    left: -10px;
+  }
+  .process__title {
+    margin-top: 2px;
+  }
+  .process__desc {
+    margin-top: var(--m-space-1);
+  }
+}
+
+/* 実践一覧：写真カード（下部にグラデーションでタイトルを重ねる） */
+.practice-grid {
+  margin-top: var(--space-4);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.practice-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--c-surface);
+}
+
+.practice-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(15%);
+  transition: transform 1200ms var(--ease), filter 500ms var(--ease);
+}
+
+.practice-card:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.practice-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0) 42%, rgba(17, 17, 17, 0.8) 100%);
+}
+
+.practice-card__label {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: var(--space-3);
+  color: #fdfdfc;
+}
+
+.practice-card__tag {
+  display: block;
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.practice-card__title {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 720px) {
+  .practice-grid {
+    margin-top: var(--m-space-3);
+    grid-template-columns: 1fr;
+    gap: var(--m-space-4);
+  }
+  .practice-card {
+    aspect-ratio: 4 / 3.2;
+  }
+  .practice-card__label {
+    left: var(--m-space-2);
+    right: var(--m-space-2);
+    bottom: var(--m-space-2);
+  }
+}
+
+/* 活動タイムライン：縦線＋ドットで工程を見せる版（このページ専用） */
+.proc-timeline {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+}
+
+.proc-timeline__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+  border-left: 1px solid var(--c-line-strong);
+  margin-left: 4px;
+}
+
+.proc-timeline__row::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: calc(var(--space-2) + 4px);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-fg);
+}
+
+.proc-timeline__row:last-child {
+  border-left-color: transparent;
+}
+
+.proc-timeline__date {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  color: var(--c-gray);
+  letter-spacing: 0.05em;
+  padding-top: 1px;
+}
+
+.proc-timeline__text {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-tight);
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 720px) {
+  .proc-timeline {
+    margin-top: var(--m-space-3);
+  }
+  .proc-timeline__row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: var(--m-space-2) 0 var(--m-space-2) var(--m-space-3);
+  }
+  .proc-timeline__row::before {
+    top: calc(var(--m-space-2) + 4px);
+  }
+  .proc-timeline__text {
+    font-size: var(--fs-xs);
+  }
+}
+
 /* ---------- 17. Responsive ---------- */
 @media (max-width: 900px) {
   .profile {
@@ -1392,12 +1637,12 @@ button {
 @media (max-width: 720px) {
   :root {
     /* モバイル専用スペーシングスケール（大胆に余白を取る方針） */
-    --m-space-1: 8px;
-    --m-space-2: 20px;
-    --m-space-3: 32px;
-    --m-space-4: 48px;
-    --m-space-5: 64px;
-    --m-space-6: 96px;
+    --m-space-1: 10px;
+    --m-space-2: 24px;
+    --m-space-3: 38px;
+    --m-space-4: 58px;
+    --m-space-5: 78px;
+    --m-space-6: 112px;
 
     /* モバイル専用タイポグラフィスケール */
     --m-fs-xs: 12px;
@@ -1427,12 +1672,12 @@ button {
     line-break: strict;
   }
 
-  a, button, .nav__link, .work-card, .hero3d__tile, .hero-strip__item, .menu-toggle, .back-link, .pickup__link {
+  a, button, .nav__link, .work-card, .hero-slideshow__slide, .menu-toggle, .back-link, .pickup__link {
     transition: opacity var(--m-dur) var(--m-ease), background-color var(--m-dur) var(--m-ease);
     -webkit-tap-highlight-color: transparent;
   }
 
-  a:active, button:active, .nav__link:active, .work-card:active, .hero3d__tile:active, .hero-strip__item:active, .pickup__link:active {
+  a:active, button:active, .nav__link:active, .work-card:active, .hero-slideshow__slide:active, .pickup__link:active {
     opacity: 0.6;
   }
 
