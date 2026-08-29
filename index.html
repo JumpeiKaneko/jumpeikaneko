@@ -7,8 +7,8 @@
 <meta name="description" content="金子淳平（Jumpei Kaneko）ポートフォリオ。サウンド・アート、仏近現代美術史研究、アートコミュニケーションを横断する活動を紹介する。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body data-page="about">
 
@@ -25,90 +25,55 @@
     <nav class="nav" id="nav">
       <ul class="nav__list">
         <li><a href="index.html" class="nav__link" data-nav-key="about">About</a></li>
-        <li><a href="otoato.html" class="nav__link" data-nav-key="otoato">個展開催</a></li>
+        <li><a href="otoato.html" class="nav__link" data-nav-key="otoato" data-en="Exhibition">個展開催</a></li>
         <li><a href="work.html" class="nav__link" data-nav-key="work">Work</a></li>
         <li><a href="news.html" class="nav__link" data-nav-key="news">News</a></li>
         <li><a href="contact.html" class="nav__link" data-nav-key="contact">Contact</a></li>
       </ul>
+      <button class="lang-toggle" data-lang-toggle type="button" aria-pressed="false">EN</button>
     </nav>
   </div>
 </header>
 
 <main>
 
-  <!-- Hero: 作品サムネイルのスライドショーを背景に配置 -->
+  <!-- Hero: グラデーション背景の上に、名前まわりに大きく余白を取ったシンプルな構成 -->
   <section class="hero hero--gallery wrap">
-    <div class="hero__bg">
-      <div class="hero-slideshow">
-        <a class="hero-slideshow__slide" href="work-detail-kiku.html" style="--delay:0s;">
-          <img src="thumb/kiku-01.jpg" alt="絵画を聴く" loading="lazy" decoding="async">
-        </a>
-        <a class="hero-slideshow__slide" href="work-detail-resonance.html" style="--delay:5s;">
-          <img src="thumb/resonance-01.jpg" alt="Resonance" loading="lazy" decoding="async">
-        </a>
-        <a class="hero-slideshow__slide" href="work-detail-mimi.html" style="--delay:10s;">
-          <img src="thumb/mimi-01.jpg" alt="耳を澄ますための装置" loading="lazy" decoding="async">
-        </a>
-        <a class="hero-slideshow__slide" href="work-detail-kikue.html" style="--delay:15s;">
-          <img src="thumb/kikue-01.jpg" alt="聴く絵画をつくる" loading="lazy" decoding="async">
-        </a>
-        <a class="hero-slideshow__slide" href="work-detail-museum.html" style="--delay:20s;">
-          <img src="thumb/museum-04.jpg" alt="大学生の放課後ミュージアム" loading="lazy" decoding="async">
-        </a>
-      </div>
-    </div>
-
     <div class="hero__content">
       <p class="hero__eyebrow"><span class="hero__eyebrow-mark" aria-hidden="true">—</span>Sound Art ／ Media Art<br>— Research &amp; Practice</p>
-      <h1 class="hero__title" data-scramble>金子 淳平</h1>
-      <p class="hero__title-en">Jumpei Kaneko</p>
+      <h1 class="hero__title" data-scramble data-en="Jumpei Kaneko">金子 淳平</h1>
+      <p class="hero__title-en" data-en="Sound Artist">Jumpei Kaneko</p>
     </div>
   </section>
 
-  <!-- Profile -->
+  <!-- プロフィール：見出しは持たず、名前の直下にそのまま文章として続ける -->
   <section class="section wrap">
-    <div class="heading reveal">
-      <span class="heading__watermark" aria-hidden="true">01</span>
-      <span class="heading__num">01</span>
-      <h2 class="heading__title" data-scramble>プロフィール</h2>
-      <span class="heading__en">Profile</span>
-    </div>
-
-    <div class="profile">
-      <div class="profile__portrait reveal img-wipe">
-        <img src="images/image.png" alt="金子淳平">
-      </div>
-
-      <div class="profile__intro reveal">
-        <p class="profile__meta">
-          2005年生まれ<br>
-          明治学院大学 文学部 フランス文学科 3年<br>
-          東京都美術館×東京藝術大学「とびらプロジェクト」<span class="meta-tail">13期とびラー</span>
-        </p>
-      </div>
-
-      <div class="profile__bio reveal">
-        <p class="prose">
-          大学ではフランス近現代の美術史と思想を専門に学びながら、課外では身の回りの「関係性」を
-          起点にサウンドインスタレーション、ワークショップ、プロダクト制作を行なっている。
-        </p>
-        <p class="prose">
-          「絵画を聴く」では、絵画を音で拡張し、誰もが作品の空間に入り込み「実感」できる環境を
-          目指し研究・制作を行なっている。2026年からはASIBA Creative League 4期にも採択され、
-          実装を進めている。
-        </p>
-        <p class="prose">
-          これまで行ってきたプロジェクト「絵画を聴く」の発表に加え、2026年9月には新作を含む
-          初個展「OTOATO」を開催する。
-        </p>
-      </div>
+    <div class="hero-profile reveal">
+      <p class="profile__meta" data-en="Born 2005<br>3rd-year student, Dept. of French Literature, Meiji Gakuin University<br>Tokyo Metropolitan Art Museum &#215; Tokyo University of the Arts &quot;Tobira Project&quot; <span class=&quot;meta-tail&quot;>13th Cohort</span>">
+        2005年生まれ<br>
+        明治学院大学 文学部 フランス文学科 3年<br>
+        東京都美術館×東京藝術大学「とびらプロジェクト」<span class="meta-tail">13期とびラー</span>
+      </p>
+      <p class="prose" data-en="While studying modern and contemporary French art history and philosophy at university, he creates sound installations, workshops, and products outside the classroom, starting from the relationships around him.">
+        大学ではフランス近現代の美術史と思想を専門に学びながら、課外では身の回りの「関係性」を
+        起点にサウンドインスタレーション、ワークショップ、プロダクト制作を行なっている。
+      </p>
+      <p class="prose" data-en="In &quot;Listening to Painting,&quot; he researches and creates ways to extend paintings through sound, aiming for an environment where anyone can step into the work and truly feel it. Since 2026, he has been developing the project as part of ASIBA Creative League, Cohort 4.">
+        「絵画を聴く」では、絵画を音で拡張し、誰もが作品の空間に入り込み「実感」できる環境を
+        目指し研究・制作を行なっている。2026年からはASIBA Creative League 4期にも採択され、
+        実装を進めている。
+      </p>
+      <p class="prose" data-en="In addition to presenting the ongoing &quot;Listening to Painting&quot; project, he will hold his first solo exhibition, &quot;OTOATO,&quot; featuring new work, in September 2026.">
+        これまで行ってきたプロジェクト「絵画を聴く」の発表に加え、2026年9月には新作を含む
+        初個展「OTOATO」を開催する。
+      </p>
     </div>
 
     <div class="pickup reveal">
       <span class="pickup__label">Pickup</span>
-      <span class="pickup__title">金子淳平 初個展「OTOATO」</span>
-      <a href="otoato.html" class="pickup__link">特設ページを見る →</a>
-      <p class="pickup__text">2026.9.19 FRI – 9.23 WED　GALLERY工+WITH（新高円寺駅徒歩3分）</p>
+      <span class="pickup__title" data-en="Jumpei Kaneko&#39;s First Solo Exhibition &quot;OTOATO&quot;">金子淳平 初個展「OTOATO」</span>
+      <a href="otoato.html" class="pickup__link" data-en="View special page →">特設ページを見る →</a>
+      <p class="pickup__text" data-en="2026.9.19 FRI &#8211; 9.23 WED GALLERY Kou+WITH (3 min. walk from Shin-Koenji Sta.)">2026.9.19 FRI – 9.23 WED　GALLERY工+WITH（新高円寺駅徒歩3分）</p>
     </div>
 
   </section>
@@ -116,36 +81,36 @@
   <!-- 活動略歴 -->
   <section class="section wrap">
     <div class="heading reveal">
-      <span class="heading__watermark" aria-hidden="true">02</span>
-      <span class="heading__num">02</span>
-      <h2 class="heading__title" data-scramble>活動略歴</h2>
+      <span class="heading__watermark" aria-hidden="true">01</span>
+      <span class="heading__num">01</span>
+      <h2 class="heading__title" data-scramble data-en="Activities">活動略歴</h2>
       <span class="heading__en">Activities</span>
     </div>
 
     <ul class="timeline reveal">
       <li class="timeline__row">
         <span class="timeline__date">2022</span>
-        <span class="timeline__text">国立新美術館ユースプログラム「第1期新美塾」修了</span>
+        <span class="timeline__text" data-en="Completed The National Art Center, Tokyo Youth Program, &quot;Shinbi-juku&quot; 1st Cohort">国立新美術館ユースプログラム「第1期新美塾」修了</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2024</span>
-        <span class="timeline__text">明治学院大学 文学部 フランス文学科 在籍</span>
+        <span class="timeline__text" data-en="Enrolled in Dept. of French Literature, Meiji Gakuin University">明治学院大学 文学部 フランス文学科 在籍</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2024</span>
-        <span class="timeline__text">「とびらプロジェクト」アートコミュニケーター13期</span>
+        <span class="timeline__text" data-en="&quot;Tobira Project&quot; Art Communicator, 13th Cohort">「とびらプロジェクト」アートコミュニケーター13期</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026</span>
-        <span class="timeline__text">美学校 サウンド・アート講座 修了</span>
+        <span class="timeline__text" data-en="Completed Bigakko Sound Art Course">美学校 サウンド・アート講座 修了</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026</span>
-        <span class="timeline__text">100BANCH GARAGE Program</span>
+        <span class="timeline__text" data-en="100BANCH GARAGE Program">100BANCH GARAGE Program</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026</span>
-        <span class="timeline__text">ASIBA Creative League 4期 採択</span>
+        <span class="timeline__text" data-en="Selected for ASIBA Creative League, Cohort 4">ASIBA Creative League 4期 採択</span>
       </li>
     </ul>
   </section>
@@ -153,60 +118,60 @@
   <!-- 展示・受賞歴 -->
   <section class="section wrap">
     <div class="heading reveal">
-      <span class="heading__watermark" aria-hidden="true">03</span>
-      <span class="heading__num">03</span>
-      <h2 class="heading__title" data-scramble>展示・登壇・受賞歴</h2>
+      <span class="heading__watermark" aria-hidden="true">02</span>
+      <span class="heading__num">02</span>
+      <h2 class="heading__title" data-scramble data-en="Exhibitions, Talks &amp; Awards">展示・登壇・受賞歴</h2>
       <span class="heading__en">Exhibitions &amp; Awards</span>
     </div>
 
     <ul class="timeline reveal">
       <li class="timeline__row">
         <span class="timeline__date">2025</span>
-        <span class="timeline__text">鯖江市制70周年記念 まちなか芸術祭2025　出展</span>
+        <span class="timeline__text" data-en="Exhibited at Machinaka Art Festival 2025, commemorating Sabae City&#39;s 70th anniversary">鯖江市制70周年記念 まちなか芸術祭2025　出展</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2025</span>
-        <span class="timeline__text">tornad2025 企業賞 受賞</span>
+        <span class="timeline__text" data-en="Received Corporate Award at tornad2025">tornad2025 企業賞 受賞</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2025</span>
-        <span class="timeline__text">Sasebo Sound Chronicle Award ファイナリスト選出</span>
+        <span class="timeline__text" data-en="Selected as Finalist, Sasebo Sound Chronicle Award">Sasebo Sound Chronicle Award ファイナリスト選出</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2025</span>
-        <span class="timeline__text">させぼピース展 ―海からたどる、時の旅　出展</span>
+        <span class="timeline__text" data-en="Exhibited at Sasebo Peace Exhibition &#8212; A Journey Through Time from the Sea">させぼピース展 ―海からたどる、時の旅　出展</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026</span>
-        <span class="timeline__text">NEW SCHOOL成果展「希望の野帖」</span>
+        <span class="timeline__text" data-en="NEW SCHOOL Exhibition &quot;Field Notes of Hope&quot;">NEW SCHOOL成果展「希望の野帖」</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026.5</span>
-        <span class="timeline__text">ASIBA Creative League 4期 MIDTERM DEMO DAYにて「絵画を聴く」出展</span>
+        <span class="timeline__text" data-en="Presented &quot;Listening to Painting&quot; at ASIBA Creative League Cohort 4 Midterm Demo Day">ASIBA Creative League 4期 MIDTERM DEMO DAYにて「絵画を聴く」出展</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026.6</span>
-        <span class="timeline__text">美学校 ワークショップ「聴く絵画をつくる」開催</span>
+        <span class="timeline__text" data-en="Held workshop &quot;Making a Painting to Listen To&quot; at Bigakko">美学校 ワークショップ「聴く絵画をつくる」開催</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026.7</span>
-        <span class="timeline__text">東京都盲人福祉協会（八王子）にて視覚障害当事者向け鑑賞会実施</span>
+        <span class="timeline__text" data-en="Held an appreciation session for visually impaired participants at the Tokyo Association for the Blind (Hachioji)">東京都盲人福祉協会（八王子）にて視覚障害当事者向け鑑賞会実施</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026.7</span>
-        <span class="timeline__text">100BANCHにて「絵画を聴く〜ミキキの交差点〜」開催</span>
+        <span class="timeline__text" data-en="Held &quot;Listening to Painting: The Intersection of Mikiki&quot; at 100BANCH">100BANCHにて「絵画を聴く〜ミキキの交差点〜」開催</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026.7</span>
-        <span class="timeline__text">o-i studioにてワークショップ「線を聴く」開催</span>
+        <span class="timeline__text" data-en="Held workshop &quot;Listening to Lines&quot; at o-i studio">o-i studioにてワークショップ「線を聴く」開催</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026.9</span>
-        <span class="timeline__text">初個展「OTOATO」開催（GALLERY工+WITH）</span>
+        <span class="timeline__text" data-en="First solo exhibition &quot;OTOATO&quot; (GALLERY Kou+WITH)">初個展「OTOATO」開催（GALLERY工+WITH）</span>
       </li>
       <li class="timeline__row">
         <span class="timeline__date">2026.9</span>
-        <span class="timeline__text">第31回日本バーチャルリアリティ学会大会 論文発表予定</span>
+        <span class="timeline__text" data-en="Paper presentation scheduled at the 31st Annual Conference of the Virtual Reality Society of Japan">第31回日本バーチャルリアリティ学会大会 論文発表予定</span>
       </li>
     </ul>
   </section>
@@ -224,6 +189,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=4"></script>
+<script src="js/main.js?v=9"></script>
 </body>
 </html>

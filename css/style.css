@@ -7,25 +7,29 @@
 
 /* ---------- 1. Design tokens ---------- */
 :root {
-  /* Color: 白ベース＋淡い黄・淡い青のグラデーションアクセント */
-  --c-bg: #fefdfb;
-  --c-fg: #111111;
-  --c-fg-soft: #4a4a4a;
-  --c-gray: #8a8a8a;
-  --c-gray-light: #c9c9c7;
-  --c-line: #dcdcda;
-  --c-line-strong: #5a75ae;
-  --c-surface: linear-gradient(135deg, #fff7de 0%, #eef2fa 60%, #e4eaf6 100%);
+  /* Color: 黄→青のグラデーションをベースカラーにしつつ、彩度を落として
+     静かなトーンに抑える（うるさくならないように） */
+  --c-bg: linear-gradient(165deg, #fffefb 0%, #faf0d8 45%, #e2eaf5 100%);
+  --c-fg: #14141a;
+  --c-fg-soft: #4a4a58;
+  --c-gray: #767f96;
+  --c-gray-light: #ccd3e2;
+  --c-line: #e8ecf3;
+  --c-line-strong: #7a8ec0;
+  /* カード等の小さい面には、グラデーションをそのまま押し込まず
+     単色のフラットな色を、かなり淡く使う */
+  --c-surface: #faf1dd;
 
-  /* Accent gradient（Instagram参考の配色） */
-  --c-tint-yellow: #fff2c9;
-  --c-tint-blue: #cbd7ef;
-  --c-gradient: linear-gradient(135deg, #ffffff 0%, #fff2c9 50%, #cbd7ef 100%);
-  --c-gradient-soft: linear-gradient(160deg, #ffffff 0%, #fffaef 45%, #f2f5fb 100%);
+  /* Accent gradient（Instagram参考の配色。彩度は控えめに） */
+  --c-tint-yellow: #faf0d8;
+  --c-tint-blue: #e2eaf5;
+  --c-gradient: linear-gradient(135deg, #fffefb 0%, #faf0d8 50%, #e2eaf5 100%);
+  --c-gradient-band: linear-gradient(90deg, #faf0d8 0%, #e2eaf5 100%);
 
-  /* Typography */
+  /* Typography：本文・UIはゴシック、名前や見出しはセリフを合わせる */
   --font-jp: "Zen Kaku Gothic Antique", "Shippori Mincho", "Noto Serif JP", sans-serif;
   --font-en: "Zen Kaku Gothic Antique", "EB Garamond", sans-serif;
+  --font-display: "Zen Old Mincho", "Shippori Mincho", "Noto Serif JP", serif;
 
   --fs-xs: 0.72rem;
   --fs-sm: 0.82rem;
@@ -79,6 +83,18 @@ body {
   letter-spacing: var(--ls-jp);
   font-feature-settings: "palt";
   -webkit-font-smoothing: antialiased;
+}
+
+/* ページ全体のグラデーション背景。background-attachment:fixedはiOS Safari等で
+   挙動が不安定なため使わず、position:fixedの実要素（main.jsが全ページに注入）で
+   常に画面いっぱいにグラデーションが敷かれている状態を保証する。
+   bodyのbackground自体は、JS無効時や印刷時のフォールバックとして残す。 */
+.page-gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--c-bg);
+  pointer-events: none;
 }
 
 img {
@@ -164,9 +180,9 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(253, 253, 252, 0.86);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(255, 253, 248, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--c-line);
 }
 
@@ -231,6 +247,23 @@ button {
   right: 0;
 }
 
+.lang-toggle {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  border: 1px solid var(--c-line-strong);
+  background: transparent;
+  color: var(--c-fg);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background 300ms var(--ease), color 300ms var(--ease);
+}
+
+.lang-toggle:hover {
+  background: var(--c-line-strong);
+  color: #fff;
+}
+
 .nav__link[aria-current="page"] {
   color: var(--c-fg);
 }
@@ -277,47 +310,21 @@ button {
   padding-bottom: var(--space-6);
 }
 
-/* .hero--gallery: index.htmlのスライドショーを背景に持つHeroのみに適用。
-   work.html / news.html も .hero を共有しているため、位置指定や高さの
-   強制はここに限定し、他ページのヒーローに影響しないようにする。 */
+/* .hero--gallery: index.htmlのHeroのみに適用。写真やスライドショーは置かず、
+   ページ全体のグラデーション（bodyの背景）の上に、名前まわりへ大きく余白を
+   取ったシンプルなタイポグラフィだけを置く。 */
 .hero--gallery {
   position: relative;
-  overflow: hidden;
-  min-height: clamp(460px, 66vh, 720px);
+  min-height: clamp(420px, 54vh, 620px);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: var(--c-gradient-soft);
-}
-
 .hero__content {
   position: relative;
   z-index: 1;
-}
-
-.hero__content::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: min(140%, 900px);
-  height: 140%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.94) 0%,
-    rgba(255, 250, 235, 0.78) 45%,
-    rgba(255, 250, 235, 0) 75%
-  );
-  z-index: -1;
-  pointer-events: none;
+  max-width: 640px;
 }
 
 .hero__eyebrow {
@@ -335,14 +342,15 @@ button {
 }
 
 .hero__title {
+  font-family: var(--font-display);
   font-size: var(--fs-xxl);
   font-weight: 500;
   line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
 }
 
 .hero__title-en {
-  margin-top: var(--space-1);
+  margin-top: var(--space-2);
   font-family: var(--font-en);
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-wide);
@@ -358,68 +366,9 @@ button {
   color: var(--c-fg-soft);
 }
 
-/* ---------- 5b. Hero slideshow — 作品サムネイルをゆっくりクロスフェードさせる
-   シンプルなスライドショー（JS不要、CSSアニメーションのみ）。 ---------- */
-.hero-slideshow {
-  position: absolute;
-  inset: 0;
-}
-
-.hero-slideshow__slide {
-  position: absolute;
-  inset: 0;
-  display: block;
-  opacity: 0;
-  animation: hero-slideshow-fade 25s ease-in-out infinite;
-  animation-delay: calc(var(--delay, 0s) * -1);
-}
-
-.hero-slideshow__slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: grayscale(10%);
-  transition: filter 600ms var(--ease);
-}
-
-.hero-slideshow__slide:hover img,
-.hero-slideshow__slide:focus-visible img {
-  filter: grayscale(0%);
-}
-
-@keyframes hero-slideshow-fade {
-  0%   { opacity: 0; }
-  3%   { opacity: 1; }
-  17%  { opacity: 1; }
-  22%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-slideshow__slide {
-    animation: none;
-    opacity: 0;
-  }
-  .hero-slideshow__slide:first-child {
-    opacity: 1;
-  }
-}
-
 @media (max-width: 720px) {
   .hero--gallery {
-    min-height: clamp(420px, 58vh, 560px);
-  }
-
-  .hero__content::before {
-    width: 96%;
-    height: 96%;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(255, 255, 255, 0.92) 0%,
-      rgba(255, 250, 235, 0.68) 42%,
-      rgba(255, 250, 235, 0) 70%
-    );
+    min-height: clamp(340px, 46vh, 480px);
   }
 }
 
@@ -458,6 +407,7 @@ button {
 }
 
 .heading__title {
+  font-family: var(--font-display);
   font-size: var(--fs-lg);
   font-weight: 500;
   letter-spacing: var(--ls-wide);
@@ -474,6 +424,7 @@ button {
 .pickup {
   margin-top: var(--space-5);
   border: 1px solid var(--c-line-strong);
+  background: var(--c-surface);
   padding: var(--space-3) var(--space-4);
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -490,6 +441,7 @@ button {
 }
 
 .pickup__title {
+  font-family: var(--font-display);
   font-size: var(--fs-base);
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -566,6 +518,15 @@ button {
 
 .profile__bio {
   grid-area: bio;
+  margin-top: var(--space-4);
+}
+
+/* Hero直下に見出しなしで続けるプロフィール文章（写真・2カラムなし） */
+.hero-profile {
+  max-width: var(--maxw-text);
+}
+
+.hero-profile .prose:first-of-type {
   margin-top: var(--space-4);
 }
 
@@ -667,6 +628,7 @@ button {
 }
 
 .work-card__title {
+  font-family: var(--font-display);
   font-size: var(--fs-md);
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -676,6 +638,55 @@ button {
   font-size: var(--fs-sm);
   color: var(--c-fg-soft);
   line-height: var(--lh-body);
+}
+
+/* ---------- 9b. Work banner — プロジェクト全体像への横長バナー
+   （通常のwork-cardとは別枠。サムネなし、箱2つ分の幅、低い高さ。
+   写真カードの並びに紛れさせず、単色の面を持つ「機能が違うもの」として
+   はっきり性格分けすることで、逆に一貫性を持たせる） ---------- */
+.work-card--banner {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--c-surface);
+}
+
+.work-card--banner:hover {
+  background: var(--c-surface);
+}
+
+.work-card--banner__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.work-card--banner .work-card__tags {
+  color: var(--c-line-strong);
+}
+
+.work-card--banner .work-card__title {
+  white-space: normal;
+}
+
+.work-card--banner .work-card__desc {
+  max-width: 640px;
+}
+
+.work-card__arrow {
+  flex: 0 0 auto;
+  font-family: var(--font-en);
+  font-size: var(--fs-lg);
+  color: var(--c-line-strong);
+  transition: transform 400ms var(--ease);
+}
+
+.work-card--banner:hover .work-card__arrow {
+  transform: translateX(8px);
 }
 
 /* placeholder media (no photo yet) */
@@ -719,6 +730,7 @@ button {
 }
 
 .project-head__title {
+  font-family: var(--font-display);
   font-size: var(--fs-xl);
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -1190,7 +1202,7 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--c-bg);
+  background: var(--c-surface);
   transform-origin: top;
   transform: scaleY(1);
   transition: transform 1100ms var(--ease);
@@ -1418,7 +1430,7 @@ button {
   height: 19px;
   border-radius: 50%;
   border: 1px solid var(--c-line-strong);
-  background: var(--c-bg);
+  background: var(--c-surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1672,12 +1684,12 @@ button {
     line-break: strict;
   }
 
-  a, button, .nav__link, .work-card, .hero-slideshow__slide, .menu-toggle, .back-link, .pickup__link {
+  a, button, .nav__link, .work-card, .menu-toggle, .back-link, .pickup__link {
     transition: opacity var(--m-dur) var(--m-ease), background-color var(--m-dur) var(--m-ease);
     -webkit-tap-highlight-color: transparent;
   }
 
-  a:active, button:active, .nav__link:active, .work-card:active, .hero-slideshow__slide:active, .pickup__link:active {
+  a:active, button:active, .nav__link:active, .work-card:active, .pickup__link:active {
     opacity: 0.6;
   }
 
@@ -1765,6 +1777,10 @@ button {
     font-size: var(--fs-sm);
   }
 
+  .lang-toggle {
+    margin-top: var(--m-space-2);
+  }
+
   .menu-toggle {
     display: inline-flex;
     flex-shrink: 0;
@@ -1777,6 +1793,16 @@ button {
   .work-card__tags {
     flex-wrap: wrap;
     row-gap: var(--m-space-1);
+  }
+
+  .work-card--banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--m-space-2);
+  }
+
+  .work-card--banner .work-card__title {
+    white-space: normal;
   }
 
   .timeline__row,
