@@ -508,13 +508,15 @@ button {
   margin-top: var(--space-4);
 }
 
-/* Hero直下に見出しなしで続けるプロフィール文章（写真・2カラムなし） */
+/* Hero直下に見出しなしで続けるプロフィール文章（写真・2カラムなし）。
+   下にある.pickup（初個展の枠）と幅を合わせるため、あえてmax-widthで
+   絞らず、セクション幅いっぱいまで使う。 */
 .hero-profile {
-  max-width: var(--maxw-text);
+  max-width: none;
 }
 
-.hero-profile .prose:first-of-type {
-  margin-top: var(--space-4);
+.hero-profile .prose {
+  max-width: none;
 }
 
 /* ---------- 8. Timeline (活動略歴 / 受賞歴) ----------
@@ -1635,21 +1637,21 @@ button {
 
 @media (max-width: 720px) {
   :root {
-    /* モバイル専用スペーシングスケール（大胆に余白を取る方針） */
-    --m-space-1: 10px;
-    --m-space-2: 24px;
-    --m-space-3: 38px;
-    --m-space-4: 58px;
-    --m-space-5: 78px;
-    --m-space-6: 112px;
+    /* モバイル専用スペーシングスケール（さらに大胆に余白を取り、上品に見せる方針） */
+    --m-space-1: 14px;
+    --m-space-2: 32px;
+    --m-space-3: 52px;
+    --m-space-4: 80px;
+    --m-space-5: 108px;
+    --m-space-6: 152px;
 
-    /* モバイル専用タイポグラフィスケール */
-    --m-fs-xs: 12px;
-    --m-fs-sm: 14px;
-    --m-fs-base: 16px;
-    --m-fs-lg: 20px;
-    --m-fs-xl: 24px;
-    --m-fs-2xl: 28px;
+    /* モバイル専用タイポグラフィスケール（少し小さめに抑えて上品に） */
+    --m-fs-xs: 11px;
+    --m-fs-sm: 13px;
+    --m-fs-base: 15px;
+    --m-fs-lg: 19px;
+    --m-fs-xl: 23px;
+    --m-fs-2xl: 26px;
 
     /* モバイル専用モーション・トークン */
     --m-ease: cubic-bezier(0.16, 1, 0.3, 1);
