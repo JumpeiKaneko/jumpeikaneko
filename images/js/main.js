@@ -18,10 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollProgress();
   initScrambleText();
   initWatermarkCount();
+  initLangToggle();
 });
 
 /* 0) 全ページ共通のオーバーレイ要素を注入 -------------------------- */
 function injectChrome() {
+  // ページ全体のグラデーション背景。position:fixedの実要素にすることで、
+  // background-attachment:fixed の挙動が不安定な端末でも、スクロール位置に
+  // 関わらず常に画面いっぱいにグラデーションが敷かれた状態を保証する。
+  const pageBg = document.createElement("div");
+  pageBg.className = "page-gradient-bg";
+  document.body.prepend(pageBg);
+
   const grain = document.createElement("div");
   grain.className = "grain";
   document.body.appendChild(grain);
@@ -30,6 +38,38 @@ function injectChrome() {
   progress.className = "scroll-progress";
   progress.setAttribute("data-scroll-progress", "");
   document.body.appendChild(progress);
+}
+
+/* 0b) 英語版の切り替え --------------------------------------------
+   data-en属性を持つ要素だけを対象に、初回表示時の日本語(innerHTML)を
+   自動でキャッシュしておき、ボタンで日本語⇄英語をトグルする。
+   英語訳がまだ用意されていないページ／要素はそのまま日本語で表示される。 */
+function initLangToggle() {
+  const toggle = document.querySelector("[data-lang-toggle]");
+  if (!toggle) return;
+
+  const targets = document.querySelectorAll("[data-en]");
+  let isEn = localStorage.getItem("siteLang") === "en";
+
+  function applyLang(en) {
+    targets.forEach((el) => {
+      if (el.dataset.jaCache === undefined) {
+        el.dataset.jaCache = el.innerHTML;
+      }
+      el.innerHTML = en ? el.dataset.en : el.dataset.jaCache;
+    });
+    document.documentElement.lang = en ? "en" : "ja";
+    toggle.textContent = en ? "JA" : "EN";
+    toggle.setAttribute("aria-pressed", String(en));
+  }
+
+  applyLang(isEn);
+
+  toggle.addEventListener("click", () => {
+    isEn = !isEn;
+    localStorage.setItem("siteLang", isEn ? "en" : "ja");
+    applyLang(isEn);
+  });
 }
 
 /* 1) モバイルメニューの開閉 -------------------------------- */
