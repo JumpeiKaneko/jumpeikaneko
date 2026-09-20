@@ -2123,8 +2123,8 @@ a.lineup__handle:hover {
 }
 .guide-chapter__label strong {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--fs-xl);
+  font-weight: 500;
+  font-size: var(--fs-lg);
   color: var(--c-fg);
   letter-spacing: .02em;
 }
@@ -2168,9 +2168,20 @@ a.lineup__handle:hover {
 .guide-list__body { flex: 1 1 220px; min-width: 0; }
 .guide-list__title {
   font-family: var(--font-jp);
-  font-weight: 600;
-  font-size: var(--fs-lg);
+  font-weight: 500;
+  font-size: var(--fs-md);
   line-height: 1.6;
+  transition: color .25s ease;
+}
+/* rows with no audio/video/link get de-emphasized so the ones with media
+   naturally draw the eye — hierarchy by subtraction, not by adding more badges */
+.guide-list__row--muted .guide-list__title {
+  color: var(--c-fg-soft);
+  font-weight: 400;
+}
+.guide-list__row--muted .guide-list__num,
+.guide-list__row--muted .guide-list__arrow {
+  color: var(--c-gray-light);
 }
 .guide-list__meta {
   margin-top: 4px;
@@ -2282,4 +2293,44 @@ a.lineup__handle:hover {
   .media-block__label { margin-bottom: var(--m-space-1); }
   .audio-player { padding: var(--m-space-2); }
   .guide-archive-note { padding: var(--m-space-1) var(--m-space-2); }
+}
+
+/* ---------- 20. Notice banner (time-sensitive announcements, top of page) ---------- */
+/* International Klein Blue — used once, sparingly, purely as an alert accent;
+   not part of the regular site palette. */
+.notice-banner {
+  background: #002fa7;
+  color: #fff;
+}
+.notice-banner__row {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.notice-banner__label {
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .7);
+}
+.notice-banner__text {
+  font-family: var(--font-jp);
+  font-size: var(--fs-md);
+  line-height: 2;
+  color: #fff;
+  max-width: var(--maxw-text);
+}
+
+@media (max-width: 720px) {
+  .notice-banner__row {
+    padding-top: var(--m-space-3);
+    padding-bottom: var(--m-space-3);
+  }
+  .notice-banner__text {
+    font-size: var(--fs-base);
+  }
 }
