@@ -18,17 +18,23 @@
   --c-line: #e8ecf3;
   --c-line-strong: #7a8ec0;
   --c-surface: #faf1dd;
+  /* サイト本体（css/style.css）とまったく同じタイポグラフィ・トークンを使う。
+     見出し・名前はセリフ(font-display)、本文・ラベルはゴシック(font-jp/font-en)
+     ——というサイト本来の役割分担をそのまま踏襲し、サイズも実際の値に揃える。 */
   --font-jp: "Zen Kaku Gothic Antique","Shippori Mincho","Noto Serif JP",sans-serif;
   --font-en: "Zen Kaku Gothic Antique","EB Garamond",sans-serif;
   --font-display: "Zen Old Mincho","Shippori Mincho","Noto Serif JP",serif;
-  --fs-xs: 0.76rem;
-  --fs-sm: 0.92rem;
-  --fs-base: 1.04rem;
-  --fs-md: 1.3rem;
-  --fs-lg: 1.9rem;
-  --fs-xl: clamp(2.3rem, 6vw, 4.6rem);
-  --fs-xxl: clamp(3.6rem, 13vw, 11rem);
-  --space-1: 10px; --space-2: 20px; --space-3: 32px; --space-4: 56px; --space-5: 96px;
+  --fs-xs: 0.72rem;
+  --fs-sm: 0.82rem;
+  --fs-base: 0.98rem;
+  --fs-md: 1.15rem;
+  --fs-lg: 1.6rem;
+  --fs-xl: clamp(2rem, 5vw, 3.2rem);
+  --fs-xxl: clamp(2.2rem, 4.5vw, 3.4rem);
+  --ls-wide: 0.22em;
+  --lh-tight: 1.5;
+  --space-1: 10px; --space-2: 20px; --space-3: 30px; --space-4: 48px; --space-5: 80px; --space-6: 120px;
+  --dur: 900ms;
   --ease: cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{ box-sizing:border-box; }
@@ -40,6 +46,7 @@ body{
   overscroll-behavior-y:none;
 }
 img{ max-width:100%; display:block; }
+ul{ margin:0; padding:0; list-style:none; }
 
 #deck{
   height:100vh; height:100dvh;
@@ -61,20 +68,23 @@ img{ max-width:100%; display:block; }
 .slide-inner{ width:100%; max-width:1320px; margin:0 auto; }
 
 .eyebrow{
-  font-family:var(--font-en); font-weight:600; font-size:var(--fs-xs);
-  letter-spacing:.24em; text-transform:uppercase; color:var(--c-gray);
+  font-family:var(--font-en); font-size:var(--fs-sm);
+  letter-spacing:var(--ls-wide); color:var(--c-gray);
 }
+/* サイトの .heading__title と同じ扱い：セリフ・控えめなウェイト・ワイドなトラッキング */
 .s-title{
-  font-family:var(--font-display); font-weight:500; letter-spacing:.05em;
-  font-size:var(--fs-xl); line-height:1.25; margin-top:var(--space-2); color:var(--c-fg);
+  font-family:var(--font-display); font-weight:500; letter-spacing:var(--ls-wide);
+  font-size:var(--fs-lg); line-height:1.4; margin-top:var(--space-2); color:var(--c-fg);
 }
+/* 唯一、作品名そのものを名乗る瞬間だけ、サイトHeroと同じ大きさのセリフを使う */
+.s-title--name{ font-size:var(--fs-xxl); line-height:1.2; letter-spacing:0.1em; }
 .s-sub{
-  margin-top:var(--space-2); font-size:var(--fs-md); color:var(--c-fg-soft); line-height:1.85;
-  max-width:760px;
+  margin-top:var(--space-3); font-size:var(--fs-md); color:var(--c-fg-soft); line-height:1.85;
+  max-width:680px;
 }
 .s-note{
-  margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:1.95;
-  max-width:700px;
+  margin-top:var(--space-2); font-size:var(--fs-base); color:var(--c-fg-soft); line-height:2;
+  max-width:640px;
 }
 .s-meta{
   margin-top:var(--space-4); font-family:var(--font-en); font-size:var(--fs-xs);
@@ -112,44 +122,17 @@ img{ max-width:100%; display:block; }
 }
 @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
 
-/* ---- slide 0: cold open / thread ---- */
-.thread-shell{
-  margin-top:var(--space-4); max-width:760px;
-  background:#fffdf8; border:1px solid var(--c-line); border-radius:14px;
-  box-shadow:0 20px 60px -30px rgba(20,20,26,.25);
-  overflow:hidden;
-}
-.thread-chrome{
-  display:flex; align-items:center; gap:10px; padding:14px 22px;
-  border-bottom:1px solid var(--c-line); font-family:var(--font-en);
-  font-size:11px; letter-spacing:.14em; color:var(--c-gray); text-transform:uppercase;
-}
-.thread-chrome .dot{ width:8px; height:8px; border-radius:50%; background:var(--c-line-strong); opacity:.5; }
-.thread-body{ padding: var(--space-3) var(--space-4) var(--space-4); }
-.thread-body p{ margin:0 0 16px; font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:1.95; }
-.thread-body p:last-child{ margin-bottom:0; }
-.thread-body .strong{ color:var(--c-fg); font-weight:500; }
-.thread-pitch{ margin:10px 0 16px; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px; }
-.thread-pitch li{ font-size:var(--fs-sm); color:var(--c-fg); }
-.thread-foot{
-  display:flex; align-items:center; gap:16px; padding-top:18px; margin-top:4px;
-  border-top:1px solid var(--c-line);
-  font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.08em; color:var(--c-gray);
-}
-.check{ display:inline-flex; align-items:center; gap:6px; color:var(--c-line-strong); font-weight:600; }
-.go-next{ margin-top:var(--space-4); font-family:var(--font-display); font-size:var(--fs-lg); color:var(--c-fg); }
-
 /* ---- slide 1: top ---- */
 .top-wrap{ display:grid; grid-template-columns: 1.1fr 1fr; gap:var(--space-5); align-items:center; }
 .top-photo{ width:100%; aspect-ratio:16/9; overflow:hidden; background:var(--c-surface); }
 .top-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-/* ---- slide 2: timeline ---- */
-.tl{ margin-top:var(--space-4); display:flex; flex-direction:column; max-width:880px; }
-.tl-row{ display:grid; grid-template-columns:140px 1fr; gap:var(--space-3); padding:14px 0; border-top:1px solid var(--c-line); }
-.tl-row:first-child{ border-top:none; }
-.tl-date{ font-family:var(--font-en); font-size:var(--fs-sm); color:var(--c-gray); }
-.tl-text{ font-size:var(--fs-md); color:var(--c-fg); line-height:1.6; }
+/* ---- slide 2: timeline — サイトの .timeline と同じCSSをそのまま使う ---- */
+.timeline{ margin-top:var(--space-4); display:flex; flex-direction:column; max-width:760px; }
+.timeline__row{ display:grid; grid-template-columns:96px 1fr; gap:var(--space-2); padding:var(--space-2) 0; transition:padding-left 250ms var(--ease); }
+.timeline__row:hover{ padding-left:var(--space-1); }
+.timeline__date{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:0.05em; }
+.timeline__text{ font-size:var(--fs-sm); line-height:var(--lh-tight); letter-spacing:0.03em; color:var(--c-fg); }
 .photo-row{ margin-top:var(--space-5); display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-3); }
 .photo-row figure{ margin:0; }
 .photo-row .ph{ width:100%; aspect-ratio:16/9; overflow:hidden; background:var(--c-surface); }
@@ -157,63 +140,91 @@ img{ max-width:100%; display:block; }
 .photo-row figcaption{ margin-top:10px; font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.04em; }
 @media (max-width:900px){ .photo-row{ grid-template-columns:repeat(2,1fr); } }
 
-/* ---- interlude: full-bleed signage ---- */
-.interlude{ padding:0 !important; justify-content:center; align-items:center; background:#fff; }
-.interlude-img{ max-width:min(900px,86vw); width:100%; }
-.interlude-img img{ width:100%; height:auto; }
-.interlude-cap{
-  position:absolute; bottom:var(--space-4); left:0; right:0; text-align:center;
-  font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.2em; color:var(--c-gray); text-transform:uppercase;
-}
-
 /* ---- OTOATOとは overview ---- */
 .ov-grid{ margin-top:var(--space-4); display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); align-items:start; }
-.ov-list{ display:flex; flex-direction:column; gap:14px; }
-.ov-list .num{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.1em; margin-right:14px; }
-.ov-list .nm{ font-family:var(--font-display); font-size:var(--fs-md); color:var(--c-fg); }
+.ov-list{ display:flex; flex-direction:column; gap:16px; }
+.ov-list .num{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray-light); letter-spacing:.1em; margin-right:16px; }
+.ov-list .nm{ font-family:var(--font-display); font-weight:500; font-size:var(--fs-md); color:var(--c-fg); letter-spacing:.04em; }
 .ov-fact{ border-top:1px solid var(--c-line-strong); padding-top:14px; margin-top:22px; }
-.ov-fact dt{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.14em; text-transform:uppercase; }
+.ov-fact dt{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.14em; }
 .ov-fact dd{ margin:4px 0 16px; font-size:var(--fs-sm); color:var(--c-fg); }
 .ov-sessions{ font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2.1; }
 @media (max-width:900px){ .ov-grid{ grid-template-columns:1fr; } }
 
-/* ---- chapter slides ---- */
-.ch-wrap{ display:grid; grid-template-columns: 1fr 1.15fr; gap:var(--space-5); align-items:center; height:100%; }
-.ch-panel{ height:min(78vh,860px); display:flex; align-items:center; justify-content:center; }
-.ch-panel img{
-  height:100%; width:auto; max-width:100%; object-fit:contain;
-  box-shadow:0 30px 70px -36px rgba(20,20,26,.35); border:1px solid var(--c-line);
-  background:#fff;
-}
+/* ---- chapter slides : text left / photo right (サイトの慣例に合わせる) ---- */
+.ch-wrap{ display:grid; grid-template-columns: 0.95fr 1.2fr; gap:var(--space-5); align-items:center; }
 .ch-text{ min-width:0; }
-.ch-label{ font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.22em; color:var(--c-gray); text-transform:uppercase; }
-.ch-title{ font-family:var(--font-display); font-size:clamp(1.8rem,3.4vw,2.6rem); margin-top:10px; color:var(--c-fg); }
-.ch-quote{ margin-top:var(--space-3); font-size:var(--fs-md); color:var(--c-fg); line-height:1.95; max-width:560px; }
-.ch-desc{ margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2; max-width:560px; }
+.ch-label{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray-light); letter-spacing:.1em; }
+.ch-title{ font-family:var(--font-display); font-weight:500; font-size:var(--fs-lg); margin-top:10px; color:var(--c-fg); letter-spacing:.04em; }
+.ch-desc{ margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2.1; max-width:480px; }
 .ch-works{ margin-top:var(--space-3); padding-top:var(--space-2); border-top:1px solid var(--c-line); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.04em; line-height:2; }
+
+/* photo slot shared by chapter / lecture / other content slides — landscape, uncropped, flush edge（装飾枠なし） */
+.photo-slot{ position:relative; width:100%; aspect-ratio:3/2; background:var(--c-surface); overflow:hidden; }
+.photo-slot img{ width:100%; height:100%; object-fit:contain; display:block; background:var(--c-surface); }
+.ph-placeholder{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background: repeating-linear-gradient(135deg, var(--c-surface), var(--c-surface) 11px, #ece3ca 11px, #ece3ca 12px);
+}
+.ph-placeholder span{
+  font-family:var(--font-en); font-size:11px; color:var(--c-gray); letter-spacing:.06em;
+  text-align:center; padding:0 20px; line-height:1.8;
+}
 @media (max-width:900px){
-  .ch-wrap{ grid-template-columns:1fr; height:auto; }
-  .ch-panel{ height:40vh; order:-1; }
+  .ch-wrap{ grid-template-columns:1fr; }
+  .photo-slot{ order:-1; }
 }
 
+/* ---- 個展風景: 3枚の実写真プレースホルダー ---- */
+.expo-grid{ margin-top:var(--space-5); display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-4); max-width:900px; }
+.expo-grid .photo-slot{ aspect-ratio:3/2; }
+.expo-grid figcaption{ margin-top:12px; font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.04em; }
+@media (max-width:900px){ .expo-grid{ grid-template-columns:1fr; } }
+
 /* ---- これから ---- */
-.plan-list{ margin-top:var(--space-4); display:flex; flex-direction:column; gap:var(--space-4); max-width:900px; }
-.plan-item{ display:grid; grid-template-columns:90px 1fr; gap:var(--space-3); border-top:1px solid var(--c-line-strong); padding-top:16px; }
+.plan-list{ margin-top:var(--space-5); display:flex; flex-direction:column; gap:var(--space-4); max-width:900px; }
+.plan-item{ display:grid; grid-template-columns:90px 1fr; gap:var(--space-3); border-top:1px solid var(--c-line-strong); padding-top:20px; }
 .plan-num{ font-family:var(--font-en); font-size:var(--fs-md); color:var(--c-gray); }
 .plan-text{ font-size:var(--fs-md); color:var(--c-fg); line-height:2; }
 @media (max-width:760px){ .plan-item{ grid-template-columns:1fr; } }
 
 /* ---- last slide ---- */
 .last-wrap{ display:flex; flex-direction:column; align-items:center; text-align:center; }
-.qr-box{ margin-top:var(--space-4); background:#fff; padding:18px; border:1px solid var(--c-line); box-shadow:0 20px 60px -30px rgba(20,20,26,.3); }
+.qr-box{ margin-top:var(--space-5); background:#fff; padding:20px; }
 .qr-box svg{ display:block; width:min(300px,46vw); height:min(300px,46vw); }
 .last-links{ margin-top:var(--space-4); display:flex; gap:var(--space-4); flex-wrap:wrap; justify-content:center; }
 .last-links a{ font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.1em; color:var(--c-gray); border-bottom:1px solid var(--c-line-strong); padding-bottom:2px; }
 
 @media (max-width:760px){
   .ov-grid, .top-wrap{ grid-template-columns:1fr; }
-  .s-title{ font-size:clamp(1.8rem,9vw,2.6rem); }
+  .s-title{ font-size:clamp(1.3rem,6vw,1.6rem); }
   .photo-row{ grid-template-columns:repeat(2,1fr); }
+}
+
+/* ---- motion: サイト本体と同じ演出（フェードイン・ワイプ・スクランブル）---- */
+.reveal{ opacity:0; transform:translateY(24px); transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+.reveal-stagger > *{ opacity:0; transform:translateY(20px); transition:opacity 800ms var(--ease), transform 800ms var(--ease); }
+.reveal-stagger.is-visible > *{ opacity:1; transform:translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(1){ transition-delay:0ms; }
+.reveal-stagger.is-visible > *:nth-child(2){ transition-delay:90ms; }
+.reveal-stagger.is-visible > *:nth-child(3){ transition-delay:180ms; }
+.reveal-stagger.is-visible > *:nth-child(4){ transition-delay:270ms; }
+.reveal-stagger.is-visible > *:nth-child(5){ transition-delay:360ms; }
+
+.img-wipe{ position:relative; overflow:hidden; }
+.img-wipe::after{
+  content:""; position:absolute; inset:0; background:var(--c-surface);
+  transform-origin:top; transform:scaleY(1); transition:transform 1100ms var(--ease); z-index:2;
+}
+.img-wipe img{ transform:scale(1.08); transition:transform 1300ms var(--ease); }
+.img-wipe.is-visible::after{ transform:scaleY(0); }
+.img-wipe.is-visible img{ transform:scale(1); }
+
+@media (prefers-reduced-motion: reduce){
+  .reveal, .reveal-stagger > *{ opacity:1; transform:none; }
+  .img-wipe::after{ display:none; }
+  .img-wipe img{ transform:none; }
 }
 </style>
 </head>
@@ -223,39 +234,13 @@ img{ max-width:100%; display:block; }
 
 <main id="deck">
 
-<!-- 0: cold open -->
-<section class="slide" data-title="MEETUP">
-  <div class="slide-inner">
-    <div class="eyebrow">100BANCH GARAGE — MEETUP THREAD</div>
-    <div class="s-title" style="font-size:clamp(1.7rem,4.2vw,3rem);">来月の「MEETUP」は<br>10/1(木) 19:00〜 @100BANCH 3F</div>
-    <div class="thread-shell">
-      <div class="thread-chrome"><span class="dot"></span>100BANCH GARAGE Program — Thread</div>
-      <div class="thread-body">
-        <p>皆さんには以下の構成で、再度中間報告ピッチを3分で行っていただきます。</p>
-        <ul class="thread-pitch">
-          <li>・プロジェクト紹介（1分）</li>
-          <li>・延長後1ヶ月で行った活動の紹介（1分）</li>
-          <li>・残りの入居期間でやりたいことや目指すゴール（1分）</li>
-        </ul>
-        <p>プロトタイプなど、見せられるものがあればお持ちいただけると嬉しいです。</p>
-        <p style="font-size:var(--fs-xs); color:var(--c-gray);">※現役期間中はメンバー1名以上の参加必須です</p>
-        <div class="thread-foot">
-          <span class="check">✓ 出席（金子淳平）</span>
-          <span>期限：9/24 23:59</span>
-        </div>
-      </div>
-    </div>
-    <div class="go-next">それでは、始めます。</div>
-  </div>
-</section>
-
 <!-- 1: top -->
 <section class="slide" data-title="絵画を聴く">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="eyebrow">100BANCH GARAGE Program — MEETUP 2026.10.1</div>
     <div class="top-wrap">
       <div class="top-text">
-        <div class="s-title">絵画を聴く</div>
+        <div class="s-title s-title--name">絵画を聴く</div>
         <p class="s-sub">絵画の中に鳴っていたであろう音風景を、作曲によって立ち上げる</p>
         <p class="s-note">全盲の友人と作品を鑑賞した経験をきっかけに、絵画を音に読み替える「作曲実践」を続けている。</p>
         <p class="s-meta">金子淳平 ／ 100BANCH GARAGE Program ／ MEETUP 2026.10.1</p>
@@ -267,17 +252,17 @@ img{ max-width:100%; display:block; }
 
 <!-- 2: これまで -->
 <section class="slide" data-title="これまで">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="eyebrow">01 — これまで</div>
-    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">これまで</div>
-    <div class="tl">
-      <div class="tl-row"><span class="tl-date">2026.05</span><span class="tl-text">ASIBA DEMO DAY：インスタレーション発表</span></div>
-      <div class="tl-row"><span class="tl-date">2026.06</span><span class="tl-text">美学校：ワークショップ「聴く絵画をつくる」</span></div>
-      <div class="tl-row"><span class="tl-date">2026.07</span><span class="tl-text">100BANCH：「気配に触れる」「ミキキの交差点」</span></div>
-      <div class="tl-row"><span class="tl-date">2026.07</span><span class="tl-text">八王子：東京都盲人福祉協会での鑑賞会</span></div>
-      <div class="tl-row"><span class="tl-date">2026.07</span><span class="tl-text">o-i studio：「線を聴く」</span></div>
-    </div>
-    <div class="photo-row">
+    <div class="s-title" data-scramble>これまで</div>
+    <ul class="timeline reveal-stagger">
+      <li class="timeline__row"><span class="timeline__date">2026.05</span><span class="timeline__text">ASIBA DEMO DAY：インスタレーション発表</span></li>
+      <li class="timeline__row"><span class="timeline__date">2026.06</span><span class="timeline__text">美学校：ワークショップ「聴く絵画をつくる」</span></li>
+      <li class="timeline__row"><span class="timeline__date">2026.07</span><span class="timeline__text">100BANCH：「気配に触れる」「ミキキの交差点」</span></li>
+      <li class="timeline__row"><span class="timeline__date">2026.07</span><span class="timeline__text">八王子：東京都盲人福祉協会での鑑賞会</span></li>
+      <li class="timeline__row"><span class="timeline__date">2026.07</span><span class="timeline__text">o-i studio：「線を聴く」</span></li>
+    </ul>
+    <div class="photo-row reveal-stagger">
       <figure><div class="ph"><img src="strip/kiku-01.jpg" alt="絵画を聴く"></div><figcaption>絵画を聴く</figcaption></figure>
       <figure><div class="ph"><img src="strip/kikue-06.jpg" alt="聴く絵画をつくる"></div><figcaption>聴く絵画をつくる</figcaption></figure>
       <figure><div class="ph"><img src="strip/kehai-01.jpg" alt="ミキキの交差点"></div><figcaption>ミキキの交差点</figcaption></figure>
@@ -288,27 +273,36 @@ img{ max-width:100%; display:block; }
 
 <!-- 2-0: 見出し -->
 <section class="slide" data-title="8・9月にやったこと">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="eyebrow">02 — Aug / Sep</div>
-    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">8・9月にやったこと</div>
-    <div class="tl" style="margin-top:var(--space-5);">
-      <div class="tl-row"><span class="tl-date">2026.09</span><span class="tl-text">第31回日本バーチャルリアリティ学会大会：論文発表</span></div>
-      <div class="tl-row"><span class="tl-date">2026.09.19〜23</span><span class="tl-text">初個展「OTOATO」（GALLERY工+WITH・新高円寺）</span></div>
+    <div class="s-title" data-scramble>8・9月にやったこと</div>
+    <p class="s-sub" style="margin-top:var(--space-4);">学会発表と、初めての個展。</p>
+  </div>
+</section>
+
+<!-- 2-0b: 論文発表 -->
+<section class="slide" data-title="論文発表">
+  <div class="slide-inner reveal">
+    <div class="ch-wrap">
+      <div class="ch-text">
+        <div class="eyebrow">2026.09</div>
+        <div class="s-title">第31回日本バーチャルリアリティ学会大会<br>論文発表</div>
+        <p class="ch-desc">絵画を音で拡張する試みを検証した学術論文と解説パネル。木枠の没入展示とWebアプリを使ったワークショップを行い、音や振動が加わることで絵の奥行きがどう伝わり、言葉だけに頼らない対話がどう生まれるかを実証的に分析した。</p>
+        <div class="ch-works">「絵画を聴く」絵画の音響的拡張における鑑賞体験と対話の創出</div>
+      </div>
+      <div class="photo-slot img-wipe">
+        <img src="image/conference-01.jpg" alt="第31回日本バーチャルリアリティ学会大会 発表の様子" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/conference-01.jpg<br>学会発表の様子</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- interlude: OTOATO signage -->
-<section class="slide interlude" data-title="OTOATO">
-  <div class="interlude-img"><img src="otoato-panels/signage.png" alt="OTOATO 金子淳平 初個展 看板"></div>
-  <div class="interlude-cap">2026.9.19 – 9.23 ／ GALLERY工+WITH</div>
-</section>
-
 <!-- 2-1: OTOATOとは -->
 <section class="slide" data-title="OTOATOとは">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="eyebrow">OTOATO — Concept</div>
-    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">OTOATOとは</div>
+    <div class="s-title" data-scramble>OTOATOとは</div>
     <p class="s-sub">これまでの実践を4つの章で紹介した、初めての個展。</p>
     <div class="ov-grid">
       <div class="ov-list">
@@ -328,17 +322,43 @@ img{ max-width:100%; display:block; }
   </div>
 </section>
 
+<!-- 2-1b: 個展風景（実写真3枚） -->
+<section class="slide" data-title="個展風景">
+  <div class="slide-inner reveal">
+    <div class="eyebrow">OTOATO — Installation Views</div>
+    <div class="s-title" data-scramble>個展風景</div>
+    <div class="expo-grid">
+      <figure>
+        <div class="photo-slot img-wipe">
+          <img src="image/view-01.jpg" alt="OTOATO 会場風景 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/view-01.jpg</span></div>
+        </div>
+        <figcaption>会場風景</figcaption>
+      </figure>
+      <figure>
+        <div class="photo-slot img-wipe">
+          <img src="image/view-02.jpg" alt="OTOATO 会場風景 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/view-02.jpg</span></div>
+        </div>
+        <figcaption>会場風景</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- 2-2: CHAPTER 01 -->
 <section class="slide" data-title="CHAPTER 01">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="ch-wrap">
-      <div class="ch-panel"><img src="otoato-panels/chapter_1.png" alt="CHAPTER I 絵画を聴く パネル"></div>
       <div class="ch-text">
         <div class="ch-label">Chapter I / IV</div>
-        <div class="ch-title">絵画を聴く</div>
-        <p class="ch-quote">絵画を見るとき、私たちは何を受け取っているでしょうか。</p>
+        <div class="ch-title" data-scramble>絵画を聴く</div>
         <p class="ch-desc">絵の中に鳴っていたかもしれない音の風景を立ち上げ、視覚や言葉だけに頼らずに作品の世界へ入り込むための試み。全盲の友人と美術館へ行った経験がきっかけだった。</p>
         <div class="ch-works">絵画を聴く　／　絵画の音響的拡張における鑑賞体験と対話の創出</div>
+      </div>
+      <div class="photo-slot img-wipe">
+        <img src="image/view-03.jpg" alt="CHAPTER I 絵画を聴く 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/view-03.jpg<br>CHAPTER I 絵画を聴く 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -346,15 +366,17 @@ img{ max-width:100%; display:block; }
 
 <!-- 2-3: CHAPTER 02 -->
 <section class="slide" data-title="CHAPTER 02">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="ch-wrap">
-      <div class="ch-panel"><img src="otoato-panels/chapter_2.png" alt="CHAPTER II 関係性 パネル"></div>
       <div class="ch-text">
         <div class="ch-label">Chapter II / IV</div>
-        <div class="ch-title">関係性</div>
-        <p class="ch-quote">作品や場を通して、人と人との間に何かが生まれることに興味がある。</p>
+        <div class="ch-title" data-scramble>関係性</div>
         <p class="ch-desc">他者との関わりや、その場の時間を音に変換しながら共有してきた、ワークショップやセッションの実践をまとめた章。</p>
         <div class="ch-works">気配に触れる　／　ミキキの交差点　／　線を聴く</div>
+      </div>
+      <div class="photo-slot img-wipe">
+        <img src="image/chapter-02.jpg" alt="CHAPTER II 関係性 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/chapter-02.jpg<br>CHAPTER II 関係性 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -362,15 +384,17 @@ img{ max-width:100%; display:block; }
 
 <!-- 2-4: CHAPTER 03 -->
 <section class="slide" data-title="CHAPTER 03">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="ch-wrap">
-      <div class="ch-panel"><img src="otoato-panels/chapter_3.png" alt="CHAPTER III 情報とエモーション パネル"></div>
       <div class="ch-text">
         <div class="ch-label">Chapter III / IV</div>
-        <div class="ch-title">情報とエモーション</div>
-        <p class="ch-quote">劣化せず残り続けるデジタルの音から、こぼれ落ちてしまう手触りがある。</p>
+        <div class="ch-title" data-scramble>情報とエモーション</div>
         <p class="ch-desc">「残るもの（データ）」に、もう一度「消えるもの（現象）」や「朽ちるもの（物質）」の感覚を取り戻せないかと考えた作品群。</p>
         <div class="ch-works">Resonance（福井県鯖江市 西山公園）　／　繋がり、朽ちる（新作）</div>
+      </div>
+      <div class="photo-slot img-wipe">
+        <img src="image/chapter-03.jpg" alt="CHAPTER III 情報とエモーション 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/chapter-03.jpg<br>CHAPTER III 情報とエモーション 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -378,15 +402,17 @@ img{ max-width:100%; display:block; }
 
 <!-- 2-5: CHAPTER 04 -->
 <section class="slide" data-title="CHAPTER 04">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="ch-wrap">
-      <div class="ch-panel"><img src="otoato-panels/chapter_4.png" alt="CHAPTER IV ひらく パネル"></div>
       <div class="ch-text">
         <div class="ch-label">Chapter IV / IV</div>
-        <div class="ch-title">ひらく</div>
-        <p class="ch-quote">"REUNIR" はフランス語で「集まる／集める」を意味する。</p>
+        <div class="ch-title" data-scramble>ひらく</div>
         <p class="ch-desc">大学3年生の夏、音の金子淳平と建築の鏡理吾の2人で、高島平団地の一室に1週間滞在。その記録と対話、循環のモデルを1冊のZINEとして書き上げた。</p>
         <div class="ch-works">ZINE『Reunir』（1週間でメディアをつくる）</div>
+      </div>
+      <div class="photo-slot img-wipe">
+        <img src="image/chapter-04.jpg" alt="CHAPTER IV ひらく 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/chapter-04.jpg<br>CHAPTER IV ひらく 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -394,9 +420,9 @@ img{ max-width:100%; display:block; }
 
 <!-- 3: これから -->
 <section class="slide" data-title="これから">
-  <div class="slide-inner">
+  <div class="slide-inner reveal">
     <div class="eyebrow">03 — これから</div>
-    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">これから</div>
+    <div class="s-title" data-scramble>これから</div>
     <div class="plan-list">
       <div class="plan-item">
         <div class="plan-num">01</div>
@@ -416,9 +442,9 @@ img{ max-width:100%; display:block; }
 
 <!-- 4: 最後の画面 -->
 <section class="slide" data-title="発表資料">
-  <div class="last-wrap" style="width:100%;">
+  <div class="last-wrap reveal" style="width:100%;">
     <div class="eyebrow">Thank you</div>
-    <div class="s-title" style="font-size:clamp(1.6rem,4.4vw,2.4rem);">発表資料はサイトから<br>ご覧いただけます</div>
+    <div class="s-title">発表資料はサイトから<br>ご覧いただけます</div>
     <div class="qr-box"><svg id="qr-svg"></svg></div>
     <div class="last-links">
       <a href="index.html">ポートフォリオ</a>
@@ -683,6 +709,66 @@ function renderQR(targetSvg, text){
   targetSvg.innerHTML = rects;
 }
 renderQR(document.getElementById('qr-svg'), QR_TARGET_URL);
+
+/* ===================== Motion：サイト本体と同じ fade-in / wipe / scramble ===================== */
+/* #deck は独自スクロールコンテナなので、IntersectionObserverのrootをdeckにする */
+function initRevealAndWipe(){
+  const deckEl = document.getElementById('deck');
+  const targets = document.querySelectorAll('.reveal, .reveal-stagger, .img-wipe');
+  if (!targets.length) return;
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { root: deckEl, threshold: 0.2 });
+  targets.forEach((el) => observer.observe(el));
+}
+
+/* [data-scramble]：見出しが画面に入ると、ノイズ文字から本来のテキストへ収束する */
+function initScrambleText(){
+  const deckEl = document.getElementById('deck');
+  const els = document.querySelectorAll('[data-scramble]');
+  if (!els.length) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const noise = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  const scramble = (el) => {
+    const final = el.textContent;
+    const len = final.length;
+    const totalFrames = 16;
+    let frame = 0;
+    const timer = setInterval(() => {
+      let out = '';
+      for (let i = 0; i < len; i++) {
+        const ch = final[i];
+        if (ch === '\n' || ch === ' ') { out += ch; continue; }
+        const revealAt = (i / len) * totalFrames * 0.7;
+        out += frame >= revealAt ? ch : noise[Math.floor(Math.random() * noise.length)];
+      }
+      el.textContent = out;
+      frame++;
+      if (frame > totalFrames) { el.textContent = final; clearInterval(timer); }
+    }, 38);
+  };
+
+  if (!('IntersectionObserver' in window)) { els.forEach((el) => scramble(el)); return; }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) { scramble(entry.target); obs.unobserve(entry.target); }
+    });
+  }, { root: deckEl, threshold: 0.4 });
+  els.forEach((el) => observer.observe(el));
+}
+
+initRevealAndWipe();
+initScrambleText();
 
 /* ===================== Slide navigation ===================== */
 const deck = document.getElementById('deck');
