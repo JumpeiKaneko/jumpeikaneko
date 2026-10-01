@@ -109,6 +109,16 @@ ul{ margin:0; padding:0; list-style:none; }
   position:fixed; left:24px; bottom:20px; z-index:50;
   font-family:var(--font-en); font-size:10px; letter-spacing:.1em; color:var(--c-gray-light);
 }
+.fs-toggle{
+  position:fixed; right:24px; top:20px; z-index:60;
+  display:flex; align-items:center; gap:6px;
+  font-family:var(--font-en); font-size:11px; letter-spacing:.1em; color:var(--c-gray);
+  background:rgba(255,253,248,.72); backdrop-filter:blur(6px);
+  padding:6px 12px; border:1px solid var(--c-line); border-radius:999px;
+  cursor:pointer; transition:border-color .2s, color .2s;
+}
+.fs-toggle:hover{ border-color:var(--c-line-strong); color:var(--c-fg); }
+.fs-toggle svg{ width:12px; height:12px; display:block; }
 
 /* ---- reused site element: marquee ticker ---- */
 .marquee{
@@ -145,9 +155,9 @@ ul{ margin:0; padding:0; list-style:none; }
 .ov-list{ display:flex; flex-direction:column; gap:16px; }
 .ov-list .num{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray-light); letter-spacing:.1em; margin-right:16px; }
 .ov-list .nm{ font-family:var(--font-display); font-weight:500; font-size:var(--fs-md); color:var(--c-fg); letter-spacing:.04em; }
-.ov-fact{ border-top:1px solid var(--c-line-strong); padding-top:14px; margin-top:22px; }
-.ov-fact dt{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.14em; }
-.ov-fact dd{ margin:4px 0 16px; font-size:var(--fs-sm); color:var(--c-fg); }
+.ov-fact{ border-top:1px solid var(--c-line-strong); padding-top:14px; margin-top:22px; display:grid; grid-template-columns:72px 1fr; column-gap:var(--space-3); row-gap:10px; }
+.ov-fact dt{ margin:0; font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.14em; }
+.ov-fact dd{ margin:0; font-size:var(--fs-sm); color:var(--c-fg); }
 .ov-sessions{ font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2.1; }
 @media (max-width:900px){ .ov-grid{ grid-template-columns:1fr; } }
 
@@ -175,17 +185,17 @@ ul{ margin:0; padding:0; list-style:none; }
   .photo-slot{ order:-1; }
 }
 
-/* ---- 個展風景: 3枚の実写真プレースホルダー ---- */
-.expo-grid{ margin-top:var(--space-5); display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-4); max-width:900px; }
-.expo-grid .photo-slot{ aspect-ratio:3/2; }
+/* ---- 個展風景: 実写真（他のスライドの写真と同じ大きさ感に揃える） ---- */
+.expo-grid{ margin-top:var(--space-5); display:grid; grid-template-columns:repeat(2,1fr); gap:var(--space-4); }
+.expo-grid .photo-slot{ aspect-ratio:4/3; }
 .expo-grid figcaption{ margin-top:12px; font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.04em; }
 @media (max-width:900px){ .expo-grid{ grid-template-columns:1fr; } }
 
 /* ---- これから ---- */
 .plan-list{ margin-top:var(--space-5); display:flex; flex-direction:column; gap:var(--space-4); max-width:900px; }
 .plan-item{ display:grid; grid-template-columns:90px 1fr; gap:var(--space-3); border-top:1px solid var(--c-line-strong); padding-top:20px; }
-.plan-num{ font-family:var(--font-en); font-size:var(--fs-md); color:var(--c-gray); }
-.plan-text{ font-size:var(--fs-md); color:var(--c-fg); line-height:2; }
+.plan-num{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray-light); letter-spacing:.1em; }
+.plan-text{ font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2.1; }
 @media (max-width:760px){ .plan-item{ grid-template-columns:1fr; } }
 
 /* ---- last slide ---- */
@@ -231,6 +241,10 @@ ul{ margin:0; padding:0; list-style:none; }
 <body>
 
 <div class="site-echo"><a href="index.html">← JUMPEI KANEKO</a><span>/ 100BANCH GARAGE Program MEETUP 2026.10.1</span></div>
+<button class="fs-toggle" id="fsToggle" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  <span id="fsLabel">全画面</span>
+</button>
 
 <main id="deck">
 
@@ -291,8 +305,8 @@ ul{ margin:0; padding:0; list-style:none; }
         <div class="ch-works">「絵画を聴く」絵画の音響的拡張における鑑賞体験と対話の創出</div>
       </div>
       <div class="photo-slot img-wipe">
-        <img src="image/conference-01.jpg" alt="第31回日本バーチャルリアリティ学会大会 発表の様子" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/conference-01.jpg<br>学会発表の様子</span></div>
+        <img src="images/conference-01.jpg" alt="第31回日本バーチャルリアリティ学会大会 発表の様子" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/conference-01.jpg<br>学会発表の様子</span></div>
       </div>
     </div>
   </div>
@@ -330,15 +344,15 @@ ul{ margin:0; padding:0; list-style:none; }
     <div class="expo-grid">
       <figure>
         <div class="photo-slot img-wipe">
-          <img src="image/view-01.jpg" alt="OTOATO 会場風景 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/view-01.jpg</span></div>
+          <img src="images/view-01.jpg" alt="OTOATO 会場風景 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/view-01.jpg</span></div>
         </div>
         <figcaption>会場風景</figcaption>
       </figure>
       <figure>
         <div class="photo-slot img-wipe">
-          <img src="image/view-02.jpg" alt="OTOATO 会場風景 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/view-02.jpg</span></div>
+          <img src="images/view-02.jpg" alt="OTOATO 会場風景 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/view-02.jpg</span></div>
         </div>
         <figcaption>会場風景</figcaption>
       </figure>
@@ -357,8 +371,8 @@ ul{ margin:0; padding:0; list-style:none; }
         <div class="ch-works">絵画を聴く　／　絵画の音響的拡張における鑑賞体験と対話の創出</div>
       </div>
       <div class="photo-slot img-wipe">
-        <img src="image/view-03.jpg" alt="CHAPTER I 絵画を聴く 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/view-03.jpg<br>CHAPTER I 絵画を聴く 展示風景</span></div>
+        <img src="images/view-03.jpg" alt="CHAPTER I 絵画を聴く 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/view-03.jpg<br>CHAPTER I 絵画を聴く 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -375,8 +389,8 @@ ul{ margin:0; padding:0; list-style:none; }
         <div class="ch-works">気配に触れる　／　ミキキの交差点　／　線を聴く</div>
       </div>
       <div class="photo-slot img-wipe">
-        <img src="image/chapter-02.jpg" alt="CHAPTER II 関係性 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/chapter-02.jpg<br>CHAPTER II 関係性 展示風景</span></div>
+        <img src="images/chapter-02.jpg" alt="CHAPTER II 関係性 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/chapter-02.jpg<br>CHAPTER II 関係性 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -393,8 +407,8 @@ ul{ margin:0; padding:0; list-style:none; }
         <div class="ch-works">Resonance（福井県鯖江市 西山公園）　／　繋がり、朽ちる（新作）</div>
       </div>
       <div class="photo-slot img-wipe">
-        <img src="image/chapter-03.jpg" alt="CHAPTER III 情報とエモーション 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/chapter-03.jpg<br>CHAPTER III 情報とエモーション 展示風景</span></div>
+        <img src="images/chapter-03.jpg" alt="CHAPTER III 情報とエモーション 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/chapter-03.jpg<br>CHAPTER III 情報とエモーション 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -411,8 +425,8 @@ ul{ margin:0; padding:0; list-style:none; }
         <div class="ch-works">ZINE『Reunir』（1週間でメディアをつくる）</div>
       </div>
       <div class="photo-slot img-wipe">
-        <img src="image/chapter-04.jpg" alt="CHAPTER IV ひらく 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>image/chapter-04.jpg<br>CHAPTER IV ひらく 展示風景</span></div>
+        <img src="images/chapter-04.jpg" alt="CHAPTER IV ひらく 展示風景" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/chapter-04.jpg<br>CHAPTER IV ひらく 展示風景</span></div>
       </div>
     </div>
   </div>
@@ -769,6 +783,34 @@ function initScrambleText(){
 
 initRevealAndWipe();
 initScrambleText();
+
+/* ===================== Fullscreen toggle ===================== */
+(function(){
+  const btn = document.getElementById('fsToggle');
+  const label = document.getElementById('fsLabel');
+  if (!btn) return;
+  const supported = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
+  if (!supported) { btn.style.display = 'none'; return; }
+
+  function isFullscreen(){
+    return !!(document.fullscreenElement || document.webkitFullscreenElement);
+  }
+  function updateLabel(){
+    label.textContent = isFullscreen() ? '全画面を解除' : '全画面';
+  }
+  btn.addEventListener('click', () => {
+    if (!isFullscreen()) {
+      const req = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
+      req.call(document.documentElement);
+    } else {
+      const exit = document.exitFullscreen || document.webkitExitFullscreen;
+      exit.call(document);
+    }
+  });
+  document.addEventListener('fullscreenchange', updateLabel);
+  document.addEventListener('webkitfullscreenchange', updateLabel);
+  updateLabel();
+})();
 
 /* ===================== Slide navigation ===================== */
 const deck = document.getElementById('deck');
