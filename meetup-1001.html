@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEETUP 2026.10.1 中間報告 — Jumpei Kaneko</title>
+<meta name="description" content="100BANCH GARAGE Program MEETUP（2026.10.1）中間報告ピッチ用の発表サイト。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-bg: linear-gradient(165deg, #fffefb 0%, #faf0d8 45%, #e2eaf5 100%);
+  --c-fg: #14141a;
+  --c-fg-soft: #4a4a58;
+  --c-gray: #767f96;
+  --c-gray-light: #ccd3e2;
+  --c-line: #e8ecf3;
+  --c-line-strong: #7a8ec0;
+  --c-surface: #faf1dd;
+  --font-jp: "Zen Kaku Gothic Antique","Shippori Mincho","Noto Serif JP",sans-serif;
+  --font-en: "Zen Kaku Gothic Antique","EB Garamond",sans-serif;
+  --font-display: "Zen Old Mincho","Shippori Mincho","Noto Serif JP",serif;
+  --fs-xs: 0.76rem;
+  --fs-sm: 0.92rem;
+  --fs-base: 1.04rem;
+  --fs-md: 1.3rem;
+  --fs-lg: 1.9rem;
+  --fs-xl: clamp(2.3rem, 6vw, 4.6rem);
+  --fs-xxl: clamp(3.6rem, 13vw, 11rem);
+  --space-1: 10px; --space-2: 20px; --space-3: 32px; --space-4: 56px; --space-5: 96px;
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:auto; }
+body{
+  margin:0; background:var(--c-bg); color:var(--c-fg);
+  font-family:var(--font-jp); font-size:var(--fs-base); line-height:1.8;
+  letter-spacing:.05em; -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none;
+}
+img{ max-width:100%; display:block; }
+
+#deck{
+  height:100vh; height:100dvh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+.slide{
+  height:100vh; height:100dvh;
+  width:100%;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex; flex-direction:column; justify-content:center;
+  padding: clamp(32px,5.5vw,104px);
+  position:relative;
+  overflow:hidden;
+}
+.slide + .slide{ border-top:1px solid var(--c-line); }
+.slide-inner{ width:100%; max-width:1320px; margin:0 auto; }
+
+.eyebrow{
+  font-family:var(--font-en); font-weight:600; font-size:var(--fs-xs);
+  letter-spacing:.24em; text-transform:uppercase; color:var(--c-gray);
+}
+.s-title{
+  font-family:var(--font-display); font-weight:500; letter-spacing:.05em;
+  font-size:var(--fs-xl); line-height:1.25; margin-top:var(--space-2); color:var(--c-fg);
+}
+.s-sub{
+  margin-top:var(--space-2); font-size:var(--fs-md); color:var(--c-fg-soft); line-height:1.85;
+  max-width:760px;
+}
+.s-note{
+  margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:1.95;
+  max-width:700px;
+}
+.s-meta{
+  margin-top:var(--space-4); font-family:var(--font-en); font-size:var(--fs-xs);
+  letter-spacing:.1em; color:var(--c-gray);
+}
+
+/* ---- site-echo chrome: small, unobtrusive link back to the real site ---- */
+.site-echo{
+  position:fixed; top:20px; left:24px; z-index:60;
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--font-en); font-size:11px; letter-spacing:.1em; color:var(--c-gray);
+}
+.site-echo a{ color:var(--c-gray); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s; }
+.site-echo a:hover{ border-color:var(--c-gray); }
+.posi{
+  position:fixed; right:24px; bottom:20px; z-index:50;
+  font-family:var(--font-en); font-size:11px; letter-spacing:.12em; color:var(--c-gray);
+  background:rgba(255,253,248,.72); backdrop-filter:blur(6px);
+  padding:6px 12px; border:1px solid var(--c-line); border-radius:999px;
+}
+.hint{
+  position:fixed; left:24px; bottom:20px; z-index:50;
+  font-family:var(--font-en); font-size:10px; letter-spacing:.1em; color:var(--c-gray-light);
+}
+
+/* ---- reused site element: marquee ticker ---- */
+.marquee{
+  overflow:hidden; border-top:1px solid var(--c-line); border-bottom:1px solid var(--c-line);
+  padding: 14px 0; white-space:nowrap;
+}
+.marquee__track{
+  display:inline-block; font-family:var(--font-en); font-size: var(--fs-xs);
+  letter-spacing:.3em; color:var(--c-gray); text-transform:uppercase;
+  animation: marquee 28s linear infinite;
+}
+@keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+/* ---- slide 0: cold open / thread ---- */
+.thread-shell{
+  margin-top:var(--space-4); max-width:760px;
+  background:#fffdf8; border:1px solid var(--c-line); border-radius:14px;
+  box-shadow:0 20px 60px -30px rgba(20,20,26,.25);
+  overflow:hidden;
+}
+.thread-chrome{
+  display:flex; align-items:center; gap:10px; padding:14px 22px;
+  border-bottom:1px solid var(--c-line); font-family:var(--font-en);
+  font-size:11px; letter-spacing:.14em; color:var(--c-gray); text-transform:uppercase;
+}
+.thread-chrome .dot{ width:8px; height:8px; border-radius:50%; background:var(--c-line-strong); opacity:.5; }
+.thread-body{ padding: var(--space-3) var(--space-4) var(--space-4); }
+.thread-body p{ margin:0 0 16px; font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:1.95; }
+.thread-body p:last-child{ margin-bottom:0; }
+.thread-body .strong{ color:var(--c-fg); font-weight:500; }
+.thread-pitch{ margin:10px 0 16px; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px; }
+.thread-pitch li{ font-size:var(--fs-sm); color:var(--c-fg); }
+.thread-foot{
+  display:flex; align-items:center; gap:16px; padding-top:18px; margin-top:4px;
+  border-top:1px solid var(--c-line);
+  font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.08em; color:var(--c-gray);
+}
+.check{ display:inline-flex; align-items:center; gap:6px; color:var(--c-line-strong); font-weight:600; }
+.go-next{ margin-top:var(--space-4); font-family:var(--font-display); font-size:var(--fs-lg); color:var(--c-fg); }
+
+/* ---- slide 1: top ---- */
+.top-wrap{ display:grid; grid-template-columns: 1.1fr 1fr; gap:var(--space-5); align-items:center; }
+.top-photo{ width:100%; aspect-ratio:16/9; overflow:hidden; background:var(--c-surface); }
+.top-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* ---- slide 2: timeline ---- */
+.tl{ margin-top:var(--space-4); display:flex; flex-direction:column; max-width:880px; }
+.tl-row{ display:grid; grid-template-columns:140px 1fr; gap:var(--space-3); padding:14px 0; border-top:1px solid var(--c-line); }
+.tl-row:first-child{ border-top:none; }
+.tl-date{ font-family:var(--font-en); font-size:var(--fs-sm); color:var(--c-gray); }
+.tl-text{ font-size:var(--fs-md); color:var(--c-fg); line-height:1.6; }
+.photo-row{ margin-top:var(--space-5); display:grid; grid-template-columns:repeat(4,1fr); gap:var(--space-3); }
+.photo-row figure{ margin:0; }
+.photo-row .ph{ width:100%; aspect-ratio:16/9; overflow:hidden; background:var(--c-surface); }
+.photo-row .ph img{ width:100%; height:100%; object-fit:cover; display:block; }
+.photo-row figcaption{ margin-top:10px; font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.04em; }
+@media (max-width:900px){ .photo-row{ grid-template-columns:repeat(2,1fr); } }
+
+/* ---- interlude: full-bleed signage ---- */
+.interlude{ padding:0 !important; justify-content:center; align-items:center; background:#fff; }
+.interlude-img{ max-width:min(900px,86vw); width:100%; }
+.interlude-img img{ width:100%; height:auto; }
+.interlude-cap{
+  position:absolute; bottom:var(--space-4); left:0; right:0; text-align:center;
+  font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.2em; color:var(--c-gray); text-transform:uppercase;
+}
+
+/* ---- OTOATOとは overview ---- */
+.ov-grid{ margin-top:var(--space-4); display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5); align-items:start; }
+.ov-list{ display:flex; flex-direction:column; gap:14px; }
+.ov-list .num{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.1em; margin-right:14px; }
+.ov-list .nm{ font-family:var(--font-display); font-size:var(--fs-md); color:var(--c-fg); }
+.ov-fact{ border-top:1px solid var(--c-line-strong); padding-top:14px; margin-top:22px; }
+.ov-fact dt{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.14em; text-transform:uppercase; }
+.ov-fact dd{ margin:4px 0 16px; font-size:var(--fs-sm); color:var(--c-fg); }
+.ov-sessions{ font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2.1; }
+@media (max-width:900px){ .ov-grid{ grid-template-columns:1fr; } }
+
+/* ---- chapter slides ---- */
+.ch-wrap{ display:grid; grid-template-columns: 1fr 1.15fr; gap:var(--space-5); align-items:center; height:100%; }
+.ch-panel{ height:min(78vh,860px); display:flex; align-items:center; justify-content:center; }
+.ch-panel img{
+  height:100%; width:auto; max-width:100%; object-fit:contain;
+  box-shadow:0 30px 70px -36px rgba(20,20,26,.35); border:1px solid var(--c-line);
+  background:#fff;
+}
+.ch-text{ min-width:0; }
+.ch-label{ font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.22em; color:var(--c-gray); text-transform:uppercase; }
+.ch-title{ font-family:var(--font-display); font-size:clamp(1.8rem,3.4vw,2.6rem); margin-top:10px; color:var(--c-fg); }
+.ch-quote{ margin-top:var(--space-3); font-size:var(--fs-md); color:var(--c-fg); line-height:1.95; max-width:560px; }
+.ch-desc{ margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2; max-width:560px; }
+.ch-works{ margin-top:var(--space-3); padding-top:var(--space-2); border-top:1px solid var(--c-line); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.04em; line-height:2; }
+@media (max-width:900px){
+  .ch-wrap{ grid-template-columns:1fr; height:auto; }
+  .ch-panel{ height:40vh; order:-1; }
+}
+
+/* ---- これから ---- */
+.plan-list{ margin-top:var(--space-4); display:flex; flex-direction:column; gap:var(--space-4); max-width:900px; }
+.plan-item{ display:grid; grid-template-columns:90px 1fr; gap:var(--space-3); border-top:1px solid var(--c-line-strong); padding-top:16px; }
+.plan-num{ font-family:var(--font-en); font-size:var(--fs-md); color:var(--c-gray); }
+.plan-text{ font-size:var(--fs-md); color:var(--c-fg); line-height:2; }
+@media (max-width:760px){ .plan-item{ grid-template-columns:1fr; } }
+
+/* ---- last slide ---- */
+.last-wrap{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+.qr-box{ margin-top:var(--space-4); background:#fff; padding:18px; border:1px solid var(--c-line); box-shadow:0 20px 60px -30px rgba(20,20,26,.3); }
+.qr-box svg{ display:block; width:min(300px,46vw); height:min(300px,46vw); }
+.last-links{ margin-top:var(--space-4); display:flex; gap:var(--space-4); flex-wrap:wrap; justify-content:center; }
+.last-links a{ font-family:var(--font-en); font-size:var(--fs-xs); letter-spacing:.1em; color:var(--c-gray); border-bottom:1px solid var(--c-line-strong); padding-bottom:2px; }
+
+@media (max-width:760px){
+  .ov-grid, .top-wrap{ grid-template-columns:1fr; }
+  .s-title{ font-size:clamp(1.8rem,9vw,2.6rem); }
+  .photo-row{ grid-template-columns:repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="site-echo"><a href="index.html">← JUMPEI KANEKO</a><span>/ 100BANCH GARAGE Program MEETUP 2026.10.1</span></div>
+
+<main id="deck">
+
+<!-- 0: cold open -->
+<section class="slide" data-title="MEETUP">
+  <div class="slide-inner">
+    <div class="eyebrow">100BANCH GARAGE — MEETUP THREAD</div>
+    <div class="s-title" style="font-size:clamp(1.7rem,4.2vw,3rem);">来月の「MEETUP」は<br>10/1(木) 19:00〜 @100BANCH 3F</div>
+    <div class="thread-shell">
+      <div class="thread-chrome"><span class="dot"></span>100BANCH GARAGE Program — Thread</div>
+      <div class="thread-body">
+        <p>皆さんには以下の構成で、再度中間報告ピッチを3分で行っていただきます。</p>
+        <ul class="thread-pitch">
+          <li>・プロジェクト紹介（1分）</li>
+          <li>・延長後1ヶ月で行った活動の紹介（1分）</li>
+          <li>・残りの入居期間でやりたいことや目指すゴール（1分）</li>
+        </ul>
+        <p>プロトタイプなど、見せられるものがあればお持ちいただけると嬉しいです。</p>
+        <p style="font-size:var(--fs-xs); color:var(--c-gray);">※現役期間中はメンバー1名以上の参加必須です</p>
+        <div class="thread-foot">
+          <span class="check">✓ 出席（金子淳平）</span>
+          <span>期限：9/24 23:59</span>
+        </div>
+      </div>
+    </div>
+    <div class="go-next">それでは、始めます。</div>
+  </div>
+</section>
+
+<!-- 1: top -->
+<section class="slide" data-title="絵画を聴く">
+  <div class="slide-inner">
+    <div class="eyebrow">100BANCH GARAGE Program — MEETUP 2026.10.1</div>
+    <div class="top-wrap">
+      <div class="top-text">
+        <div class="s-title">絵画を聴く</div>
+        <p class="s-sub">絵画の中に鳴っていたであろう音風景を、作曲によって立ち上げる</p>
+        <p class="s-note">全盲の友人と作品を鑑賞した経験をきっかけに、絵画を音に読み替える「作曲実践」を続けている。</p>
+        <p class="s-meta">金子淳平 ／ 100BANCH GARAGE Program ／ MEETUP 2026.10.1</p>
+      </div>
+      <div class="top-photo"><img src="strip/kiku-01.jpg" alt="絵画を聴く インスタレーション"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2: これまで -->
+<section class="slide" data-title="これまで">
+  <div class="slide-inner">
+    <div class="eyebrow">01 — これまで</div>
+    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">これまで</div>
+    <div class="tl">
+      <div class="tl-row"><span class="tl-date">2026.05</span><span class="tl-text">ASIBA DEMO DAY：インスタレーション発表</span></div>
+      <div class="tl-row"><span class="tl-date">2026.06</span><span class="tl-text">美学校：ワークショップ「聴く絵画をつくる」</span></div>
+      <div class="tl-row"><span class="tl-date">2026.07</span><span class="tl-text">100BANCH：「気配に触れる」「ミキキの交差点」</span></div>
+      <div class="tl-row"><span class="tl-date">2026.07</span><span class="tl-text">八王子：東京都盲人福祉協会での鑑賞会</span></div>
+      <div class="tl-row"><span class="tl-date">2026.07</span><span class="tl-text">o-i studio：「線を聴く」</span></div>
+    </div>
+    <div class="photo-row">
+      <figure><div class="ph"><img src="strip/kiku-01.jpg" alt="絵画を聴く"></div><figcaption>絵画を聴く</figcaption></figure>
+      <figure><div class="ph"><img src="strip/kikue-06.jpg" alt="聴く絵画をつくる"></div><figcaption>聴く絵画をつくる</figcaption></figure>
+      <figure><div class="ph"><img src="strip/kehai-01.jpg" alt="ミキキの交差点"></div><figcaption>ミキキの交差点</figcaption></figure>
+      <figure><div class="ph"><img src="strip/sen-01.jpg" alt="線を聴く"></div><figcaption>線を聴く</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 2-0: 見出し -->
+<section class="slide" data-title="8・9月にやったこと">
+  <div class="slide-inner">
+    <div class="eyebrow">02 — Aug / Sep</div>
+    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">8・9月にやったこと</div>
+    <div class="tl" style="margin-top:var(--space-5);">
+      <div class="tl-row"><span class="tl-date">2026.09</span><span class="tl-text">第31回日本バーチャルリアリティ学会大会：論文発表</span></div>
+      <div class="tl-row"><span class="tl-date">2026.09.19〜23</span><span class="tl-text">初個展「OTOATO」（GALLERY工+WITH・新高円寺）</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- interlude: OTOATO signage -->
+<section class="slide interlude" data-title="OTOATO">
+  <div class="interlude-img"><img src="otoato-panels/signage.png" alt="OTOATO 金子淳平 初個展 看板"></div>
+  <div class="interlude-cap">2026.9.19 – 9.23 ／ GALLERY工+WITH</div>
+</section>
+
+<!-- 2-1: OTOATOとは -->
+<section class="slide" data-title="OTOATOとは">
+  <div class="slide-inner">
+    <div class="eyebrow">OTOATO — Concept</div>
+    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">OTOATOとは</div>
+    <p class="s-sub">これまでの実践を4つの章で紹介した、初めての個展。</p>
+    <div class="ov-grid">
+      <div class="ov-list">
+        <div><span class="num">I</span><span class="nm">絵画を聴く</span></div>
+        <div><span class="num">II</span><span class="nm">関係性</span></div>
+        <div><span class="num">III</span><span class="nm">情報とエモーション</span></div>
+        <div><span class="num">IV</span><span class="nm">ひらく</span></div>
+      </div>
+      <div>
+        <dl class="ov-fact">
+          <dt>会期</dt><dd>2026.9.19 SAT – 9.23 WED　11:00–19:00</dd>
+          <dt>会場</dt><dd>GALLERY工+WITH（新高円寺駅徒歩3分）</dd>
+        </dl>
+        <p class="ov-sessions">会期中5日間、毎日ライブセッションを開催。電子音響、工芸、VJ、カリンバ、フィールドレコーディングなど、その都度異なる領域のアーティストと共に。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2-2: CHAPTER 01 -->
+<section class="slide" data-title="CHAPTER 01">
+  <div class="slide-inner">
+    <div class="ch-wrap">
+      <div class="ch-panel"><img src="otoato-panels/chapter_1.png" alt="CHAPTER I 絵画を聴く パネル"></div>
+      <div class="ch-text">
+        <div class="ch-label">Chapter I / IV</div>
+        <div class="ch-title">絵画を聴く</div>
+        <p class="ch-quote">絵画を見るとき、私たちは何を受け取っているでしょうか。</p>
+        <p class="ch-desc">絵の中に鳴っていたかもしれない音の風景を立ち上げ、視覚や言葉だけに頼らずに作品の世界へ入り込むための試み。全盲の友人と美術館へ行った経験がきっかけだった。</p>
+        <div class="ch-works">絵画を聴く　／　絵画の音響的拡張における鑑賞体験と対話の創出</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2-3: CHAPTER 02 -->
+<section class="slide" data-title="CHAPTER 02">
+  <div class="slide-inner">
+    <div class="ch-wrap">
+      <div class="ch-panel"><img src="otoato-panels/chapter_2.png" alt="CHAPTER II 関係性 パネル"></div>
+      <div class="ch-text">
+        <div class="ch-label">Chapter II / IV</div>
+        <div class="ch-title">関係性</div>
+        <p class="ch-quote">作品や場を通して、人と人との間に何かが生まれることに興味がある。</p>
+        <p class="ch-desc">他者との関わりや、その場の時間を音に変換しながら共有してきた、ワークショップやセッションの実践をまとめた章。</p>
+        <div class="ch-works">気配に触れる　／　ミキキの交差点　／　線を聴く</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2-4: CHAPTER 03 -->
+<section class="slide" data-title="CHAPTER 03">
+  <div class="slide-inner">
+    <div class="ch-wrap">
+      <div class="ch-panel"><img src="otoato-panels/chapter_3.png" alt="CHAPTER III 情報とエモーション パネル"></div>
+      <div class="ch-text">
+        <div class="ch-label">Chapter III / IV</div>
+        <div class="ch-title">情報とエモーション</div>
+        <p class="ch-quote">劣化せず残り続けるデジタルの音から、こぼれ落ちてしまう手触りがある。</p>
+        <p class="ch-desc">「残るもの（データ）」に、もう一度「消えるもの（現象）」や「朽ちるもの（物質）」の感覚を取り戻せないかと考えた作品群。</p>
+        <div class="ch-works">Resonance（福井県鯖江市 西山公園）　／　繋がり、朽ちる（新作）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2-5: CHAPTER 04 -->
+<section class="slide" data-title="CHAPTER 04">
+  <div class="slide-inner">
+    <div class="ch-wrap">
+      <div class="ch-panel"><img src="otoato-panels/chapter_4.png" alt="CHAPTER IV ひらく パネル"></div>
+      <div class="ch-text">
+        <div class="ch-label">Chapter IV / IV</div>
+        <div class="ch-title">ひらく</div>
+        <p class="ch-quote">"REUNIR" はフランス語で「集まる／集める」を意味する。</p>
+        <p class="ch-desc">大学3年生の夏、音の金子淳平と建築の鏡理吾の2人で、高島平団地の一室に1週間滞在。その記録と対話、循環のモデルを1冊のZINEとして書き上げた。</p>
+        <div class="ch-works">ZINE『Reunir』（1週間でメディアをつくる）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3: これから -->
+<section class="slide" data-title="これから">
+  <div class="slide-inner">
+    <div class="eyebrow">03 — これから</div>
+    <div class="s-title" style="font-size:clamp(1.8rem,4.4vw,3rem);">これから</div>
+    <div class="plan-list">
+      <div class="plan-item">
+        <div class="plan-num">01</div>
+        <p class="plan-text">新たな美術館の音声ガイドを試作し、検証する。複製画に小型のビーコンを取り付け、鑑賞者がデバイスを持って作品に近づくと、音声ガイドが自動で再生される。これまでの木枠と距離センサーの据え置き装置から、実際の美術館に導入できる形へ進める。</p>
+      </div>
+      <div class="plan-item">
+        <div class="plan-num">02</div>
+        <p class="plan-text">11月28日(土)（仮）に、100BANCHで鑑賞会を予定。体験後にアンケートとヒアリングを行う。ぜひお越しください。</p>
+      </div>
+      <div class="plan-item">
+        <div class="plan-num">03</div>
+        <p class="plan-text">得られた知見を、インタラクション2027での発表に向けてまとめる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4: 最後の画面 -->
+<section class="slide" data-title="発表資料">
+  <div class="last-wrap" style="width:100%;">
+    <div class="eyebrow">Thank you</div>
+    <div class="s-title" style="font-size:clamp(1.6rem,4.4vw,2.4rem);">発表資料はサイトから<br>ご覧いただけます</div>
+    <div class="qr-box"><svg id="qr-svg"></svg></div>
+    <div class="last-links">
+      <a href="index.html">ポートフォリオ</a>
+      <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="posi" id="posi">1 / 12</div>
+<div class="hint">↑↓ / Space / PageUp・Down</div>
+
+<script>
+/* ===================== QR Code (inline, no external service) ===================== */
+'use strict';
+const GF_EXP = new Array(512);
+const GF_LOG = new Array(256);
+(function(){
+  let x = 1;
+  for (let i = 0; i < 255; i++) {
+    GF_EXP[i] = x;
+    GF_LOG[x] = i;
+    x <<= 1;
+    if (x & 0x100) x ^= 0x11D;
+  }
+  for (let i = 255; i < 512; i++) GF_EXP[i] = GF_EXP[i - 255];
+})();
+function gfMul(a, b) { if (a === 0 || b === 0) return 0; return GF_EXP[GF_LOG[a] + GF_LOG[b]]; }
+
+function rsGeneratorPoly(degree) {
+  let poly = [1];
+  for (let i = 0; i < degree; i++) {
+    const next = new Array(poly.length + 1).fill(0);
+    for (let j = 0; j < poly.length; j++) {
+      next[j] ^= gfMul(poly[j], 1);
+      next[j + 1] ^= gfMul(poly[j], GF_EXP[i]);
+    }
+    poly = next;
+  }
+  return poly;
+}
+
+function rsEncode(dataBytes, ecCount) {
+  const gen = rsGeneratorPoly(ecCount);
+  const res = dataBytes.concat(new Array(ecCount).fill(0));
+  for (let i = 0; i < dataBytes.length; i++) {
+    const coef = res[i];
+    if (coef === 0) continue;
+    for (let j = 0; j < gen.length; j++) res[i + j] ^= gfMul(gen[j], coef);
+  }
+  return res.slice(dataBytes.length);
+}
+
+const EC_L = {
+  1:{ec:7, blocks:[[1,19]]},
+  2:{ec:10, blocks:[[1,34]]},
+  3:{ec:15, blocks:[[1,55]]},
+  4:{ec:20, blocks:[[1,80]]},
+  5:{ec:26, blocks:[[1,108]]},
+  6:{ec:18, blocks:[[2,86]]},
+  7:{ec:20, blocks:[[2,98]]},
+  8:{ec:24, blocks:[[2,121]]},
+  9:{ec:30, blocks:[[2,146]]},
+  10:{ec:18, blocks:[[2,86],[2,87]]},
+};
+const ALIGN_COORDS = {
+  1:[],2:[6,18],3:[6,22],4:[6,26],5:[6,30],6:[6,34],
+  7:[6,22,38],8:[6,24,42],9:[6,26,46],10:[6,28,50],
+};
+function charCountBits(version){ return version <= 9 ? 8 : 16; }
+function byteModeCapacity(version){
+  const spec = EC_L[version];
+  const totalDataCw = spec.blocks.reduce((s,b)=>s + b[0]*b[1], 0);
+  const headerBits = 4 + charCountBits(version);
+  return Math.floor((totalDataCw * 8 - headerBits) / 8);
+}
+function selectVersion(byteLen){
+  for (let v = 1; v <= 10; v++) if (byteModeCapacity(v) >= byteLen) return v;
+  throw new Error('text too long (max version 10 supported)');
+}
+
+function strToBytes(str){
+  const bytes = [];
+  for (let i=0;i<str.length;i++){
+    let code = str.codePointAt(i);
+    if (code > 0xFFFF) i++;
+    if (code < 0x80) bytes.push(code);
+    else if (code < 0x800) { bytes.push(0xC0|(code>>6), 0x80|(code&0x3F)); }
+    else if (code < 0x10000) { bytes.push(0xE0|(code>>12), 0x80|((code>>6)&0x3F), 0x80|(code&0x3F)); }
+    else { bytes.push(0xF0|(code>>18), 0x80|((code>>12)&0x3F), 0x80|((code>>6)&0x3F), 0x80|(code&0x3F)); }
+  }
+  return bytes;
+}
+
+function buildDataCodewords(text, version){
+  const bytes = strToBytes(text);
+  const spec = EC_L[version];
+  const totalDataCw = spec.blocks.reduce((s,b)=>s + b[0]*b[1], 0);
+  const bits = [];
+  const push = (val,len)=>{ for (let i=len-1;i>=0;i--) bits.push((val>>i)&1); };
+  push(0b0100, 4);
+  push(bytes.length, charCountBits(version));
+  for (const b of bytes) push(b, 8);
+  const capBits = totalDataCw * 8;
+  for (let i=0;i<4 && bits.length<capBits;i++) bits.push(0);
+  while (bits.length % 8 !== 0) bits.push(0);
+  const codewords = [];
+  for (let i=0;i<bits.length;i+=8){
+    let v=0; for (let j=0;j<8;j++) v=(v<<1)|bits[i+j];
+    codewords.push(v);
+  }
+  const pad=[0xEC,0x11]; let pi=0;
+  while (codewords.length < totalDataCw) codewords.push(pad[pi++%2]);
+  return codewords;
+}
+
+function interleave(dataCw, version){
+  const spec = EC_L[version];
+  const blocks = []; let idx=0;
+  for (const [count,len] of spec.blocks){
+    for (let i=0;i<count;i++){
+      const block = dataCw.slice(idx, idx+len); idx+=len;
+      const ec = rsEncode(block, spec.ec);
+      blocks.push({data:block, ec});
+    }
+  }
+  const maxLen = Math.max(...blocks.map(b=>b.data.length));
+  const out = [];
+  for (let i=0;i<maxLen;i++) for (const b of blocks) if (i<b.data.length) out.push(b.data[i]);
+  for (let i=0;i<spec.ec;i++) for (const b of blocks) out.push(b.ec[i]);
+  return out;
+}
+
+function makeMatrix(version){
+  const size = version*4+17;
+  return Array.from({length:size},()=>new Array(size).fill(null));
+}
+function placeFinder(m,row,col){
+  for (let r=-1;r<=7;r++) for (let c=-1;c<=7;c++){
+    const rr=row+r, cc=col+c;
+    if (rr<0||cc<0||rr>=m.length||cc>=m.length) continue;
+    let val=0;
+    if (r>=0&&r<=6&&c>=0&&c<=6){
+      if (r===0||r===6||c===0||c===6) val=1;
+      else if (r>=2&&r<=4&&c>=2&&c<=4) val=1;
+      else val=0;
+    }
+    m[rr][cc]=val;
+  }
+}
+function placeAlignment(m,row,col){
+  for (let r=-2;r<=2;r++) for (let c=-2;c<=2;c++){
+    m[row+r][col+c] = (Math.max(Math.abs(r),Math.abs(c))!==1) ? 1 : 0;
+  }
+}
+function buildBaseMatrix(version){
+  const m = makeMatrix(version); const size = m.length;
+  placeFinder(m,0,0); placeFinder(m,0,size-7); placeFinder(m,size-7,0);
+  for (let i=8;i<size-8;i++){
+    const v=(i%2===0)?1:0;
+    if (m[6][i]===null) m[6][i]=v;
+    if (m[i][6]===null) m[i][6]=v;
+  }
+  const coords = ALIGN_COORDS[version]||[];
+  for (const r of coords) for (const c of coords){
+    if ((r<=8&&c<=8)||(r<=8&&c>=size-9)||(r>=size-9&&c<=8)) continue;
+    placeAlignment(m,r,c);
+  }
+  m[size-8][8]=1;
+  for (let i=0;i<9;i++){ if(m[8][i]===null) m[8][i]='R'; if(m[i][8]===null) m[i][8]='R'; }
+  for (let i=0;i<8;i++){ if(m[8][size-1-i]===null) m[8][size-1-i]='R'; if(m[size-1-i][8]===null) m[size-1-i][8]='R'; }
+  return m;
+}
+const MASK_FUNCS = [
+  (r,c)=> (r+c)%2===0,
+  (r,c)=> r%2===0,
+  (r,c)=> c%3===0,
+  (r,c)=> (r+c)%3===0,
+  (r,c)=> (((r/2)|0)+((c/3)|0))%2===0,
+  (r,c)=> ((r*c)%2 + (r*c)%3) === 0,
+  (r,c)=> (((r*c)%2 + (r*c)%3)%2) === 0,
+  (r,c)=> (((r+c)%2 + (r*c)%3)%2) === 0,
+];
+function placeData(base, allCodewords, maskId){
+  const size = base.length;
+  const m = base.map(row=>row.slice());
+  const bits = [];
+  for (const cw of allCodewords) for (let i=7;i>=0;i--) bits.push((cw>>i)&1);
+  let bi=0, col=size-1, dir=-1;
+  while (col>0){
+    if (col===6) col--;
+    for (let i=0;i<size;i++){
+      const row = dir===-1 ? (size-1-i) : i;
+      for (const c of [col, col-1]){
+        if (m[row][c] !== null) continue;
+        let bit = bi<bits.length ? bits[bi] : 0; bi++;
+        if (MASK_FUNCS[maskId](row,c)) bit ^= 1;
+        m[row][c] = bit;
+      }
+    }
+    col -= 2; dir = -dir;
+  }
+  return m;
+}
+const FMT_GEN = 0b10100110111;
+const FMT_MASK = 0b101010000010010;
+function formatBits(ecIndicator, maskId){
+  const data = (ecIndicator<<3)|maskId;
+  let val = data << 10;
+  for (let i=14;i>=10;i--){
+    if ((val>>i)&1) val ^= (FMT_GEN << (i-10));
+  }
+  const full = (data<<10) | val;
+  return full ^ FMT_MASK;
+}
+function placeFormatInfo(m, maskId){
+  const size = m.length;
+  const fb = formatBits(0b01, maskId);
+  const bits = []; for (let i=14;i>=0;i--) bits.push((fb>>i)&1);
+  m[8][0]=bits[14]; m[8][1]=bits[13]; m[8][2]=bits[12]; m[8][3]=bits[11];
+  m[8][4]=bits[10]; m[8][5]=bits[9]; m[8][7]=bits[8]; m[8][8]=bits[7];
+  m[7][8]=bits[6]; m[5][8]=bits[5]; m[4][8]=bits[4]; m[3][8]=bits[3];
+  m[2][8]=bits[2]; m[1][8]=bits[1]; m[0][8]=bits[0];
+  for (let i=0;i<8;i++) m[8][size-1-i] = bits[i];
+  for (let i=0;i<7;i++) m[size-7+i][8] = bits[8+i];
+  m[size-8][8]=1;
+}
+
+function encodeQR(text){
+  const version = selectVersion(strToBytes(text).length);
+  const dataCw = buildDataCodewords(text, version);
+  const allCodewords = interleave(dataCw, version);
+  const base = buildBaseMatrix(version);
+  const maskId = 0;
+  const m = placeData(base, allCodewords, maskId);
+  placeFormatInfo(m, maskId);
+  return { matrix: m, version, maskId };
+}
+
+/* URL to encode — 公開後、このページの正式URLに差し替え可能（現状は公開中のポートフォリオのトップを指す） */
+const QR_TARGET_URL = "https://jumpeikaneko.com/";
+
+function renderQR(targetSvg, text){
+  const { matrix } = encodeQR(text);
+  const size = matrix.length;
+  const quiet = 4;
+  const modulePx = 6;
+  const total = (size + quiet*2) * modulePx;
+  targetSvg.setAttribute('viewBox', `0 0 ${total} ${total}`);
+  targetSvg.setAttribute('shape-rendering','crispEdges');
+  let rects = `<rect width="${total}" height="${total}" fill="#fff"/>`;
+  for (let r=0;r<size;r++){
+    for (let c=0;c<size;c++){
+      if (matrix[r][c]) {
+        const x = (c+quiet)*modulePx, y=(r+quiet)*modulePx;
+        rects += `<rect x="${x}" y="${y}" width="${modulePx}" height="${modulePx}" fill="#14141a"/>`;
+      }
+    }
+  }
+  targetSvg.innerHTML = rects;
+}
+renderQR(document.getElementById('qr-svg'), QR_TARGET_URL);
+
+/* ===================== Slide navigation ===================== */
+const deck = document.getElementById('deck');
+const slides = Array.from(document.querySelectorAll('.slide'));
+const posi = document.getElementById('posi');
+let current = 0;
+
+function updatePosition(){
+  const scrollTop = deck.scrollTop;
+  let idx = Math.round(scrollTop / window.innerHeight);
+  idx = Math.max(0, Math.min(slides.length-1, idx));
+  current = idx;
+  posi.textContent = (idx+1) + ' / ' + slides.length;
+}
+deck.addEventListener('scroll', () => { window.requestAnimationFrame(updatePosition); }, { passive:true });
+
+function goTo(idx){
+  idx = Math.max(0, Math.min(slides.length-1, idx));
+  slides[idx].scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+window.addEventListener('keydown', (e) => {
+  const nextKeys = ['ArrowDown','ArrowRight','PageDown',' '];
+  const prevKeys = ['ArrowUp','ArrowLeft','PageUp'];
+  if (nextKeys.includes(e.key)) { e.preventDefault(); goTo(current+1); }
+  else if (prevKeys.includes(e.key)) { e.preventDefault(); goTo(current-1); }
+});
+
+updatePosition();
+</script>
+</body>
+</html>
