@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二瓶さんミーティング 2026.10.3 — Jumpei Kaneko</title>
+<meta name="description" content="二瓶さんミーティング（2026.10.3）企画書「Interference（仮）」発表用サイト。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-bg: linear-gradient(165deg, #fffefb 0%, #faf0d8 45%, #e2eaf5 100%);
+  --c-fg: #14141a;
+  --c-fg-soft: #4a4a58;
+  --c-gray: #767f96;
+  --c-gray-light: #ccd3e2;
+  --c-line: #e8ecf3;
+  --c-line-strong: #7a8ec0;
+  --c-surface: #faf1dd;
+  --font-jp: "Zen Kaku Gothic Antique","Shippori Mincho","Noto Serif JP",sans-serif;
+  --font-en: "Zen Kaku Gothic Antique","EB Garamond",sans-serif;
+  --font-display: "Zen Old Mincho","Shippori Mincho","Noto Serif JP",serif;
+  --fs-xs: 0.72rem;
+  --fs-sm: 0.82rem;
+  --fs-base: 0.98rem;
+  --fs-md: 1.15rem;
+  --fs-lg: 1.6rem;
+  --fs-xl: clamp(2rem, 5vw, 3.2rem);
+  --fs-xxl: clamp(2.2rem, 4.5vw, 3.4rem);
+  --ls-wide: 0.22em;
+  --lh-tight: 1.5;
+  --space-1: 10px; --space-2: 20px; --space-3: 30px; --space-4: 48px; --space-5: 80px; --space-6: 120px;
+  --dur: 900ms;
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:auto; }
+body{
+  margin:0; background:var(--c-bg); color:var(--c-fg);
+  font-family:var(--font-jp); font-size:var(--fs-base); line-height:1.8;
+  letter-spacing:.05em; -webkit-font-smoothing:antialiased;
+  overscroll-behavior-y:none;
+}
+img{ max-width:100%; display:block; }
+ul{ margin:0; padding:0; list-style:none; }
+
+#deck{
+  height:100vh; height:100dvh;
+  overflow-y:scroll;
+  scroll-snap-type:y mandatory;
+  scroll-behavior:smooth;
+}
+.slide{
+  height:100vh; height:100dvh;
+  width:100%;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  display:flex; flex-direction:column; justify-content:center;
+  padding: clamp(32px,5.5vw,104px);
+  position:relative;
+  overflow:hidden;
+}
+.slide + .slide{ border-top:1px solid var(--c-line); }
+.slide-inner{ width:100%; max-width:1320px; margin:0 auto; }
+
+.eyebrow{
+  font-family:var(--font-en); font-size:var(--fs-sm);
+  letter-spacing:var(--ls-wide); color:var(--c-gray);
+}
+.s-title{
+  font-family:var(--font-display); font-weight:500; letter-spacing:var(--ls-wide);
+  font-size:var(--fs-lg); line-height:1.4; margin-top:var(--space-2); color:var(--c-fg);
+}
+.s-title--name{ font-size:var(--fs-xxl); line-height:1.2; letter-spacing:0.1em; }
+.s-sub{
+  margin-top:var(--space-3); font-size:var(--fs-md); color:var(--c-fg-soft); line-height:1.85;
+  max-width:680px;
+}
+.s-note{
+  margin-top:var(--space-2); font-size:var(--fs-base); color:var(--c-fg-soft); line-height:2;
+  max-width:640px;
+}
+.s-meta{
+  margin-top:var(--space-4); font-family:var(--font-en); font-size:var(--fs-xs);
+  letter-spacing:.1em; color:var(--c-gray);
+}
+
+.site-echo{
+  position:fixed; top:20px; left:24px; z-index:60;
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--font-en); font-size:11px; letter-spacing:.1em; color:var(--c-gray);
+}
+.site-echo a{ color:var(--c-gray); text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s; }
+.site-echo a:hover{ border-color:var(--c-gray); }
+.posi{
+  position:fixed; right:24px; bottom:20px; z-index:50;
+  font-family:var(--font-en); font-size:11px; letter-spacing:.12em; color:var(--c-gray);
+  background:rgba(255,253,248,.72); backdrop-filter:blur(6px);
+  padding:6px 12px; border:1px solid var(--c-line); border-radius:999px;
+}
+.hint{
+  position:fixed; left:24px; bottom:20px; z-index:50;
+  font-family:var(--font-en); font-size:10px; letter-spacing:.1em; color:var(--c-gray-light);
+}
+.fs-toggle{
+  position:fixed; right:24px; top:20px; z-index:60;
+  display:flex; align-items:center; gap:6px;
+  font-family:var(--font-en); font-size:11px; letter-spacing:.1em; color:var(--c-gray);
+  background:rgba(255,253,248,.72); backdrop-filter:blur(6px);
+  padding:6px 12px; border:1px solid var(--c-line); border-radius:999px;
+  cursor:pointer; transition:border-color .2s, color .2s;
+}
+.fs-toggle:hover{ border-color:var(--c-line-strong); color:var(--c-fg); }
+.fs-toggle svg{ width:12px; height:12px; display:block; }
+
+/* ---- chapter-style slides: text left / photo or figure right ---- */
+.ch-wrap{ display:grid; grid-template-columns: 0.95fr 1.2fr; gap:var(--space-5); align-items:center; }
+.ch-text{ min-width:0; }
+.ch-label{ font-family:var(--font-en); font-size:var(--fs-xs); color:var(--c-gray-light); letter-spacing:.1em; }
+.ch-title{ font-family:var(--font-display); font-weight:500; font-size:var(--fs-lg); margin-top:10px; color:var(--c-fg); letter-spacing:.04em; }
+.ch-desc{ margin-top:var(--space-3); font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2.1; max-width:480px; }
+.ch-works{ margin-top:var(--space-3); padding-top:var(--space-2); border-top:1px solid var(--c-line); font-size:var(--fs-xs); color:var(--c-gray); letter-spacing:.04em; line-height:2; }
+
+.photo-slot{ position:relative; width:100%; aspect-ratio:3/2; background:var(--c-surface); overflow:hidden; }
+.photo-slot img{ width:100%; height:100%; object-fit:contain; display:block; background:var(--c-surface); }
+.ph-placeholder{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background: repeating-linear-gradient(135deg, var(--c-surface), var(--c-surface) 11px, #ece3ca 11px, #ece3ca 12px);
+}
+.ph-placeholder span{
+  font-family:var(--font-en); font-size:11px; color:var(--c-gray); letter-spacing:.06em;
+  text-align:center; padding:0 20px; line-height:1.8;
+}
+@media (max-width:900px){
+  .ch-wrap{ grid-template-columns:1fr; }
+  .photo-slot{ order:-1; }
+}
+
+/* ---- 何をやるのか：これから形式の番号リスト ---- */
+.plan-list{ margin-top:var(--space-5); display:flex; flex-direction:column; gap:var(--space-4); max-width:1080px; }
+.plan-item{ display:grid; grid-template-columns:110px 1fr; gap:var(--space-4); border-top:1px solid var(--c-line-strong); padding-top:22px; }
+.plan-num{ font-family:var(--font-en); font-size:var(--fs-sm); color:var(--c-gray-light); letter-spacing:.1em; }
+.plan-text{ font-size:var(--fs-base); color:var(--c-fg-soft); line-height:2.05; }
+@media (max-width:760px){ .plan-item{ grid-template-columns:1fr; } }
+
+/* ---- それぞれにとって良い点：3カラム ---- */
+.benefit-grid{ margin-top:var(--space-5); display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4); align-items:start; }
+.benefit-item{ border-top:1px solid var(--c-line-strong); padding-top:16px; }
+.benefit-item .who{ font-family:var(--font-display); font-weight:500; font-size:var(--fs-md); color:var(--c-fg); letter-spacing:.03em; }
+.benefit-item p{ margin-top:10px; font-size:var(--fs-sm); color:var(--c-fg-soft); line-height:2; }
+@media (max-width:900px){ .benefit-grid{ grid-template-columns:1fr; gap:var(--space-3); } }
+
+/* ---- last slide ---- */
+.last-wrap{ display:flex; flex-direction:column; align-items:center; text-align:center; }
+.last-links{ margin-top:var(--space-5); display:flex; gap:var(--space-5); flex-wrap:wrap; justify-content:center; }
+.last-links a{ font-family:var(--font-en); font-size:var(--fs-sm); letter-spacing:.1em; color:var(--c-gray); border-bottom:1px solid var(--c-line-strong); padding-bottom:3px; }
+
+@media (max-width:760px){
+  .s-title{ font-size:clamp(1.3rem,6vw,1.6rem); }
+}
+
+/* ---- motion ---- */
+.reveal{ opacity:0; transform:translateY(24px); transition:opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+.reveal-stagger > *{ opacity:0; transform:translateY(20px); transition:opacity 800ms var(--ease), transform 800ms var(--ease); }
+.reveal-stagger.is-visible > *{ opacity:1; transform:translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(1){ transition-delay:0ms; }
+.reveal-stagger.is-visible > *:nth-child(2){ transition-delay:90ms; }
+.reveal-stagger.is-visible > *:nth-child(3){ transition-delay:180ms; }
+
+.img-wipe{ position:relative; overflow:hidden; }
+.img-wipe::after{
+  content:""; position:absolute; inset:0; background:var(--c-surface);
+  transform-origin:top; transform:scaleY(1); transition:transform 1100ms var(--ease); z-index:2;
+}
+.img-wipe img{ transform:scale(1.08); transition:transform 1300ms var(--ease); }
+.img-wipe.is-visible::after{ transform:scaleY(0); }
+.img-wipe.is-visible img{ transform:scale(1); }
+
+@media (max-width:680px){
+  .site-echo{ top:12px; left:16px; max-width:62vw; }
+  .site-echo span{ display:none; }
+  .site-echo a{ font-size:10px; }
+  .fs-toggle{ top:12px; right:16px; padding:6px 9px; }
+  .fs-toggle span{ display:none; }
+  .posi{ right:16px; bottom:12px; padding:5px 10px; font-size:10px; }
+  .hint{ display:none; }
+
+  .slide{
+    padding: 68px 20px 52px;
+    justify-content:flex-start;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .slide-inner{ margin:auto 0; padding:12px 0; }
+  .slide + .slide{ border-top:none; }
+
+  .eyebrow{ font-size:0.66rem; letter-spacing:.14em; }
+  .s-title{ font-size:clamp(1.15rem,5.8vw,1.4rem); letter-spacing:.1em; line-height:1.5; }
+  .s-title--name{ font-size:clamp(1.9rem,10vw,2.5rem); letter-spacing:.05em; line-height:1.3; }
+  .s-sub{ font-size:0.92rem; line-height:1.8; margin-top:var(--space-2); }
+  .s-note{ font-size:0.86rem; line-height:1.9; margin-top:var(--space-1); }
+  .s-meta{ margin-top:var(--space-3); font-size:0.68rem; }
+  .ch-desc, .plan-text{ font-size:0.86rem; line-height:1.9; max-width:none; }
+  .ch-title{ font-size:1.3rem; }
+  .ch-works{ font-size:0.68rem; line-height:1.9; }
+
+  .ch-wrap{ gap:var(--space-3); }
+  .ch-works{ margin-top:var(--space-2); padding-top:var(--space-1); }
+  .plan-list{ margin-top:var(--space-3); gap:var(--space-3); }
+  .plan-item{ grid-template-columns:1fr; gap:6px; padding-top:14px; }
+  .benefit-grid{ margin-top:var(--space-3); gap:var(--space-3); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal, .reveal-stagger > *{ opacity:1; transform:none; }
+  .img-wipe::after{ display:none; }
+  .img-wipe img{ transform:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="site-echo"><a href="index.html">← JUMPEI KANEKO</a><span>/ 二瓶さんミーティング 2026.10.3</span><a href="slide-archive.html" style="margin-left:4px;">／ Archive</a></div>
+<button class="fs-toggle" id="fsToggle" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  <span id="fsLabel">全画面</span>
+</button>
+
+<main id="deck">
+
+<!-- 1: top -->
+<section class="slide" data-title="Interference（仮）">
+  <div class="slide-inner reveal">
+    <div class="eyebrow">二瓶さんミーティング — 2026.10.3</div>
+    <div class="s-title s-title--name">Interference（仮）</div>
+    <p class="s-sub">「空間としての音楽」をつくり、「置く」。</p>
+    <p class="s-note">物理的な立体音響を、オフィス空間内に立ち上げる。</p>
+    <p class="s-meta">金子淳平 ／ 企画書 ／ 2026.10.3</p>
+  </div>
+</section>
+
+<!-- 2: 何をやるのか -->
+<section class="slide" data-title="何をやるのか">
+  <div class="slide-inner reveal">
+    <div class="eyebrow">01 — What</div>
+    <div class="s-title" data-scramble>何をやるのか</div>
+    <div class="plan-list">
+      <div class="plan-item">
+        <div class="plan-num">01</div>
+        <p class="plan-text">スピーカーを複数個用意し、部屋やフロアの対象区域にまばらに配置する。</p>
+      </div>
+      <div class="plan-item">
+        <div class="plan-num">02</div>
+        <p class="plan-text">1つのスピーカーごとに、1曲ずつ流す。11月末は市販のスピーカー、その以降の開催は自作にする。</p>
+      </div>
+      <div class="plan-item">
+        <div class="plan-num">03</div>
+        <p class="plan-text">各曲は、長さを変えてループ再生し、少しずつずらして流していく。</p>
+      </div>
+      <div class="plan-item">
+        <div class="plan-num">04</div>
+        <p class="plan-text">各曲は、一度は聴いたことのある印象派音楽から引用したフレーズを編曲したものにする。編曲は、ピアノやヴァイオリンに電子音や環境音を重ねるものにする。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3: 会議室に配置した際のイメージ -->
+<section class="slide" data-title="会議室に配置した際のイメージ">
+  <div class="slide-inner reveal">
+    <div class="ch-wrap">
+      <div class="ch-text">
+        <div class="ch-label">Image</div>
+        <div class="ch-title" data-scramble>会議室に配置した際のイメージ</div>
+        <p class="ch-desc">重なり方が少しずつ変わり、歩くことでも全体の音楽は変わり続ける。オフィスのような日常の空間に、歩きたくなる音楽、心地よさを感じる音楽を「置く」。</p>
+      </div>
+      <div class="photo-slot img-wipe">
+        <img src="images/1.jpg" alt="会議室に配置した際のイメージ図" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="ph-placeholder" style="display:none;"><span>PLACEHOLDER<br>images/1.jpg<br>会議室に配置した際のイメージ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4: なぜ今やるのか -->
+<section class="slide" data-title="なぜ今やるのか">
+  <div class="slide-inner reveal">
+    <div class="eyebrow">02 — Why now</div>
+    <div class="s-title" data-scramble>なぜ今やるのか</div>
+    <p class="s-sub">11/14と11/28に、脳科学を修士で専攻しているヴァイオリン奏者と、クラシック音楽とシンセサイザーのライブを行う。このライブのために編曲している音楽を、この作品にも使う。</p>
+    <p class="s-note">そして、元々自分がギャラリーの外（日常の空間）で、マルチオーディオを実装したいと考えてきた。それを実装して次に繋げられれば、音楽を聴く空間自体を日常にデザインできるプロジェクトになると思う。</p>
+  </div>
+</section>
+
+<!-- 5: それぞれにとって良い点 -->
+<section class="slide" data-title="それぞれにとって良い点">
+  <div class="slide-inner reveal">
+    <div class="eyebrow">03 — Why each</div>
+    <div class="s-title" data-scramble>それぞれにとって良い点</div>
+    <div class="benefit-grid reveal-stagger">
+      <div class="benefit-item">
+        <div class="who">竹中工務店</div>
+        <p>健康と音と結びつく実例を、一緒につくれる（歩きたくなる、話したくなる、リラックスする）。聴いている人のリラックス状態も脳波で計測できる。</p>
+      </div>
+      <div class="benefit-item">
+        <div class="who">ASIBA</div>
+        <p>関係性のデザインの考え方と接点がある。</p>
+      </div>
+      <div class="benefit-item">
+        <div class="who">自分</div>
+        <p>やってみたかった、ギャラリーの外でマルチチャンネルを実装する機会になる。これまで取り組んできた、関係性や情報の音の実践の発展としてできる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6: これから -->
+<section class="slide" data-title="これから">
+  <div class="slide-inner reveal">
+    <div class="eyebrow">04 — これから</div>
+    <div class="s-title" data-scramble>これから</div>
+    <p class="s-sub">日常で使用されるスピーカーは、ずっと2チャンネルが当たり前だった。</p>
+    <p class="s-note">
+      サウンドアートの立体音響を使えば、音楽自体のあり方が変わる。どのスピーカーで流し、
+      どこで流さないかという配置によって空間を立体的に扱い、歩く場所によって重なり方が変わり、
+      聴こえてくる音楽そのものが変わっていく。
+    </p>
+    <p class="s-note" style="margin-top:var(--space-2);">
+      ただ、それは自分の実践としては、ギャラリーを一歩も出たことがなかった。多チャンネルの
+      実践を、日常の空間の中に持ち込んでいく。それが、これから続けていきたいこと。
+    </p>
+  </div>
+</section>
+
+<!-- 7: 最後の画面 -->
+<section class="slide" data-title="Thank you">
+  <div class="last-wrap reveal" style="width:100%;">
+    <div class="eyebrow">Thank you</div>
+    <div class="s-title">Interference（仮）<br>二瓶さんミーティング 2026.10.3</div>
+    <div class="last-links">
+      <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="posi" id="posi">1 / 7</div>
+<div class="hint">↑↓ / Space / PageUp・Down</div>
+
+<script>
+'use strict';
+function initRevealAndWipe(){
+  const deckEl = document.getElementById('deck');
+  const targets = document.querySelectorAll('.reveal, .reveal-stagger, .img-wipe');
+  if (!targets.length) return;
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { root: deckEl, threshold: 0.2 });
+  targets.forEach((el) => observer.observe(el));
+}
+
+function initScrambleText(){
+  const deckEl = document.getElementById('deck');
+  const els = document.querySelectorAll('[data-scramble]');
+  if (!els.length) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const noise = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+  const scramble = (el) => {
+    const final = el.textContent;
+    const len = final.length;
+    const totalFrames = 16;
+    let frame = 0;
+    const timer = setInterval(() => {
+      let out = '';
+      for (let i = 0; i < len; i++) {
+        const ch = final[i];
+        if (ch === '\n' || ch === ' ') { out += ch; continue; }
+        const revealAt = (i / len) * totalFrames * 0.7;
+        out += frame >= revealAt ? ch : noise[Math.floor(Math.random() * noise.length)];
+      }
+      el.textContent = out;
+      frame++;
+      if (frame > totalFrames) { el.textContent = final; clearInterval(timer); }
+    }, 38);
+  };
+
+  if (!('IntersectionObserver' in window)) { els.forEach((el) => scramble(el)); return; }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) { scramble(entry.target); obs.unobserve(entry.target); }
+    });
+  }, { root: deckEl, threshold: 0.4 });
+  els.forEach((el) => observer.observe(el));
+}
+
+initRevealAndWipe();
+initScrambleText();
+
+(function(){
+  const btn = document.getElementById('fsToggle');
+  const label = document.getElementById('fsLabel');
+  if (!btn) return;
+  const supported = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
+  if (!supported) { btn.style.display = 'none'; return; }
+
+  function isFullscreen(){
+    return !!(document.fullscreenElement || document.webkitFullscreenElement);
+  }
+  function updateLabel(){
+    label.textContent = isFullscreen() ? '全画面を解除' : '全画面';
+  }
+  btn.addEventListener('click', () => {
+    if (!isFullscreen()) {
+      const req = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
+      req.call(document.documentElement);
+    } else {
+      const exit = document.exitFullscreen || document.webkitExitFullscreen;
+      exit.call(document);
+    }
+  });
+  document.addEventListener('fullscreenchange', updateLabel);
+  document.addEventListener('webkitfullscreenchange', updateLabel);
+  updateLabel();
+})();
+
+const deck = document.getElementById('deck');
+const slides = Array.from(document.querySelectorAll('.slide'));
+const posi = document.getElementById('posi');
+let current = 0;
+
+function updatePosition(){
+  const scrollTop = deck.scrollTop;
+  let idx = Math.round(scrollTop / window.innerHeight);
+  idx = Math.max(0, Math.min(slides.length-1, idx));
+  current = idx;
+  posi.textContent = (idx+1) + ' / ' + slides.length;
+}
+deck.addEventListener('scroll', () => { window.requestAnimationFrame(updatePosition); }, { passive:true });
+
+function goTo(idx){
+  idx = Math.max(0, Math.min(slides.length-1, idx));
+  slides[idx].scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+window.addEventListener('keydown', (e) => {
+  const nextKeys = ['ArrowDown','ArrowRight','PageDown',' '];
+  const prevKeys = ['ArrowUp','ArrowLeft','PageUp'];
+  if (nextKeys.includes(e.key)) { e.preventDefault(); goTo(current+1); }
+  else if (prevKeys.includes(e.key)) { e.preventDefault(); goTo(current-1); }
+});
+
+updatePosition();
+</script>
+</body>
+</html>
