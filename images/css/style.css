@@ -466,6 +466,57 @@ button {
   }
 }
 
+.pickup--pcd {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: start;
+  gap: var(--space-3);
+}
+.pickup--pcd .pickup__thumb {
+  display: block;
+  aspect-ratio: 1840 / 900;
+  background: #000;
+  overflow: hidden;
+}
+.pickup--pcd .pickup__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 300ms var(--ease);
+}
+.pickup--pcd .pickup__thumb:hover img { opacity: 0.8; }
+.pickup--pcd .pickup__body {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+}
+@media (max-width: 720px) {
+  .pickup--pcd { grid-template-columns: 112px 1fr; gap: var(--m-space-2, 16px); }
+  .pickup--pcd .pickup__body { grid-template-columns: 1fr; }
+}
+
+/* 申し込みフォームへの入口（Pickupと同じ四角い枠） */
+.apply-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-surface);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: opacity 300ms var(--ease);
+}
+
+.apply-box:hover {
+  opacity: 0.55;
+}
+
 /* ---------- 7. Profile / bio blocks ----------
    デスクトップ：写真の右側に基本情報（meta）と本文（bio）を縦に並べる
    （＝本文も写真の横に来る）。
@@ -2005,90 +2056,5 @@ button {
 @media (max-width: 420px) {
   :root {
     --fs-xxl: var(--m-fs-xl);
-  }
-}
-
-/* ---------- 18. OTOATO session page: day meta + lineup ---------- */
-.day-meta {
-  margin-top: var(--space-3);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-4);
-  font-size: var(--fs-sm);
-  color: var(--c-gray);
-}
-
-.day-meta strong {
-  color: var(--c-fg);
-  font-weight: 500;
-}
-
-.lineup {
-  margin-top: var(--space-4);
-  display: flex;
-  flex-direction: column;
-}
-
-.lineup__item {
-  padding: var(--space-3) 0;
-  border-top: 1px solid var(--c-line);
-}
-
-.lineup__item:first-child {
-  border-top: none;
-  padding-top: 0;
-}
-
-.lineup__row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-2) var(--space-3);
-  flex-wrap: wrap;
-}
-
-.lineup__name {
-  font-family: var(--font-display);
-  font-size: var(--fs-md);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-}
-
-.lineup__tag {
-  font-family: var(--font-en);
-  font-size: var(--fs-xs);
-  letter-spacing: var(--ls-wide);
-  color: var(--c-line-strong);
-  white-space: nowrap;
-}
-
-.lineup__handle {
-  margin-top: 2px;
-  font-family: var(--font-en);
-  font-size: var(--fs-xs);
-  color: var(--c-gray);
-}
-
-.lineup__bio {
-  margin-top: var(--space-2);
-  font-size: var(--fs-sm);
-  color: var(--c-fg-soft);
-  line-height: var(--lh-body);
-  max-width: var(--maxw-text);
-}
-
-@media (max-width: 720px) {
-  .lineup {
-    margin-top: var(--m-space-3);
-  }
-  .lineup__item {
-    padding: var(--m-space-2) 0;
-  }
-  .lineup__bio {
-    margin-top: var(--m-space-1);
-  }
-  .day-meta {
-    margin-top: var(--m-space-2);
-    gap: 4px var(--m-space-3);
   }
 }
