@@ -496,6 +496,43 @@ button {
   .pickup--pcd .pickup__body { grid-template-columns: 1fr; }
 }
 
+/* 申し込みフォームへの入口（Pickupと同じ四角い枠） */
+.apply-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-surface);
+  padding: var(--space-3) var(--space-4);
+  transition: opacity 300ms var(--ease);
+}
+
+.apply-box__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.apply-box__note {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  color: var(--c-gray);
+}
+
+.nw {
+  white-space: nowrap;
+}
+
+.apply-box:hover {
+  opacity: 0.55;
+}
+
 /* ---------- 7. Profile / bio blocks ----------
    デスクトップ：写真の右側に基本情報（meta）と本文（bio）を縦に並べる
    （＝本文も写真の横に来る）。
@@ -2035,5 +2072,140 @@ button {
 @media (max-width: 420px) {
   :root {
     --fs-xxl: var(--m-fs-xl);
+  }
+}
+
+/* ---------- スマホ専用：余白と改行の整理 ----------
+   余白（縦横）をスマホ幅向けに詰め、日本語の改行を文節単位にそろえる。
+   デスクトップの見た目には影響しない。 */
+@media (max-width: 720px) {
+  :root {
+    --gutter: 28px;
+  }
+
+  /* 改行：文節単位で折り返し、行末の1文字残りを避ける */
+  .prose,
+  .pickup__text,
+  .timeline__text,
+  .project-head__meta,
+  .apply-box__note,
+  .news-item,
+  .site-footer {
+    word-break: auto-phrase;
+    text-wrap: pretty;
+  }
+
+  h1, h2, h3,
+  .hero__title,
+  .heading__title,
+  .project-head__title,
+  .pickup__title,
+  .apply-box__main {
+    word-break: auto-phrase;
+    text-wrap: balance;
+  }
+
+  .heading__title,
+  .project-head__title {
+    letter-spacing: 0.06em;
+  }
+
+  /* セクション間・見出しまわり */
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .section--tight-top {
+    padding-top: 36px;
+  }
+
+  .heading {
+    gap: 6px 14px;
+    row-gap: 6px;
+    margin-bottom: 28px;
+    padding-bottom: 0;
+  }
+
+  /* Hero・ページ冒頭 */
+  .hero {
+    padding-top: 48px;
+    padding-bottom: 8px;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: var(--space-2);
+  }
+
+  .project-head {
+    padding-top: 48px;
+    padding-bottom: 32px;
+  }
+
+  .project-head__eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .project-head__meta {
+    margin-top: 20px;
+    gap: 8px 20px;
+  }
+
+  .project-media {
+    margin: 32px 0;
+  }
+
+  /* 本文 */
+  .prose + .prose,
+  .reveal .prose + .prose {
+    margin-top: 20px;
+  }
+
+  .project-links {
+    margin-top: 24px;
+    gap: 16px 24px;
+  }
+
+  .timeline__row,
+  .news-item {
+    padding: 10px 0;
+  }
+
+  .photo-stream {
+    gap: 24px;
+  }
+
+  .photo-stream__pair {
+    gap: 24px;
+  }
+
+  /* 枠（申し込み・Pickup） */
+  .apply-box {
+    margin-top: 28px;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .apply-box__main {
+    font-size: var(--fs-sm);
+    gap: 12px;
+  }
+
+  .apply-box__note {
+    font-size: var(--fs-xs);
+  }
+
+  .pickup {
+    margin-top: 40px;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .pickup--pcd {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__row {
+    gap: 16px;
   }
 }
