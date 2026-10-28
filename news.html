@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=28">
+<link rel="stylesheet" href="css/style.css?v=29">
 </head>
 <body data-page="news">
 
@@ -50,15 +50,10 @@
     </div>
 
     <!-- 枠としてわかりやすいイベント開催カード -->
-    <article class="event-frame reveal">
-      <div class="event-frame__head">
-        <p class="event-frame__eyebrow" data-en="Upcoming Event — 2026.11.28 Sat.">開催予定 — 2026.11.28 Sat.</p>
-        <h3 class="event-frame__title" data-en="Listen to the Painting: Audio Guide Appreciation Event">絵画を聴く 音声ガイド鑑賞会</h3>
-        <div class="event-frame__meta">
-          <span><strong data-en="Date">日時</strong> 2026年11月28日（土）</span>
-          <span><strong data-en="Venue">会場</strong> 100BANCH 3F</span>
-          <span><strong data-en="Admission">参加料金</strong> 無料（予約制）</span>
-        </div>
+    <article class="event-card reveal">
+      <div class="event-card__head">
+        <p class="event-card__eyebrow" data-en="Upcoming Event — 2026.11.28 Sat.">開催予定 — 2026.11.28 Sat.</p>
+        <h3 class="event-card__title" data-en="Listen to the Painting: Audio Guide Appreciation Event">絵画を聴く 音声ガイド鑑賞会</h3>
         <a class="apply-box" href="https://docs.google.com/forms/d/e/1FAIpQLScRJ3Y7HeH9bJucARmQ7volV9T1a4sllUvD-GNal-FnsDNkeQ/viewform?usp=dialog" target="_blank" rel="noopener">
           <span class="apply-box__main">
             <span data-en="Application Form for Audio Guide Experience">音声ガイド体験の申し込みフォーム</span>
@@ -68,29 +63,24 @@
         </a>
       </div>
 
-      <div class="event-frame__media img-wipe">
-        <img src="images/listen/main.jpg" alt="絵画を聴く 音声ガイド鑑賞会" loading="lazy">
-      </div>
+      <div class="event-card__grid">
+        <a href="listen-to-the-painting.html" class="event-card__media img-wipe" aria-label="絵画を聴く 音声ガイド鑑賞会">
+          <img src="images/listen/main.jpg" alt="絵画を聴く 音声ガイド鑑賞会" loading="lazy">
+        </a>
 
-      <div class="event-frame__content">
-        <div class="event-frame__col">
-          <div class="event-frame__subhead">
-            <span class="event-frame__subnum">01</span>
-            <h4 class="event-frame__subtitle" data-en="Information">開催情報</h4>
-            <span class="event-frame__suben">Information</span>
-          </div>
-          <ul class="timeline event-frame__timeline">
+        <div class="event-card__details">
+          <ul class="timeline">
             <li class="timeline__row">
               <span class="timeline__date" data-en="Date">日時</span>
               <span class="timeline__text" data-en="Saturday, November 28, 2026 / 11:00–20:00">2026年11月28日（土）11:00〜20:00</span>
             </li>
             <li class="timeline__row">
               <span class="timeline__date" data-en="Session">体験</span>
-              <span class="timeline__text" data-en="Audio guide sessions: 11:00–18:00 / 19:00–20:00 (Reservation required)">音声ガイド体験　11:00〜18:00・19:00〜20:00<span class="nw">（予約制）</span></span>
+              <span class="timeline__text" data-en="Audio guide: 11:00–18:00 / 19:00–20:00 (Reservation required, 5 per session)">音声ガイド体験　11:00〜18:00・19:00〜20:00<span class="nw">（予約制・各回5名）</span></span>
             </li>
             <li class="timeline__row">
               <span class="timeline__date" data-en="Live">ライブ</span>
-              <span class="timeline__text" data-en="Live performance: 18:00–19:00 (No reservation needed)">18:00〜19:00（予約不要・入退場自由）</span>
+              <span class="timeline__text" data-en="Live: 18:00–19:00 (Free admission, no reservation needed)">18:00〜19:00<span class="nw">（予約不要・入退場自由）</span></span>
             </li>
             <li class="timeline__row">
               <span class="timeline__date" data-en="Venue">場所</span>
@@ -98,41 +88,17 @@
             </li>
             <li class="timeline__row">
               <span class="timeline__date" data-en="Fee">料金</span>
-              <span class="timeline__text" data-en="Free">無料</span>
-            </li>
-            <li class="timeline__row">
-              <span class="timeline__date" data-en="Capacity">定員</span>
-              <span class="timeline__text" data-en="Audio guide: 5 per session (Hourly rotation)">音声ガイド体験　各回5名（1時間ごとの入れ替え制）</span>
+              <span class="timeline__text" data-en="Free (Audio guide requires reservation)">無料<span class="nw">（音声ガイド体験は事前予約制）</span></span>
             </li>
           </ul>
-          <div class="event-frame__links">
+
+          <p class="prose" data-en="&quot;Listening to Painting&quot; is an ongoing practice that creates the soundscapes that may have sounded within paintings. As you approach reproduced paintings in the venue, an audio guide automatically plays alongside ambient sounds. In the evening, a live performance &quot;Post-Classical Debussy&quot; will be held, combining Monet and Van Gogh paintings with Debussy through violin, electronic sound, and visuals synchronized with brainwaves.">
+            会場に並ぶ複製画に近づくと、その絵の音声ガイドが環境音とともに自動で流れ出します。絵から絵へと歩きながら作品の世界に入り込む新たな鑑賞体験です。同日夕方には、印象派の絵画とドビュッシーをヴァイオリン・電子音・脳波同期映像で立ち上げるライブ「Post-Classical Debussy」も開催します。
+          </p>
+
+          <div class="project-links">
             <a href="listen-to-the-painting.html" data-en="View Event Details &amp; Program →">鑑賞会の詳細・プログラムを見る →</a>
             <a href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E6%B8%8B%E8%B0%B73-27-1" target="_blank" rel="noopener" data-en="Venue Map (Google Maps) →">会場の地図 →</a>
-          </div>
-        </div>
-
-        <div class="event-frame__col event-frame__prose">
-          <div class="event-frame__subhead">
-            <span class="event-frame__subnum">02</span>
-            <h4 class="event-frame__subtitle" data-en="Audio Guide Experience">音声ガイド体験</h4>
-            <span class="event-frame__suben">Audio Guide</span>
-          </div>
-          <p class="prose" data-en="&quot;Listening to Painting&quot; is an ongoing practice that creates the soundscapes that may have sounded within paintings. As you approach reproduced paintings in the venue, each painting&#39;s audio guide plays automatically alongside ambient soundscapes. Walk from painting to painting and immerse yourself in the world of the artwork through sound.">
-            「絵画を聴く」は、絵画の中に鳴っていたであろう音風景をつくる実践です。会場に並ぶ複製画に近づくと、その絵の音声ガイドが、絵の中に鳴っていたであろう環境音とともに自動で流れ出します。絵から絵へと歩きながら、音で作品の世界に入り込む新たな鑑賞体験ができます。
-          </p>
-          <div class="event-frame__subhead" style="margin-top: var(--space-4);">
-            <span class="event-frame__subnum">03</span>
-            <h4 class="event-frame__subtitle" data-en="Live Performance &quot;Post-Classical Debussy&quot;">ライブ「Post-Classical Debussy」</h4>
-            <span class="event-frame__suben">Live</span>
-          </div>
-          <p class="prose" data-en="In the evening, a live performance &quot;Post-Classical Debussy&quot; combining Monet and Van Gogh paintings with Debussy will be performed with violin, electronic sound, and visuals synchronized with visitors&#39; brainwaves.">
-            同日夕方（18:00〜19:00）に、印象派の絵画とドビュッシーをヴァイオリン・電子音・映像で立ち上げ直すライブを行います。曲ごとにモネとゴッホの絵画を1枚ずつ組み合わせ、音と映像で上演します。鑑賞者の脳波と同期する映像も体験できます。
-          </p>
-          <p class="prose" style="font-size: var(--fs-xs); color: var(--c-gray);" data-en="Cast: Marcy MIWA (Visuals), SYIA (Violin), Yusaku Yoshimura (EEG-synchronized Visuals), Jumpei Kaneko (Arrangement / Direction)">
-            出演：Marcy MIWA（映像）、SYIA（ヴァイオリン）、吉村勇作（脳波同期映像）、金子淳平（編曲・企画）
-          </p>
-          <div class="event-frame__links">
-            <a href="https://jumpeikaneko.github.io/Post-Classical-Debussy/" target="_blank" rel="noopener" data-en="Post-Classical Debussy Official Site →">Post-Classical Debussy 公式サイト →</a>
           </div>
         </div>
       </div>
