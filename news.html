@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>News — Jumpei Kaneko</title>
-<meta name="description" content="金子淳平の活動記録。展示、ワークショップ、登壇、受賞などのお知らせ。">
+<meta name="description" content="金子淳平の活動記録と今後の開催情報。展示、ワークショップ、鑑賞会、登壇、受賞などのお知らせ。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=22">
+<link rel="stylesheet" href="css/style.css?v=27">
 </head>
 <body data-page="news">
 
@@ -37,17 +37,94 @@
 <main>
 
   <section class="hero wrap" style="padding-bottom: var(--space-4);">
-    <p class="hero__eyebrow">Updates</p>
-    <h1 class="hero__title" style="font-size: var(--fs-xl);" data-scramble>News</h1>
+    <p class="hero__eyebrow" data-en="Updates &amp; Upcoming Events">Updates &amp; Schedule</p>
+    <h1 class="hero__title" style="font-size: var(--fs-xl);" data-scramble data-en="News">News</h1>
   </section>
 
-  <section class="wrap section" style="padding-top: 0;">
+  <!-- 01 今後の開催情報 (Upcoming Events) -->
+  <section class="section section--tight-top wrap">
+    <div class="heading reveal">
+      <span class="heading__num">01</span>
+      <h2 class="heading__title" data-scramble data-en="Upcoming Events">今後の開催情報</h2>
+      <span class="heading__en">Upcoming</span>
+    </div>
+
+    <article class="news-event reveal">
+      <a href="listen-to-the-painting.html" class="news-event__media img-wipe" aria-label="絵画を聴く 音声ガイド鑑賞会">
+        <img src="images/listen/main.jpg" alt="絵画を聴く 音声ガイド鑑賞会" loading="lazy">
+      </a>
+      <div class="news-event__body">
+        <div class="news-event__eyebrow">
+          <span class="news-event__badge" data-en="Upcoming Event">開催予定</span>
+          <span class="news-event__date-badge">2026.11.28 Sat.</span>
+        </div>
+        <h3 class="news-event__title" data-en="Listen to the Painting: Audio Guide Appreciation Event">
+          絵画を聴く 音声ガイド鑑賞会
+        </h3>
+        <dl class="news-event__meta">
+          <div class="news-event__meta-row">
+            <dt class="news-event__meta-label" data-en="Date">会期・日時</dt>
+            <dd class="news-event__meta-val" data-en="Saturday, November 28, 2026 / 11:00–20:00">2026年11月28日（土）11:00〜20:00</dd>
+          </div>
+          <div class="news-event__meta-row">
+            <dt class="news-event__meta-label" data-en="Program">プログラム</dt>
+            <dd class="news-event__meta-val" data-en="Audio guide sessions: 11:00–18:00 / 19:00–20:00 (Reservation required, 5 per session)&lt;br&gt;Live performance: 18:00–19:00 (No reservation needed)">
+              音声ガイド体験：11:00〜18:00・19:00〜20:00<span class="nowrap">（予約制・各回5名）</span><br>
+              ライブ「Post-Classical Debussy」：18:00〜19:00<span class="nowrap">（予約不要・入退場自由）</span>
+            </dd>
+          </div>
+          <div class="news-event__meta-row">
+            <dt class="news-event__meta-label" data-en="Venue">会場</dt>
+            <dd class="news-event__meta-val" data-en="100BANCH 3F (3-27-1 Shibuya, Shibuya-ku, Tokyo)">
+              100BANCH 3F<span class="nowrap">（〒150-0002 東京都渋谷区渋谷3-27-1）</span>
+            </dd>
+          </div>
+          <div class="news-event__meta-row">
+            <dt class="news-event__meta-label" data-en="Admission">料金</dt>
+            <dd class="news-event__meta-val" data-en="Free (Audio guide experience requires reservation)">無料（音声ガイド体験は事前予約制）</dd>
+          </div>
+        </dl>
+        <div class="news-event__desc">
+          <p class="prose" data-en="&quot;Listening to Painting&quot; is an ongoing practice that creates the soundscapes that may have sounded within paintings. As you approach reproduced paintings in the venue, each painting&#39;s audio guide plays automatically alongside ambient soundscapes. In the evening (18:00–19:00), a special live performance &quot;Post-Classical Debussy&quot; reimagines Impressionist paintings (Monet, Van Gogh) with violin, electronics, and visuals synchronized with visitors&#39; brainwaves.">
+            「絵画を聴く」は、絵画の中に鳴っていたであろう音風景をつくる実践です。会場に並ぶ複製画に近づくと、その絵の音声ガイドが環境音とともに自動で流れ出します。絵から絵へと歩きながら、音で作品の世界に入り込む新たな鑑賞体験ができます。
+          </p>
+          <p class="prose" data-en="In the evening, a live performance combining Monet and Van Gogh paintings with Debussy will be performed using violin, electronic sound, and visuals synchronized with brainwaves.">
+            同日夕方には、印象派の絵画とドビュッシーをヴァイオリン・電子音・映像で立ち上げ直すライブ「Post-Classical Debussy」を開催。脳波同期映像の体験も実施します。
+          </p>
+        </div>
+        <div class="news-event__actions">
+          <a class="news-event__cta" href="https://docs.google.com/forms/d/e/1FAIpQLScRJ3Y7HeH9bJucARmQ7volV9T1a4sllUvD-GNal-FnsDNkeQ/viewform?usp=dialog" target="_blank" rel="noopener">
+            <span class="news-event__cta-text" data-en="Book Audio Guide Experience →">音声ガイド体験の申し込みフォーム →</span>
+          </a>
+          <div class="news-event__sublinks">
+            <a href="listen-to-the-painting.html" class="news-event__link" data-en="Event Details &amp; Live Information →">鑑賞会の詳細・ライブ情報を見る →</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%8B%E8%B0%B7%E5%8C%BA%E6%B8%8B%E8%B0%B73-27-1" target="_blank" rel="noopener" class="news-event__link" data-en="Venue Map (Google Maps) →">会場の地図 →</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- 02 これまでのお知らせ (Archive) -->
+  <section class="section wrap">
+    <div class="heading reveal">
+      <span class="heading__num">02</span>
+      <h2 class="heading__title" data-scramble data-en="Past Updates">これまでのお知らせ</h2>
+      <span class="heading__en">Archive</span>
+    </div>
+
     <div class="news-list reveal-stagger">
 
       <div class="news-item">
         <span class="news-item__date">2026.10.01</span>
         <span class="news-item__text" data-en="Presented a midterm report pitch at the 100BANCH GARAGE Program MEETUP.">100BANCH GARAGE Program MEETUPにて中間報告ピッチを行いました。</span>
       </div>
+
+      <a href="work-detail-otoato.html" class="news-item">
+        <span class="news-item__date">2026.09.21–27</span>
+        <span class="news-item__text" data-en="Held the first solo exhibition &quot;OTOATO&quot; at GALLERY Kou+WITH (Suginami, Tokyo).">初個展「OTOATO」をGALLERY工+WITH（南阿佐ケ谷）にて開催しました。</span>
+        <span class="news-item__arrow" aria-hidden="true">→</span>
+      </a>
 
       <a href="index.html" class="news-item">
         <span class="news-item__date">2026.07</span>
