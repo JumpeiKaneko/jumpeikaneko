@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=29">
+<link rel="stylesheet" href="css/style.css?v=30">
 </head>
 <body data-page="news">
 
@@ -37,7 +37,7 @@
 <main>
 
   <section class="hero wrap" style="padding-bottom: var(--space-4);">
-    <p class="hero__eyebrow" data-en="Updates &amp; Upcoming Events">Updates &amp; Schedule</p>
+    <p class="hero__eyebrow" data-en="Updates">Updates</p>
     <h1 class="hero__title" style="font-size: var(--fs-xl);" data-scramble data-en="News">News</h1>
   </section>
 
@@ -50,10 +50,15 @@
     </div>
 
     <!-- 枠としてわかりやすいイベント開催カード -->
-    <article class="event-card reveal">
-      <div class="event-card__head">
-        <p class="event-card__eyebrow" data-en="Upcoming Event — 2026.11.28 Sat.">開催予定 — 2026.11.28 Sat.</p>
-        <h3 class="event-card__title" data-en="Listen to the Painting: Audio Guide Appreciation Event">絵画を聴く 音声ガイド鑑賞会</h3>
+    <article class="news-upcoming reveal">
+      <div class="news-upcoming__head">
+        <p class="news-upcoming__eyebrow" data-en="Upcoming Event — 2026.11.28 Sat.">開催予定 — 2026.11.28 Sat.</p>
+        <h3 class="news-upcoming__title" data-en="Listen to the Painting: Audio Guide Appreciation Event">絵画を聴く 音声ガイド鑑賞会</h3>
+        <div class="project-head__meta">
+          <span><strong data-en="Date">日時</strong> 2026年11月28日（土）</span>
+          <span><strong data-en="Venue">会場</strong> 100BANCH 3F</span>
+          <span><strong data-en="Admission">参加料金</strong> 無料（予約制）</span>
+        </div>
         <a class="apply-box" href="https://docs.google.com/forms/d/e/1FAIpQLScRJ3Y7HeH9bJucARmQ7volV9T1a4sllUvD-GNal-FnsDNkeQ/viewform?usp=dialog" target="_blank" rel="noopener">
           <span class="apply-box__main">
             <span data-en="Application Form for Audio Guide Experience">音声ガイド体験の申し込みフォーム</span>
@@ -63,12 +68,14 @@
         </a>
       </div>
 
-      <div class="event-card__grid">
-        <a href="listen-to-the-painting.html" class="event-card__media img-wipe" aria-label="絵画を聴く 音声ガイド鑑賞会">
+      <div class="project-media project-media--full img-wipe" style="margin: var(--space-4) 0;">
+        <a href="listen-to-the-painting.html" aria-label="絵画を聴く 音声ガイド鑑賞会">
           <img src="images/listen/main.jpg" alt="絵画を聴く 音声ガイド鑑賞会" loading="lazy">
         </a>
+      </div>
 
-        <div class="event-card__details">
+      <div class="news-upcoming__body">
+        <div class="news-upcoming__info">
           <ul class="timeline">
             <li class="timeline__row">
               <span class="timeline__date" data-en="Date">日時</span>
@@ -91,8 +98,10 @@
               <span class="timeline__text" data-en="Free (Audio guide requires reservation)">無料<span class="nw">（音声ガイド体験は事前予約制）</span></span>
             </li>
           </ul>
+        </div>
 
-          <p class="prose" data-en="&quot;Listening to Painting&quot; is an ongoing practice that creates the soundscapes that may have sounded within paintings. As you approach reproduced paintings in the venue, an audio guide automatically plays alongside ambient sounds. In the evening, a live performance &quot;Post-Classical Debussy&quot; will be held, combining Monet and Van Gogh paintings with Debussy through violin, electronic sound, and visuals synchronized with brainwaves.">
+        <div class="news-upcoming__desc">
+          <p class="prose" data-en="&quot;Listening to Painting&quot; is an ongoing practice that creates the soundscapes that may have sounded within paintings. As you approach reproduced paintings in the venue, an audio guide automatically plays alongside ambient sounds. Walk from painting to painting and immerse yourself in the world of the artwork through sound.">
             会場に並ぶ複製画に近づくと、その絵の音声ガイドが環境音とともに自動で流れ出します。絵から絵へと歩きながら作品の世界に入り込む新たな鑑賞体験です。同日夕方には、印象派の絵画とドビュッシーをヴァイオリン・電子音・脳波同期映像で立ち上げるライブ「Post-Classical Debussy」も開催します。
           </p>
 
