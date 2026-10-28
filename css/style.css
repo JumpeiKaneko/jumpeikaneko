@@ -1164,6 +1164,164 @@ button {
   transform: translateX(4px);
 }
 
+/* ---------- 12b. Upcoming Event Frame on News ---------- */
+.event-frame {
+  border: 1px solid var(--c-line-strong);
+  background: var(--c-surface);
+  padding: var(--space-5);
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.event-frame__head {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-frame__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--c-line-strong);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: var(--space-2);
+}
+
+.event-frame__eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-line-strong);
+}
+
+.event-frame__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.35;
+}
+
+.event-frame__meta {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--c-gray);
+}
+
+.event-frame__meta strong {
+  color: var(--c-fg);
+  font-weight: 500;
+}
+
+/* 枠の中の申し込みフォーム（apply-box）: 白背景で浮き立たせ、より押しやすく整える */
+.event-frame .apply-box {
+  margin-top: var(--space-3);
+  background: #ffffff;
+  border: 1px solid var(--c-line-strong);
+}
+
+.event-frame .apply-box:hover {
+  background: #fffdf8;
+  opacity: 0.82;
+}
+
+.event-frame__media {
+  width: 100%;
+  aspect-ratio: 1840 / 900;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--c-line-strong);
+}
+
+.event-frame__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1200ms var(--ease);
+}
+
+.event-frame:hover .event-frame__media img {
+  transform: scale(1.02);
+}
+
+.event-frame__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  border-top: 1px solid var(--c-line-strong);
+  padding-top: var(--space-4);
+}
+
+.event-frame__subhead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.event-frame__subnum {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  color: var(--c-line-strong);
+  letter-spacing: var(--ls-wide);
+}
+
+.event-frame__subtitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.event-frame__suben {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  color: var(--c-gray);
+  letter-spacing: var(--ls-wide);
+}
+
+.event-frame__timeline {
+  margin-bottom: var(--space-3);
+}
+
+.event-frame__prose .prose {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+}
+
+.event-frame__prose .prose + .prose {
+  margin-top: var(--space-2);
+}
+
+.event-frame__links {
+  margin-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.event-frame__links a {
+  font-size: var(--fs-sm);
+  border-bottom: 1px solid var(--c-fg);
+  padding-bottom: 1px;
+  transition: opacity 300ms var(--ease);
+}
+
+.event-frame__links a:hover {
+  opacity: 0.55;
+}
+
 /* ---------- 13. Contact ---------- */
 .contact-block {
   padding-top: var(--space-6);
@@ -2203,6 +2361,36 @@ button {
 
   .pickup--pcd {
     grid-template-columns: 1fr;
+  }
+
+  .event-frame {
+    margin-top: var(--m-space-3);
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .event-frame__title {
+    font-size: var(--fs-lg);
+  }
+
+  .event-frame__meta {
+    gap: 6px 16px;
+    font-size: var(--fs-xs);
+  }
+
+  .event-frame__media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .event-frame__content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 20px;
+  }
+
+  .event-frame__links {
+    flex-direction: column;
+    gap: 12px;
   }
 
   .site-footer__row {
