@@ -797,6 +797,22 @@ button {
   line-height: 1.4;
 }
 
+.project-head__sub {
+  margin-top: var(--space-1);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+  color: var(--c-gray);
+}
+
+.work-card__sub {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  color: var(--c-gray);
+}
+
 .project-head__meta {
   margin-top: var(--space-3);
   display: flex;
@@ -866,6 +882,17 @@ button {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
+}
+
+/* 体験の流れ：4枚を同じ比率の枠に揃え、端の黒い余白が出ないようにする */
+.flow-grid .photo-stream__item {
+  aspect-ratio: 16 / 9;
+}
+
+.flow-grid .photo-stream__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* generic aspect-ratio box, reused for single images and inside grids */
@@ -1164,142 +1191,86 @@ button {
   transform: translateX(4px);
 }
 
-/* ---------- 12b. Upcoming Event Card on News ---------- */
-.event-card {
-  border: 1px solid var(--c-line-strong);
-  background: var(--c-surface);
-  padding: var(--space-4) var(--space-5);
+/* ---------- 12b. Upcoming Event on News ----------
+   他のページと同じ「写真 → 見出し → 2カラム（情報 / 説明）」のシンプルな構成。
+   外枠の罫線や二重の情報は置かない。 */
+.news-upcoming {
   margin-top: var(--space-4);
 }
 
-.event-card__head {
-  display: flex;
-  flex-direction: column;
+.news-upcoming__media {
+  margin-bottom: var(--space-4);
 }
 
-.event-card__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.news-upcoming__eyebrow {
   font-family: var(--font-en);
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-wide);
-  color: var(--c-line-strong);
+  color: var(--c-gray);
   text-transform: uppercase;
-  font-weight: 500;
   margin-bottom: var(--space-1);
 }
 
-.event-card__eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--c-line-strong);
-}
-
-.event-card__title {
+.news-upcoming__title {
   font-family: var(--font-display);
-  font-size: var(--fs-xl);
+  font-size: var(--fs-lg);
   font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 1.35;
-}
-
-.event-card .apply-box {
-  margin-top: var(--space-3);
-  margin-bottom: var(--space-4);
-  background: #ffffff;
-  border: 1px solid var(--c-line-strong);
-}
-
-.event-card .apply-box:hover {
-  background: #fffdf8;
-  opacity: 0.85;
-}
-
-.event-card__grid {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: var(--space-5);
-  align-items: start;
-  border-top: 1px solid var(--c-line-strong);
-  padding-top: var(--space-4);
-}
-
-.event-card__media {
-  display: block;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background: #000;
-  border: 1px solid var(--c-line-strong);
-}
-
-.event-card__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1200ms var(--ease);
-}
-
-.event-card:hover .event-card__media img {
-  transform: scale(1.02);
-}
-
-.event-card__details {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  min-width: 0;
-}
-
-.event-card__details .timeline {
-  display: flex;
-  flex-direction: column;
-}
-
-.event-card__details .timeline__row {
-  grid-template-columns: 76px 1fr;
-  padding: 6px 0;
-  gap: var(--space-2);
-}
-
-.event-card__details .timeline__date {
-  font-family: var(--font-en);
-  font-size: var(--fs-xs);
-  color: var(--c-gray);
   letter-spacing: 0.05em;
+  line-height: 1.4;
 }
 
-.event-card__details .timeline__text {
-  font-size: var(--fs-sm);
-  line-height: var(--lh-tight);
+.news-upcoming__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
 }
 
-.event-card__details .prose {
+.news-upcoming__info .timeline {
+  border-top: 1px solid var(--c-line);
+}
+
+.news-upcoming__info .timeline__row {
+  grid-template-columns: 72px 1fr;
+  padding: 12px 0;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.news-upcoming__desc .prose {
   font-size: var(--fs-sm);
-  line-height: 1.85;
+  line-height: 1.9;
   color: var(--c-fg-soft);
-  margin-top: var(--space-2);
 }
 
-.event-card__details .project-links {
-  margin-top: var(--space-2);
+.news-upcoming__apply {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   gap: var(--space-3);
-}
-
-.event-card__details .project-links a {
-  font-size: var(--fs-sm);
-  border-bottom: 1px solid var(--c-fg);
-  padding-bottom: 1px;
+  margin-top: var(--space-3);
+  padding: 16px 22px;
+  background: var(--c-fg);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  letter-spacing: 0.04em;
   transition: opacity 300ms var(--ease);
 }
 
-.event-card__details .project-links a:hover {
-  opacity: 0.55;
+.news-upcoming__apply:hover {
+  opacity: 0.7;
+}
+
+.news-upcoming__apply-note {
+  margin-top: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--c-gray);
+}
+
+.news-upcoming__desc .project-links {
+  margin-top: var(--space-3);
+  gap: var(--space-3);
 }
 
 /* ---------- 13. Contact ---------- */
@@ -2343,38 +2314,35 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .event-card {
+  .news-upcoming {
     margin-top: var(--m-space-3);
-    padding: 20px;
   }
 
-  .event-card__title {
-    font-size: var(--fs-lg);
+  .news-upcoming__media {
+    margin-bottom: 24px;
   }
 
-  .event-card .apply-box {
-    margin-top: 14px;
-    margin-bottom: 16px;
-    padding: 16px;
+  .news-upcoming__title {
+    font-size: var(--fs-md);
   }
 
-  .event-card__grid {
+  .news-upcoming__body {
     grid-template-columns: 1fr;
-    gap: 16px;
-    padding-top: 16px;
+    gap: 28px;
+    margin-top: 24px;
   }
 
-  .event-card__media {
-    aspect-ratio: 16 / 10;
-  }
-
-  .event-card__details .timeline__row {
+  .news-upcoming__info .timeline__row {
     grid-template-columns: 60px 1fr;
     gap: 8px;
-    padding: 6px 0;
+    padding: 10px 0;
   }
 
-  .event-card__details .project-links {
+  .news-upcoming__apply {
+    padding: 14px 16px;
+  }
+
+  .news-upcoming__desc .project-links {
     flex-direction: column;
     gap: 10px;
   }
@@ -2382,4 +2350,23 @@ button {
   .site-footer__row {
     gap: 16px;
   }
+}
+
+/* グッドデザイン・ニューホープ賞マーク（ガイドライン: 白地・変形なし） */
+.award-mark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+.award-mark img {
+  display: block;
+  width: 150px;
+  height: auto;
+  background: #fff;
+}
+.award-mark__text {
+  margin: 0;
+  font-size: 13px;
 }

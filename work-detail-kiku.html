@@ -8,7 +8,65 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=28">
+<link rel="stylesheet" href="css/style.css?v=27">
+<style>
+/* クリックで動画になるサムネイル（work-detail-kiku.html の最上部画像） */
+.video-thumb {
+  cursor: pointer;
+  aspect-ratio: 2939 / 1643;
+}
+
+.video-thumb.is-playing {
+  cursor: default;
+  background: #000;
+}
+
+.video-thumb__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 3;
+}
+
+.video-thumb__frame--preview {
+  pointer-events: none;
+}
+
+.video-thumb__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 3;
+  transition: opacity 200ms ease, background 200ms ease;
+}
+
+.video-thumb__play::before {
+  content: "";
+  position: absolute;
+  left: 29px;
+  top: 22px;
+  border-style: solid;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent #fff;
+}
+
+.video-thumb:hover .video-thumb__play {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.video-thumb.is-previewing .video-thumb__play,
+.video-thumb.is-playing .video-thumb__play {
+  opacity: 0;
+  pointer-events: none;
+}
+</style>
 </head>
 <body data-page="work">
 
@@ -46,7 +104,7 @@
     </div>
     <div class="project-links">
       <a href="https://league.asiba.or.jp/projects/kaiga-wo-kiku" target="_blank" rel="noopener" data-en="ASIBA Creative League Project Page">ASIBA Creative Leagueプロジェクトページ</a>
-      <a href="https://youtu.be/eBatsv8Ndhs" target="_blank" rel="noopener" data-en="Project Video">プロジェクト動画</a>
+      <a href="https://youtu.be/ELzo0LzzNOQ" target="_blank" rel="noopener" data-en="Project Video">プロジェクト動画</a>
       <a href="work-detail-kikue.html" data-en="See related workshop &quot;Making a Painting to Listen To&quot; →">関連ワークショップ「聴く絵画をつくる」を見る →</a>
     </div>
   </section>
@@ -59,7 +117,7 @@
   </div>
 
   <div class="wrap">
-    <div class="project-media project-media--full img-wipe reveal video-thumb" data-video-id="eBatsv8Ndhs" role="button" tabindex="0" aria-label="プロジェクト動画を再生">
+    <div class="project-media project-media--full img-wipe reveal video-thumb" data-video-id="ELzo0LzzNOQ" role="button" tabindex="0" aria-label="プロジェクト動画を再生">
       <img src="images/kiku-01.jpg" alt="絵画を聴く インスタレーション" loading="lazy">
       <span class="video-thumb__play" aria-hidden="true"></span>
     </div>
@@ -125,7 +183,7 @@
     </div>
 
     <div class="embed reveal">
-      <iframe src="https://www.youtube.com/embed/eBatsv8Ndhs" title="絵画を聴く" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      <iframe src="https://www.youtube.com/embed/ELzo0LzzNOQ" title="絵画を聴く" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
   </section>
 
