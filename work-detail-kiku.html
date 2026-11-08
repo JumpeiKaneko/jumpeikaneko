@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=27">
+<link rel="stylesheet" href="css/style.css?v=28">
 </head>
 <body data-page="work">
 
@@ -59,8 +59,9 @@
   </div>
 
   <div class="wrap">
-    <div class="project-media project-media--full img-wipe reveal">
+    <div class="project-media project-media--full img-wipe reveal video-thumb" data-video-id="eBatsv8Ndhs" role="button" tabindex="0" aria-label="プロジェクト動画を再生">
       <img src="images/kiku-01.jpg" alt="絵画を聴く インスタレーション" loading="lazy">
+      <span class="video-thumb__play" aria-hidden="true"></span>
     </div>
   </div>
 
@@ -188,6 +189,51 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var el = document.querySelector('.video-thumb');
+  if (!el) return;
+  var id = el.getAttribute('data-video-id');
+  var base = 'https://www.youtube.com/embed/' + id;
+  var allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  var timer = null, frame = null, playing = false;
+  function mk(src, cls) {
+    var f = document.createElement('iframe');
+    f.src = src; f.className = cls; f.allow = allow; f.setAttribute('allowfullscreen', '');
+    f.title = '絵画を聴く プロジェクト動画';
+    return f;
+  }
+  function stopPreview() {
+    clearTimeout(timer);
+    if (frame) { frame.remove(); frame = null; }
+    el.classList.remove('is-previewing');
+  }
+  function startPreview() {
+    if (playing || frame) return;
+    frame = mk(base + '?autoplay=1&mute=1&controls=0&loop=1&playlist=' + id + '&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1', 'video-thumb__frame video-thumb__frame--preview');
+    el.appendChild(frame);
+    el.classList.add('is-previewing');
+  }
+  function play() {
+    if (playing) return;
+    stopPreview();
+    playing = true;
+    el.classList.add('is-playing');
+    el.removeAttribute('role'); el.removeAttribute('tabindex'); el.removeAttribute('aria-label');
+    el.appendChild(mk(base + '?autoplay=1&rel=0&playsinline=1', 'video-thumb__frame'));
+  }
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (canHover && !reduce) {
+    el.addEventListener('mouseenter', function () { timer = setTimeout(startPreview, 500); });
+    el.addEventListener('mouseleave', stopPreview);
+  }
+  el.addEventListener('click', play);
+  el.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+  });
+})();
+</script>
 <script src="js/main.js?v=10"></script>
 </body>
 </html>
