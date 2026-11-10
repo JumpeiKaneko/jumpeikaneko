@@ -66,6 +66,40 @@
   opacity: 0;
   pointer-events: none;
 }
+/* 受賞表記：メタ情報の直下。マークは白地・変形なしのまま、細い罫線で紙面になじませる */
+.project-award {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--c-line);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.project-award img {
+  display: block;
+  width: 120px;
+  height: auto;
+  flex: none;
+  background: #fff;
+  outline: 1px solid var(--c-line);
+}
+.project-award__text {
+  margin: 0;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+  color: var(--c-fg);
+  word-break: auto-phrase;
+}
+@media (max-width: 640px) {
+  .project-award {
+    gap: 16px;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  .project-award img { width: 88px; }
+  .project-award__text { font-size: var(--fs-xs); }
+}
 </style>
 </head>
 <body data-page="work">
@@ -101,6 +135,10 @@
     <div class="project-head__meta">
       <span data-en="<strong>Format</strong> Sound Installation"><strong>形態</strong> Sound Installation</span>
       <span data-en="<strong>Presented</strong> 2026.05 ASIBA Creative League Cohort 4 Midterm Demo Day"><strong>発表</strong> 2026.05 ASIBA Creative League 4期 MIDTERM DEMO DAY</span>
+    </div>
+    <div class="project-award">
+      <img src="images/gdnha-mark.png" alt="GOOD DESIGN NEW HOPE AWARD" width="150" height="56" loading="lazy">
+      <p class="project-award__text" data-en="&quot;Listening to Painting&quot; received an Honorable Mention at the Good Design New Hope Award 2026.">「絵画を聴く」は、グッドデザイン・ニューホープ賞2026に入選しました。</p>
     </div>
     <div class="project-links">
       <a href="https://league.asiba.or.jp/projects/kaiga-wo-kiku" target="_blank" rel="noopener" data-en="ASIBA Creative League Project Page">ASIBA Creative Leagueプロジェクトページ</a>
@@ -183,7 +221,7 @@
     </div>
 
     <div class="embed reveal">
-      <iframe src="https://www.youtube.com/embed/ELzo0LzzNOQ" title="絵画を聴く" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      <iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ELzo0LzzNOQ" title="絵画を聴く" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
   </section>
 
@@ -227,11 +265,6 @@
     </div>
   </section>
 
-  <div class="wrap award-mark reveal">
-    <img src="images/gdnha-mark.png" alt="GOOD DESIGN NEW HOPE AWARD" width="150" height="56" loading="lazy">
-    <p class="award-mark__text" data-en="&quot;Listening to Painting&quot; received an Honorable Mention at the Good Design New Hope Award 2026.">「絵画を聴く」は、グッドデザイン・ニューホープ賞2026に入選しました。</p>
-  </div>
-
   <a href="work.html" class="back-link wrap">← Back to Work</a>
 
 </main>
@@ -257,7 +290,7 @@
   var timer = null, frame = null, playing = false;
   function mk(src, cls) {
     var f = document.createElement('iframe');
-    f.src = src; f.className = cls; f.allow = allow; f.setAttribute('allowfullscreen', '');
+    f.src = src; f.className = cls; f.allow = allow; f.setAttribute('allowfullscreen', ''); f.referrerPolicy = 'strict-origin-when-cross-origin';
     f.title = '絵画を聴く プロジェクト動画';
     return f;
   }
