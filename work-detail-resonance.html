@@ -9,6 +9,63 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=22">
+<style>
+/* クリックで動画になるサムネイル（最上部画像） */
+.video-thumb {
+  cursor: pointer;
+}
+
+.video-thumb.is-playing {
+  cursor: default;
+  background: #000;
+}
+
+.video-thumb__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 3;
+}
+
+.video-thumb__frame--preview {
+  pointer-events: none;
+}
+
+.video-thumb__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 3;
+  transition: opacity 200ms ease, background 200ms ease;
+}
+
+.video-thumb__play::before {
+  content: "";
+  position: absolute;
+  left: 29px;
+  top: 22px;
+  border-style: solid;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent #fff;
+}
+
+.video-thumb:hover .video-thumb__play {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.video-thumb.is-previewing .video-thumb__play,
+.video-thumb.is-playing .video-thumb__play {
+  opacity: 0;
+  pointer-events: none;
+}
+</style>
 </head>
 <body data-page="work">
 
@@ -66,8 +123,9 @@
   </div>
 
   <div class="wrap">
-    <div class="project-media project-media--full img-wipe reveal">
+    <div class="project-media project-media--full img-wipe reveal video-thumb" data-video-id="Ptc896ATLQY" role="button" tabindex="0" aria-label="動画を再生">
       <img src="images/resonance-01.jpg" alt="Resonance" loading="lazy">
+      <span class="video-thumb__play" aria-hidden="true"></span>
     </div>
   </div>
 
@@ -179,6 +237,51 @@
   </div>
 </footer>
 
+<script>
+(function () {
+  var el = document.querySelector('.video-thumb');
+  if (!el) return;
+  var id = el.getAttribute('data-video-id');
+  var base = 'https://www.youtube.com/embed/' + id;
+  var allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+  var timer = null, frame = null, playing = false;
+  function mk(src, cls) {
+    var f = document.createElement('iframe');
+    f.src = src; f.className = cls; f.allow = allow; f.setAttribute('allowfullscreen', ''); f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.title = 'Resonance 動画';
+    return f;
+  }
+  function stopPreview() {
+    clearTimeout(timer);
+    if (frame) { frame.remove(); frame = null; }
+    el.classList.remove('is-previewing');
+  }
+  function startPreview() {
+    if (playing || frame) return;
+    frame = mk(base + '?autoplay=1&mute=1&controls=0&loop=1&playlist=' + id + '&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1', 'video-thumb__frame video-thumb__frame--preview');
+    el.appendChild(frame);
+    el.classList.add('is-previewing');
+  }
+  function play() {
+    if (playing) return;
+    stopPreview();
+    playing = true;
+    el.classList.add('is-playing');
+    el.removeAttribute('role'); el.removeAttribute('tabindex'); el.removeAttribute('aria-label');
+    el.appendChild(mk(base + '?autoplay=1&rel=0&playsinline=1', 'video-thumb__frame'));
+  }
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (canHover && !reduce) {
+    el.addEventListener('mouseenter', function () { timer = setTimeout(startPreview, 500); });
+    el.addEventListener('mouseleave', stopPreview);
+  }
+  el.addEventListener('click', play);
+  el.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+  });
+})();
+</script>
 <script src="js/main.js?v=10"></script>
 </body>
 </html>
