@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>絵画を聴く — Jumpei Kaneko</title>
+<meta name="robots" content="noindex, nofollow">
 <meta name="description" content="「絵画を聴く」は、絵画の中に鳴っていたであろう環境音をデジタル上に作り出す、インタラクティブアート・研究プロジェクト。モネ《睡蓮の池と日本の橋》の文献調査と作品分析から33個の音を定義し、AIで効果音として生成して、Unityの3次元空間に配置し、一つの環境音にした。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +12,17 @@
 <link rel="stylesheet" href="css/style.css?v=32">
 <style>
 /* クリックで動画になるサムネイル（work-detail-kiku.html と同じ） */
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+.kgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-top: var(--space-3); }
+.kgrid .photo-stream__item img { aspect-ratio: 4 / 3; object-fit: cover; height: auto; }
+@media (max-width: 720px) { .kgrid { gap: 12px; } }
+.toc { padding-top: var(--space-5); padding-bottom: var(--space-2); }
+.toc__list { list-style: none; margin: 0; padding: 0; }
+.toc__list li { border-top: 1px solid currentColor; border-color: rgba(128,128,128,.35); }
+.toc__list li:last-child { border-bottom: 1px solid rgba(128,128,128,.35); }
+.toc__list a { display: block; padding: .8em 0; text-decoration: none; color: inherit; }
+.toc__list a:hover { opacity: .6; }
 .video-thumb {
   cursor: pointer;
   aspect-ratio: 2939 / 1643;
@@ -110,7 +122,13 @@
     </div>
   </div>
 
-  <!-- 動画 -->
+  <!-- 作品動画 -->
+  <section class="section wrap" id="video" style="padding-bottom: var(--space-4);">
+    <div class="reveal">
+      <p class="block-title">作品動画</p>
+      <p class="prose">こちらをご覧ください。</p>
+    </div>
+  </section>
   <div class="wrap">
     <div class="project-media project-media--full img-wipe reveal video-thumb" data-video-id="ELzo0LzzNOQ" role="button" tabindex="0" aria-label="プロジェクト動画を再生">
       <img src="images/kiku-01.jpg" alt="絵画を聴く インスタレーション" loading="lazy">
@@ -118,8 +136,22 @@
     </div>
   </div>
 
+  <!-- 目次 -->
+  <nav class="wrap toc reveal" aria-label="目次">
+    <p class="block-title">目次</p>
+    <ol class="toc__list">
+      <li><a href="#overview">概要</a></li>
+      <li><a href="#why-me">01　なぜ私か</a></li>
+      <li><a href="#why-yamanashi">02　なぜ山梨で</a></li>
+      <li><a href="#work">03　仕組み</a></li>
+      <li><a href="#records">04　記録</a></li>
+      <li><a href="#photos">05　写真</a></li>
+      <li><a href="#credits">06　クレジットと権利</a></li>
+    </ol>
+  </nav>
+
   <!-- 概要（上層） -->
-  <section class="section wrap">
+  <section class="section wrap" id="overview">
     <div class="reveal">
       <p class="prose">
         「絵画を聴く」は、絵画の中に鳴っていたであろう環境音をデジタル上に作り出す、インタラクティブアート・研究プロジェクトである。従来の絵画鑑賞は、視覚と言語に依存した実践が主流であった。作者は、全盲の友人との絵画鑑賞で、言葉の説明では伝えきれない感覚があると気づき、絵画を音で拡張して共有する方法を探ってきた。
@@ -133,28 +165,35 @@
     </div>
   </section>
 
-  <!-- 01 なぜ私か、なぜ山梨で -->
-  <section class="section wrap">
+  <!-- 01 なぜ私か -->
+  <section class="section wrap" id="why-me">
     <div class="heading reveal">
       <span class="heading__num">01</span>
-      <h2 class="heading__title" data-scramble>なぜ私か、なぜ山梨で</h2>
-      <span class="heading__en">Background</span>
+      <h2 class="heading__title" data-scramble>なぜ私か</h2>
+      <span class="heading__en">Why Me</span>
     </div>
 
     <div class="reveal">
-      <p class="block-title">なぜ私か</p>
       <p class="prose">
         私は大学でフランスの美術と思想を研究しながら、サウンドアートの制作を続けている。全盲の友人との鑑賞で知った感覚を出発点に、絵の中に鳴っていたであろう環境音を作曲する実践として、「絵画を聴く」を続けている。
       </p>
     </div>
+  </section>
 
-    <div class="reveal" style="margin-top: var(--space-5);">
-      <p class="block-title">なぜ山梨で</p>
+  <!-- 02 なぜ山梨で -->
+  <section class="section wrap" id="why-yamanashi">
+    <div class="heading reveal">
+      <span class="heading__num">02</span>
+      <h2 class="heading__title" data-scramble>なぜ山梨で</h2>
+      <span class="heading__en">Why Yamanashi</span>
+    </div>
+
+    <div class="reveal">
       <p class="prose">
         「絵画を聴く」は、絵画の鑑賞を、見える人にも見えない人にも開く作品である。入選した場合は、山梨で描かれた絵画を対象にしたい。
       </p>
       <p class="prose">
-        これまでの環境音は、モネの絵の文献調査から定義し、AIで生成した音である。山梨で描かれた絵画であれば、描かれた場所で音を採集し、絵の中に鳴っていたであろう音の素材にできる。
+        これまでの音は、モネの絵の文献調査から定義し、ElevenLabsで生成した音である。山梨で描かれた絵画であれば、描かれた場所で音を採集し、絵の中に鳴っていたであろう音の素材にできる。
       </p>
       <p class="prose">
         その絵を所蔵する美術館で行えれば、絵画鑑賞が営まれる場で、来場者の声を集められる。
@@ -162,10 +201,10 @@
     </div>
   </section>
 
-  <!-- 02 仕組み -->
-  <section class="section wrap">
+  <!-- 03 仕組み -->
+  <section class="section wrap" id="work">
     <div class="heading reveal">
-      <span class="heading__num">02</span>
+      <span class="heading__num">03</span>
       <h2 class="heading__title" data-scramble>仕組み</h2>
       <span class="heading__en">The Work</span>
     </div>
@@ -202,40 +241,8 @@
     </div>
   </section>
 
-  <!-- 03 写真 -->
-  <section class="section wrap">
-    <div class="heading reveal">
-      <span class="heading__num">03</span>
-      <h2 class="heading__title" data-scramble>写真</h2>
-      <span class="heading__en">Photos</span>
-    </div>
-
-    <div class="photo-stream reveal-stagger">
-      <div>
-        <div class="photo-stream__item img-wipe"><img src="images/kiku-04.jpg" alt="斜めから見たインスタレーション" loading="lazy"></div>
-        <p class="photo-stream__cap">斜めから見たインスタレーション</p>
-      </div>
-      <div>
-        <div class="photo-stream__item img-wipe"><img src="images/kiku-02.jpg" alt="振動スピーカーのディテール" loading="lazy"></div>
-        <p class="photo-stream__cap">振動スピーカーのディテール</p>
-      </div>
-      <div>
-        <div class="photo-stream__item img-wipe"><img src="images/kiku-09.jpg" alt="振動スピーカーの端子" loading="lazy"></div>
-        <p class="photo-stream__cap">振動スピーカーの端子</p>
-      </div>
-      <div>
-        <div class="photo-stream__item img-wipe"><img src="images/kiku-05.jpg" alt="Max/MSPを用いた制作風景" loading="lazy"></div>
-        <p class="photo-stream__cap">Max/MSPを用いた制作風景</p>
-      </div>
-      <div>
-        <div class="photo-stream__item img-wipe"><img src="images/kiku-08.jpg" alt="ASIBA DEMO DAY 会場の様子" loading="lazy"></div>
-        <p class="photo-stream__cap">ASIBA DEMO DAY 会場の様子</p>
-      </div>
-    </div>
-  </section>
-
   <!-- 04 記録 -->
-  <section class="section wrap">
+  <section class="section wrap" id="records">
     <div class="heading reveal">
       <span class="heading__num">04</span>
       <h2 class="heading__title" data-scramble>記録</h2>
@@ -254,6 +261,16 @@
       <p class="prose">
         気づき：見える人も見えない人も、同じ場所でコミュニケーションできることが重要だと分かった。
       </p>
+      <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-03.jpg" alt="モネの絵の前で説明する様子" loading="lazy"></div>
+          <p class="photo-stream__cap">モネの絵の前で説明する様子</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-08.jpg" alt="ASIBA DEMO DAY 会場の様子" loading="lazy"></div>
+          <p class="photo-stream__cap">ASIBA DEMO DAY 会場の様子</p>
+        </div>
+      </div>
     </div>
 
     <div class="reveal" style="margin-top: var(--space-5);">
@@ -268,6 +285,16 @@
         声：「歩いて近づくことで他者の個性を体験できた」「人為的なもの（AI 効果音）の集合体が自然となるのが妙に思った」<br>
         課題：「音が強すぎて絵に意識が向かわない」
       </p>
+      <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kikue-05.jpg" alt="Webアプリを用いたワークショップ" loading="lazy"></div>
+          <p class="photo-stream__cap">Webアプリを用いたワークショップ</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kikue-08.jpg" alt="ワークショップの参加者の様子" loading="lazy"></div>
+          <p class="photo-stream__cap">ワークショップの参加者の様子</p>
+        </div>
+      </div>
     </div>
 
     <div class="reveal" style="margin-top: var(--space-5);">
@@ -275,6 +302,12 @@
       <p class="prose">
         言語と音を使った鑑賞会を開いた。全盲・ロービジョンの方7名が対面で、1名がオンラインで参加した。前向きな声が多く出て、感じ方は人によって十人十色だった。
       </p>
+      <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/hachioji-01.jpg" alt="鑑賞会の様子" loading="lazy"></div>
+          <p class="photo-stream__cap">鑑賞会の様子</p>
+        </div>
+      </div>
     </div>
 
     <div class="reveal" style="margin-top: var(--space-5);">
@@ -285,10 +318,38 @@
     </div>
   </section>
 
-  <!-- 05 クレジットと権利 -->
-  <section class="section wrap">
+  <!-- 05 写真 -->
+  <section class="section wrap" id="photos">
     <div class="heading reveal">
       <span class="heading__num">05</span>
+      <h2 class="heading__title" data-scramble>写真</h2>
+      <span class="heading__en">Photos</span>
+    </div>
+
+    <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-04.jpg" alt="斜めから見たインスタレーション" loading="lazy"></div>
+          <p class="photo-stream__cap">斜めから見たインスタレーション</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-02.jpg" alt="振動スピーカーのディテール" loading="lazy"></div>
+          <p class="photo-stream__cap">振動スピーカーのディテール</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-09.jpg" alt="振動スピーカーの端子" loading="lazy"></div>
+          <p class="photo-stream__cap">振動スピーカーの端子</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-05.jpg" alt="Max/MSPを用いた制作風景" loading="lazy"></div>
+          <p class="photo-stream__cap">Max/MSPを用いた制作風景</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- 06 クレジットと権利 -->
+  <section class="section wrap" id="credits">
+    <div class="heading reveal">
+      <span class="heading__num">06</span>
       <h2 class="heading__title" data-scramble>クレジットと権利</h2>
       <span class="heading__en">Credits</span>
     </div>
