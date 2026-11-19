@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>絵画を聴く — Jumpei Kaneko</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="「絵画を聴く」は、絵画の中に鳴っていたであろう環境音をデジタル上に作り出す、インタラクティブアート・研究プロジェクト。モネ《睡蓮の池と日本の橋》の文献調査と作品分析から33個の音を定義し、AIで効果音として生成して、Unityの3次元空間に配置し、一つの環境音にした。">
+<meta name="description" content="「絵画を聴く」は、絵画の中に鳴っていたであろう環境音をデジタル上に作り出す、インタラクティブアート・研究プロジェクト。モネ《睡蓮の池と日本の橋》の文献調査と作品分析から33個の音を定義し、ElevenLabsで効果音として生成して、Unityの3次元空間に配置し、一つの環境音にした。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,61 +33,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 .toc__list li:last-child { border-bottom: 1px solid rgba(128,128,128,.35); }
 .toc__list a { display: block; padding: .8em 0; text-decoration: none; color: inherit; }
 .toc__list a:hover { opacity: .6; }
-.video-thumb {
-  cursor: pointer;
-  aspect-ratio: 2939 / 1643;
-}
-
-.video-thumb.is-playing {
-  cursor: default;
-  background: #000;
-}
-
-.video-thumb__frame {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  z-index: 3;
-}
-
-.video-thumb__frame--preview {
-  pointer-events: none;
-}
-
-.video-thumb__play {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 72px;
-  height: 72px;
-  margin: -36px 0 0 -36px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 3;
-  transition: opacity 200ms ease, background 200ms ease;
-}
-
-.video-thumb__play::before {
-  content: "";
-  position: absolute;
-  left: 29px;
-  top: 22px;
-  border-style: solid;
-  border-width: 14px 0 14px 22px;
-  border-color: transparent transparent transparent #fff;
-}
-
-.video-thumb:hover .video-thumb__play {
-  background: rgba(0, 0, 0, 0.75);
-}
-
-.video-thumb.is-previewing .video-thumb__play,
-.video-thumb.is-playing .video-thumb__play {
-  opacity: 0;
-  pointer-events: none;
-}
+.video-embed { position: relative; aspect-ratio: 16 / 9; background: #000; }
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 </style>
 </head>
 <body data-page="work">
@@ -140,9 +87,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
     </div>
   </section>
   <div class="wrap">
-    <div class="project-media project-media--full img-wipe reveal video-thumb" data-video-id="ELzo0LzzNOQ" role="button" tabindex="0" aria-label="プロジェクト動画を再生">
-      <img src="images/kiku-01.jpg" alt="絵画を聴く インスタレーション" loading="lazy">
-      <span class="video-thumb__play" aria-hidden="true"></span>
+    <div class="video-embed reveal">
+      <iframe src="https://www.youtube.com/embed/ELzo0LzzNOQ?rel=0" title="絵画を聴く プロジェクト動画" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy"></iframe>
     </div>
   </div>
 
@@ -168,7 +114,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
         「絵画を聴く」は、絵画の中に鳴っていたであろう環境音をデジタル上に作り出す、インタラクティブアート・研究プロジェクトである。従来の絵画鑑賞は、視覚と言語に依存した実践が主流であった。作者は、全盲の友人との絵画鑑賞で、言葉の説明では伝えきれない感覚があると気づき、絵画を音で拡張して共有する方法を探ってきた。
       </p>
       <p class="prose">
-        モネ《睡蓮の池と日本の橋》の文献調査と作品分析から、絵の中にあったかもしれない音を33個定義し、AIで効果音として生成して、絵の構図に沿ってUnityの3次元空間に配置し、一つの環境音にした。展示では、額縁を模した木枠に手を通すと、距離センサーが手の位置を読み取り、絵画の構図に合わせて環境音が変わり、振動スピーカーで木枠が震える。
+        モネ《睡蓮の池と日本の橋》の文献調査と作品分析から、絵の中にあったかもしれない音を33個定義し、ElevenLabsで効果音として生成して、絵の構図に沿ってUnityの3次元空間に配置し、一つの環境音にした。展示では、額縁を模した木枠に手を通すと、距離センサーが手の位置を読み取り、絵画の構図に合わせて環境音が変わり、振動スピーカーで木枠が震える。
       </p>
       <p class="prose">
         2026年5月の展示から、6月のワークショップ、7月の鑑賞会へと広げた。見える人も見えない人も、同じ絵の前で空間を知覚し、話し合える環境をつくることを試みている。
@@ -183,7 +129,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
       <dl class="review__list">
         <div>
           <dt>メディアとテクノロジー</dt>
-          <dd>絵の中にあったかもしれない音風景を、一つの想像的な解釈として作曲した。その音を、手の位置に応じて変わり、振動で手触りとして感じられる体験にするために、距離センサーと振動スピーカーを木枠に組み込んだ。音はモネの文献調査から33個を定義し、AIで生成してUnity上で絵の構図に置いている。
+          <dd>絵の中にあったかもしれない音風景を、一つの想像的な解釈として作曲した。その音を、手の位置に応じて変わり、振動で手触りとして感じられる体験にするために、距離センサーと振動スピーカーを木枠に組み込んだ。音はモネの文献調査から33個を定義し、ElevenLabsで生成して、Unity上で絵の構図に置いている。
           <div class="review__ph"><img src="images/kiku-06.jpg" alt="Unity上における音の3D配置" loading="lazy"><img src="images/kiku-02.jpg" alt="振動スピーカーのディテール" loading="lazy"></div>
           </dd>
         </div>
@@ -424,51 +370,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
   </div>
 </footer>
 
-<script>
-(function () {
-  var el = document.querySelector('.video-thumb');
-  if (!el) return;
-  var id = el.getAttribute('data-video-id');
-  var base = 'https://www.youtube.com/embed/' + id;
-  var allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-  var timer = null, frame = null, playing = false;
-  function mk(src, cls) {
-    var f = document.createElement('iframe');
-    f.src = src; f.className = cls; f.allow = allow; f.setAttribute('allowfullscreen', ''); f.referrerPolicy = 'strict-origin-when-cross-origin';
-    f.title = '絵画を聴く プロジェクト動画';
-    return f;
-  }
-  function stopPreview() {
-    clearTimeout(timer);
-    if (frame) { frame.remove(); frame = null; }
-    el.classList.remove('is-previewing');
-  }
-  function startPreview() {
-    if (playing || frame) return;
-    frame = mk(base + '?autoplay=1&mute=1&controls=0&loop=1&playlist=' + id + '&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1', 'video-thumb__frame video-thumb__frame--preview');
-    el.appendChild(frame);
-    el.classList.add('is-previewing');
-  }
-  function play() {
-    if (playing) return;
-    stopPreview();
-    playing = true;
-    el.classList.add('is-playing');
-    el.removeAttribute('role'); el.removeAttribute('tabindex'); el.removeAttribute('aria-label');
-    el.appendChild(mk(base + '?autoplay=1&rel=0&playsinline=1', 'video-thumb__frame'));
-  }
-  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (canHover && !reduce) {
-    el.addEventListener('mouseenter', function () { timer = setTimeout(startPreview, 500); });
-    el.addEventListener('mouseleave', stopPreview);
-  }
-  el.addEventListener('click', play);
-  el.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
-  });
-})();
-</script>
 <script src="js/main.js?v=10"></script>
 </body>
 </html>
