@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>絵画を聴く — Jumpei Kaneko</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="「絵画を聴く」は、絵画の中に鳴っていたであろう環境音をデジタル上に作り出す、インタラクティブアート・研究プロジェクト。モネ《睡蓮の池と日本の橋》の文献調査と作品分析から33個の音を定義し、ElevenLabsで効果音として生成して、Unityの3次元空間に配置し、一つの環境音にした。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=32">
+<style>
+/* クリックで動画になるサムネイル（work-detail-kiku.html と同じ） */
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+.kgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-top: var(--space-3); }
+.kgrid .photo-stream__item img { aspect-ratio: 4 / 3; object-fit: cover; height: auto; }
+@media (max-width: 720px) { .kgrid { gap: 12px; } }
+.prose { max-width: none; }
+#review.section { padding-top: 0; }
+.review__list { margin: var(--space-3) 0 0; padding: 0; }
+.review__list > div { display: grid; grid-template-columns: 12em 1fr; gap: 32px; padding: var(--space-3) 0; border-top: 1px solid rgba(128,128,128,.35); }
+.review__list > div:last-child { border-bottom: 1px solid rgba(128,128,128,.35); }
+.review__list dt { font-size: var(--fs-sm); letter-spacing: var(--ls-wide); color: var(--c-gray); margin: 0; white-space: nowrap; }
+.review__list dd { margin: 0; font-size: var(--fs-base); line-height: var(--lh-body); color: var(--c-fg-soft); text-wrap: pretty; line-break: strict; }
+.review__ph { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); margin-top: var(--space-3); max-width: 640px; }
+.review__ph img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+@media (max-width: 720px) { .review__list > div { grid-template-columns: 1fr; gap: var(--space-2); } }
+.toc { padding-top: var(--space-5); padding-bottom: var(--space-2); }
+.toc__list { list-style: none; margin: 0; padding: 0; }
+.toc__list li { border-top: 1px solid currentColor; border-color: rgba(128,128,128,.35); }
+.toc__list li:last-child { border-bottom: 1px solid rgba(128,128,128,.35); }
+.toc__list a { display: block; padding: .8em 0; text-decoration: none; color: inherit; }
+.toc__list a:hover { opacity: .6; }
+.video-embed { position: relative; aspect-ratio: 16 / 9; background: #000; }
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+</style>
+</head>
+<body data-page="work">
+
+<header class="site-header">
+  <div class="wrap site-header__row">
+    <a href="index.html" class="brand">
+      JUMPEI KANEKO
+      <span class="brand-jp">金子淳平</span>
+    </a>
+    <button class="menu-toggle" data-menu-toggle aria-expanded="false" aria-controls="nav">
+      <span class="menu-toggle__bars"><span></span><span></span><span></span></span>
+      MENU
+    </button>
+    <nav class="nav" id="nav">
+      <ul class="nav__list">
+        <li><a href="index.html" class="nav__link" data-nav-key="about">About</a></li>
+        <li><a href="work.html" class="nav__link" data-nav-key="work">Work</a></li>
+        <li><a href="news.html" class="nav__link" data-nav-key="news">News</a></li>
+        <li><a href="contact.html" class="nav__link" data-nav-key="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- 見出し -->
+  <section class="project-head wrap">
+    <p class="project-head__eyebrow">Work — 2026</p>
+    <h1 class="project-head__title" data-scramble>絵画を聴く</h1>
+    <div class="project-head__meta">
+      <span><strong>形態</strong> Interactive Art / Research</span>
+      <span><strong>技法・素材</strong> 木枠、振動スピーカー、距離センサー、Max/MSP、Unity、ElevenLabs</span>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee__track">
+      <span>絵画を聴く<em>／</em>Listening to Paintings<em>／</em>Interactive Art<em>／</em>Research<em>／</em></span>
+      <span>絵画を聴く<em>／</em>Listening to Paintings<em>／</em>Interactive Art<em>／</em>Research<em>／</em></span>
+    </div>
+  </div>
+
+  <!-- 作品動画 -->
+  <section class="section wrap" id="video" style="padding-bottom: var(--space-4);">
+    <div class="reveal">
+      <p class="block-title">作品動画</p>
+      <p class="prose">作品の実装、展示風景についてこちらをご覧ください。</p>
+    </div>
+  </section>
+  <div class="wrap">
+    <div class="video-embed reveal">
+      <iframe src="https://www.youtube.com/embed/ELzo0LzzNOQ?rel=0" title="絵画を聴く プロジェクト動画" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <!-- 目次 -->
+  <nav class="wrap toc reveal" aria-label="目次">
+    <p class="block-title">やまなしメディア芸術アワード2026-27の審査に向けて　目次</p>
+    <ol class="toc__list">
+      <li><a href="#overview">概要</a></li>
+      <li><a href="#review">審査基準への応答</a></li>
+      <li><a href="#why-me">01　なぜ私がやるのか</a></li>
+      <li><a href="#why-yamanashi">02　なぜ山梨でやるのか</a></li>
+      <li><a href="#work">03　手法とインタラクションの仕組み</a></li>
+      <li><a href="#records">04　記録</a></li>
+      <li><a href="#photos">05　写真</a></li>
+      <li><a href="#credits">06　クレジットと権利</a></li>
+    </ol>
+  </nav>
+
+  <!-- サムネイル -->
+  <div class="wrap">
+    <figure class="reveal" style="max-width:640px;margin:var(--space-4) 0;">
+      <img src="images/kaiga-wo-kiku-thumb.jpg" alt="「絵画を聴く」の展示風景：木枠、振動スピーカー、モネの絵の投影" style="width:100%;height:auto;display:block;">
+    </figure>
+  </div>
+
+  <!-- 概要（上層） -->
+  <section class="section wrap" id="overview">
+    <div class="reveal">
+      <p class="prose">
+        「絵画を聴く」は、絵画の中に鳴っていたであろう環境音をデジタル上に作り出す、インタラクティブアート・研究プロジェクトである。従来の絵画鑑賞は、視覚と言語に依存した実践が主流であった。作者は、全盲の友人との絵画鑑賞で、言葉の説明では伝えきれない感覚があると気づき、絵画を音で拡張して共有する方法を探ってきた。
+      </p>
+      <p class="prose">
+        モネ《睡蓮の池と日本の橋》の文献調査と作品分析から、絵の中にあったかもしれない音を33個定義し、ElevenLabsで効果音として生成して、絵の構図に沿ってUnityの3次元空間に配置し、一つの環境音にした。展示では、額縁を模した木枠に手を通すと、距離センサーが手の位置を読み取り、絵画の構図に合わせて環境音が変わり、振動スピーカーで木枠が震える。
+      </p>
+      <p class="prose">
+        2026年5月の展示から、6月のワークショップ、7月の鑑賞会へと広げた。見える人も見えない人も、同じ絵の前で空間を知覚し、話し合える環境をつくることを試みている。
+      </p>
+    </div>
+  </section>
+
+  <!-- 審査基準への応答 -->
+  <section class="section wrap" id="review">
+    <div class="reveal">
+      <p class="block-title">審査基準への応答</p>
+      <dl class="review__list">
+        <div>
+          <dt>メディアとテクノロジー</dt>
+          <dd>絵の中にあったかもしれない音風景を、一つの想像的な解釈として作曲した。その音を、手の位置に応じて変わり、振動で手触りとして感じられる体験にするために、距離センサーと振動スピーカーを木枠に組み込んだ。音はモネの文献調査から33個を定義し、ElevenLabsで生成して、Unity上で絵の構図に置いている。
+          <div class="review__ph"><img src="images/kiku-06.jpg" alt="Unity上における音の3D配置" loading="lazy"><img src="images/kiku-02.jpg" alt="振動スピーカーのディテール" loading="lazy"></div>
+          </dd>
+        </div>
+        <div>
+          <dt>新しいことへの挑戦</dt>
+          <dd>音を用いた表現の先行実践であるソニフィケーションは、データを規則に沿って音へ変換するため、想像的な解釈が少ない。視覚に頼らない鑑賞の試みは、主に言語による対話を介するため、直感的に絵に入り込みにくい。この作品は、絵画世界にあったであろう音風景を想像的な解釈として作曲し、音と振動で直感的に体感させる。
+          <div class="review__ph"><img src="images/kiku-05.jpg" alt="Max/MSPを用いた制作風景" loading="lazy"><img src="images/kiku-03.jpg" alt="モネの絵の前で説明する様子" loading="lazy"></div>
+          </dd>
+        </div>
+        <div>
+          <dt>批評性とメッセージ性</dt>
+          <dd>既存の美術館の音声ガイドの多くは、日本語が使え、目が見えることを前提に設計されている。この作品は、音と振動を入口にして、視覚や言語の程度に関わらず同じ絵を体感できるようにした。さらに、AIが作った効果音に、人がどれだけ自然の情景やエモーションを重ねられるかを問うている。</dd>
+        </div>
+        <div>
+          <dt>未来への提案</dt>
+          <dd>視覚の程度や言語、文化的背景に関わらず、多様な人々が同じ場で体験を交換し合える環境をつくりたい。鑑賞を共有する過程そのものが対話となり、背景を超えたコミュニケーションが生まれる状態を目指している。今後は、既存の言語ガイドと併せて使える音声ガイドと、触察と音を組み合わせた展覧会へ展開していく。</dd>
+        </div>
+        <div>
+          <dt>驚きや発見</dt>
+          <dd>木枠に手を通すと、手の位置に応じて、絵の構図に合わせた音が変わる。振動スピーカーで木枠が震え、音を手触りとして感じられる。体験者からは「空間性を感じられる」「振動により，絵画世界によりリアリティを感じる」「歩いて近づくことで他者の個性を体験できた」という声があった。
+          <div class="review__ph"><img src="images/kiku-04.jpg" alt="斜めから見たインスタレーション" loading="lazy"><img src="images/kikue-05.jpg" alt="Webアプリを用いたワークショップ" loading="lazy"></div>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- 01 なぜ私か -->
+  <section class="section wrap" id="why-me">
+    <div class="heading reveal">
+      <span class="heading__num">01</span>
+      <h2 class="heading__title" data-scramble>なぜ私がやるのか</h2>
+      <span class="heading__en">Why Me</span>
+    </div>
+
+    <div class="reveal">
+      <p class="prose">
+        私は大学でフランスの美術と思想を研究しながら、サウンドアートの制作を続けている。全盲の友人との鑑賞で知った感覚を出発点に、絵の中に鳴っていたであろう環境音を作曲する実践として、「絵画を聴く」を続けている。
+      </p>
+    </div>
+  </section>
+
+  <!-- 02 なぜ山梨で -->
+  <section class="section wrap" id="why-yamanashi">
+    <div class="heading reveal">
+      <span class="heading__num">02</span>
+      <h2 class="heading__title" data-scramble>なぜ山梨でやるのか</h2>
+      <span class="heading__en">Why Yamanashi</span>
+    </div>
+
+    <div class="reveal">
+      <p class="prose">
+        「絵画を聴く」は、絵画の鑑賞を、見える人にも見えない人にも開く作品である。入選した場合は、山梨で描かれた絵画を対象にしたい。
+      </p>
+      <p class="prose">
+        これまでの音は、モネの絵の文献調査から定義し、ElevenLabsで生成した音である。山梨で描かれた絵画であれば、描かれた場所で音を採集し、絵の中に鳴っていたであろう音の素材にできる。
+      </p>
+      <p class="prose">
+        その絵を所蔵する美術館で行えれば、絵画鑑賞が営まれる場で、来場者の声を集められる。
+      </p>
+    </div>
+  </section>
+
+  <!-- 03 仕組み -->
+  <section class="section wrap" id="work">
+    <div class="heading reveal">
+      <span class="heading__num">03</span>
+      <h2 class="heading__title" data-scramble>手法とインタラクションの仕組み</h2>
+      <span class="heading__en">The Work</span>
+    </div>
+
+    <div class="reveal">
+      <p class="block-title">手法</p>
+      <p class="prose">
+        モネ《睡蓮の池と日本の橋》(1899年、プリンストン大学美術館蔵)の文献調査と作品分析から、絵の中に鳴っていたであろう音を、水音、植物音、生物音、鳥の声の4分類10要素、計33音に定義した。素材はElevenLabsで生成した。生成AIの使用箇所は、個別の効果音の素材生成である。素材はUnity上で3次元に配置し、発生確率を互いに連動させた。音は常に移り変わる。
+      </p>
+    </div>
+
+    <div class="photo-stream reveal-stagger" style="margin-top: var(--space-4);">
+      <div>
+        <div class="photo-stream__item img-wipe"><img src="images/kiku-06.jpg" alt="Unity上における音の3D配置" loading="lazy"></div>
+        <p class="photo-stream__cap">Unity上における音の3D配置</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-5);">
+      <p class="block-title">インタラクションの仕組み</p>
+      <p class="prose">
+        出力装置は、絵画のフレームを模した木枠で、振動スピーカーを設置している。Unityで構築した環境音を振動スピーカーに出力し、木枠そのものを震わせて鳴らす。距離センサーで空間を複数の領域に分割し、センサーの値をMax/MSP経由でUnityに送る。鑑賞者が木枠に手を通すと、手の位置に応じて環境音が変わり、木枠が震える。
+      </p>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-5);">
+      <p class="block-title">論文</p>
+      <p class="prose">
+        「絵画を聴く」絵画の音響的拡張における鑑賞体験と対話の創出。第31回日本バーチャルリアリティ学会大会論文集（2026年9月）。
+      </p>
+      <div class="project-links">
+        <a href="https://www.conference.vrsj.org/ac2026/program/doc/2G-17.pdf" target="_blank" rel="noopener">論文を読む（PDF） ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 記録 -->
+  <section class="section wrap" id="records">
+    <div class="heading reveal">
+      <span class="heading__num">04</span>
+      <h2 class="heading__title" data-scramble>記録</h2>
+      <span class="heading__en">Records</span>
+    </div>
+
+    <div class="reveal">
+      <p class="block-title">2026年5月23〜24日　インスタレーション（ASIBA DEMO DAY）</p>
+      <p class="prose">
+        モネ《睡蓮の池と日本の橋》を対象に、木枠、振動スピーカー、距離センサーの装置を制作した。
+      </p>
+      <p class="prose">
+        全盲の友人：「空間性を感じられる」「絵の要素を音で感じられる」<br>
+        晴眼者：「振動により，絵画世界によりリアリティを感じる」
+      </p>
+      <p class="prose">
+        気づき：見える人も見えない人も、同じ場所でコミュニケーションできることが重要だと分かった。
+      </p>
+      <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-03.jpg" alt="モネの絵の前で説明する様子" loading="lazy"></div>
+          <p class="photo-stream__cap">モネの絵の前で説明する様子</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-08.jpg" alt="ASIBA DEMO DAY 会場の様子" loading="lazy"></div>
+          <p class="photo-stream__cap">ASIBA DEMO DAY 会場の様子</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-5);">
+      <p class="block-title">2026年6月30日　美学校ワークショップ「聴く絵画をつくる」（7名）</p>
+      <p class="prose">
+        無音で絵を見る、音をつけて見る、参加者がスマートフォンで音を選んで空間に置き、全員で一つの「聴く絵画」を共作する、の3段階で行った。
+      </p>
+      <p class="prose">
+        7段階評価：イメージの深化 5.1 → 6.4／没入感 5.3 → 6.0／奥行き 5.9 → 6.0（ほぼ変わらなかった）
+      </p>
+      <p class="prose">
+        声：「歩いて近づくことで他者の個性を体験できた」「人為的なもの（AI 効果音）の集合体が自然となるのが妙に思った」<br>
+        課題：「音が強すぎて絵に意識が向かわない」
+      </p>
+      <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kikue-05.jpg" alt="Webアプリを用いたワークショップ" loading="lazy"></div>
+          <p class="photo-stream__cap">Webアプリを用いたワークショップ</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kikue-08.jpg" alt="ワークショップの参加者の様子" loading="lazy"></div>
+          <p class="photo-stream__cap">ワークショップの参加者の様子</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-5);">
+      <p class="block-title">2026年7月25日　東京都盲人福祉協会 鑑賞会（八王子）</p>
+      <p class="prose">
+        言語と音を使った鑑賞会を開いた。全盲・ロービジョンの方7名が対面で、1名がオンラインで参加した。前向きな声が多く出て、感じ方は人によって十人十色だった。
+      </p>
+      <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/hachioji-01.jpg" alt="鑑賞会の様子" loading="lazy"></div>
+          <p class="photo-stream__cap">鑑賞会の様子</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: var(--space-5);">
+      <p class="block-title">2026年9月　研究発表</p>
+      <p class="prose">
+        第31回日本バーチャルリアリティ学会大会で、この3つの記録をまとめた論文を発表した。論文は、査読なしの技術報告として大会論文集に掲載されている。
+      </p>
+    </div>
+  </section>
+
+  <!-- 05 写真 -->
+  <section class="section wrap" id="photos">
+    <div class="heading reveal">
+      <span class="heading__num">05</span>
+      <h2 class="heading__title" data-scramble>写真</h2>
+      <span class="heading__en">Photos</span>
+    </div>
+
+    <div class="kgrid reveal-stagger">
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-04.jpg" alt="斜めから見たインスタレーション" loading="lazy"></div>
+          <p class="photo-stream__cap">斜めから見たインスタレーション</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-02.jpg" alt="振動スピーカーのディテール" loading="lazy"></div>
+          <p class="photo-stream__cap">振動スピーカーのディテール</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-09.jpg" alt="振動スピーカーの端子" loading="lazy"></div>
+          <p class="photo-stream__cap">振動スピーカーの端子</p>
+        </div>
+        <div>
+          <div class="photo-stream__item img-wipe"><img src="images/kiku-05.jpg" alt="Max/MSPを用いた制作風景" loading="lazy"></div>
+          <p class="photo-stream__cap">Max/MSPを用いた制作風景</p>
+        </div>
+      </div>
+  </section>
+
+  <!-- 06 クレジットと権利 -->
+  <section class="section wrap" id="credits">
+    <div class="heading reveal">
+      <span class="heading__num">06</span>
+      <h2 class="heading__title" data-scramble>クレジットと権利</h2>
+      <span class="heading__en">Credits</span>
+    </div>
+
+    <div class="reveal">
+      <p class="prose">
+        構成・制作：金子淳平／プロジェクトメンター・論文指導：中條麟太郎／ワークショップ補助：武田聡彦、田口玲／動画撮影：井上国太郎、児玉萌<br>
+        開発・活動支援：一般社団法人ASIBA（ASIBA Creative League 4期採択）、100BANCH、独立学校法人 美学校／機材協力：NTTソノリティ株式会社<br>
+        画像：モネ《睡蓮の池と日本の橋》（プリンストン大学美術館蔵）
+      </p>
+    </div>
+  </section>
+
+  <a href="work.html" class="back-link wrap">← Back to Work</a>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__row">
+    <span>© 2026 JUMPEI KANEKO</span>
+    <div class="site-footer__socials">
+      <a href="https://www.instagram.com/jumpei.kaneko" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://soundcloud.com/lt1jsa0m3wbn" target="_blank" rel="noopener">SoundCloud</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js?v=10"></script>
+</body>
+</html>
