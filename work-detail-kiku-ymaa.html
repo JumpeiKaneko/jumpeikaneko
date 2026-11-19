@@ -17,6 +17,16 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 .kgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-top: var(--space-3); }
 .kgrid .photo-stream__item img { aspect-ratio: 4 / 3; object-fit: cover; height: auto; }
 @media (max-width: 720px) { .kgrid { gap: 12px; } }
+.prose { max-width: none; }
+#review.section { padding-top: 0; }
+.review__list { margin: var(--space-3) 0 0; padding: 0; }
+.review__list > div { display: grid; grid-template-columns: 12em 1fr; gap: 32px; padding: var(--space-3) 0; border-top: 1px solid rgba(128,128,128,.35); }
+.review__list > div:last-child { border-bottom: 1px solid rgba(128,128,128,.35); }
+.review__list dt { font-size: var(--fs-sm); letter-spacing: var(--ls-wide); color: var(--c-gray); margin: 0; white-space: nowrap; }
+.review__list dd { margin: 0; font-size: var(--fs-base); line-height: var(--lh-body); color: var(--c-fg-soft); text-wrap: pretty; line-break: strict; }
+.review__ph { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); margin-top: var(--space-3); max-width: 640px; }
+.review__ph img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+@media (max-width: 720px) { .review__list > div { grid-template-columns: 1fr; gap: var(--space-2); } }
 .toc { padding-top: var(--space-5); padding-bottom: var(--space-2); }
 .toc__list { list-style: none; margin: 0; padding: 0; }
 .toc__list li { border-top: 1px solid currentColor; border-color: rgba(128,128,128,.35); }
@@ -111,7 +121,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
     <h1 class="project-head__title" data-scramble>絵画を聴く</h1>
     <div class="project-head__meta">
       <span><strong>形態</strong> Interactive Art / Research</span>
-      <span><strong>技法・素材</strong> 木枠、振動スピーカー、距離センサー、Max/MSP、Unity、環境音</span>
+      <span><strong>技法・素材</strong> 木枠、振動スピーカー、距離センサー、Max/MSP、Unity、ElevenLabs</span>
     </div>
   </section>
 
@@ -126,7 +136,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
   <section class="section wrap" id="video" style="padding-bottom: var(--space-4);">
     <div class="reveal">
       <p class="block-title">作品動画</p>
-      <p class="prose">こちらをご覧ください。</p>
+      <p class="prose">作品の実装、展示風景についてこちらをご覧ください。</p>
     </div>
   </section>
   <div class="wrap">
@@ -138,12 +148,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 
   <!-- 目次 -->
   <nav class="wrap toc reveal" aria-label="目次">
-    <p class="block-title">目次</p>
+    <p class="block-title">審査に向けて　目次</p>
     <ol class="toc__list">
       <li><a href="#overview">概要</a></li>
-      <li><a href="#why-me">01　なぜ私か</a></li>
-      <li><a href="#why-yamanashi">02　なぜ山梨で</a></li>
-      <li><a href="#work">03　仕組み</a></li>
+      <li><a href="#review">審査基準への応答</a></li>
+      <li><a href="#why-me">01　なぜ私がやるのか</a></li>
+      <li><a href="#why-yamanashi">02　なぜ山梨でやるのか</a></li>
+      <li><a href="#work">03　手法とインタラクションの仕組み</a></li>
       <li><a href="#records">04　記録</a></li>
       <li><a href="#photos">05　写真</a></li>
       <li><a href="#credits">06　クレジットと権利</a></li>
@@ -165,11 +176,46 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
     </div>
   </section>
 
+  <!-- 審査基準への応答 -->
+  <section class="section wrap" id="review">
+    <div class="reveal">
+      <p class="block-title">審査基準への応答</p>
+      <dl class="review__list">
+        <div>
+          <dt>メディアとテクノロジー</dt>
+          <dd>絵の中にあったかもしれない音風景を、一つの想像的な解釈として作曲した。その音を、手の位置に応じて変わり、振動で手触りとして感じられる体験にするために、距離センサーと振動スピーカーを木枠に組み込んだ。音はモネの文献調査から33個を定義し、AIで生成してUnity上で絵の構図に置いている。
+          <div class="review__ph"><img src="images/kiku-06.jpg" alt="Unity上における音の3D配置" loading="lazy"><img src="images/kiku-02.jpg" alt="振動スピーカーのディテール" loading="lazy"></div>
+          </dd>
+        </div>
+        <div>
+          <dt>新しいことへの挑戦</dt>
+          <dd>音を用いた表現の先行実践であるソニフィケーションは、データを規則に沿って音へ変換するため、想像的な解釈が少ない。視覚に頼らない鑑賞の試みは、主に言語による対話を介するため、直感的に絵に入り込みにくい。この作品は、絵画世界にあったであろう音風景を想像的な解釈として作曲し、音と振動で直感的に体感させる。
+          <div class="review__ph"><img src="images/kiku-05.jpg" alt="Max/MSPを用いた制作風景" loading="lazy"><img src="images/kiku-03.jpg" alt="モネの絵の前で説明する様子" loading="lazy"></div>
+          </dd>
+        </div>
+        <div>
+          <dt>批評性とメッセージ性</dt>
+          <dd>既存の美術館の音声ガイドの多くは、日本語が使え、目が見えることを前提に設計されている。この作品は、音と振動を入口にして、視覚や言語の程度に関わらず同じ絵を体感できるようにした。さらに、AIが作った効果音に、人がどれだけ自然の情景やエモーションを重ねられるかを問うている。</dd>
+        </div>
+        <div>
+          <dt>未来への提案</dt>
+          <dd>視覚の程度や言語、文化的背景に関わらず、多様な人々が同じ場で体験を交換し合える環境をつくりたい。鑑賞を共有する過程そのものが対話となり、背景を超えたコミュニケーションが生まれる状態を目指している。今後は、既存の言語ガイドと併せて使える音声ガイドと、触察と音を組み合わせた展覧会へ展開していく。</dd>
+        </div>
+        <div>
+          <dt>驚きや発見</dt>
+          <dd>木枠に手を通すと、手の位置に応じて、絵の構図に合わせた音が変わる。振動スピーカーで木枠が震え、音を手触りとして感じられる。体験者からは「空間性を感じられる」「振動により，絵画世界によりリアリティを感じる」「歩いて近づくことで他者の個性を体験できた」という声があった。
+          <div class="review__ph"><img src="images/kiku-04.jpg" alt="斜めから見たインスタレーション" loading="lazy"><img src="images/kikue-05.jpg" alt="Webアプリを用いたワークショップ" loading="lazy"></div>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
   <!-- 01 なぜ私か -->
   <section class="section wrap" id="why-me">
     <div class="heading reveal">
       <span class="heading__num">01</span>
-      <h2 class="heading__title" data-scramble>なぜ私か</h2>
+      <h2 class="heading__title" data-scramble>なぜ私がやるのか</h2>
       <span class="heading__en">Why Me</span>
     </div>
 
@@ -184,7 +230,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
   <section class="section wrap" id="why-yamanashi">
     <div class="heading reveal">
       <span class="heading__num">02</span>
-      <h2 class="heading__title" data-scramble>なぜ山梨で</h2>
+      <h2 class="heading__title" data-scramble>なぜ山梨でやるのか</h2>
       <span class="heading__en">Why Yamanashi</span>
     </div>
 
@@ -205,7 +251,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
   <section class="section wrap" id="work">
     <div class="heading reveal">
       <span class="heading__num">03</span>
-      <h2 class="heading__title" data-scramble>仕組み</h2>
+      <h2 class="heading__title" data-scramble>手法とインタラクションの仕組み</h2>
       <span class="heading__en">The Work</span>
     </div>
 
@@ -356,8 +402,8 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 
     <div class="reveal">
       <p class="prose">
-        制作：金子淳平<br>
-        協力：ASIBA Creative League、100BANCH、NTTソノリティ（ワークショップのイヤホン提供）<br>
+        構成・制作：金子淳平／プロジェクトメンター・論文指導：中條麟太郎／ワークショップ補助：武田聡彦、田口玲／動画撮影：井上国太郎、児玉萌<br>
+        開発・活動支援：一般社団法人ASIBA（ASIBA Creative League 4期採択）、100BANCH、独立学校法人 美学校／機材協力：NTTソノリティ株式会社<br>
         画像：モネ《睡蓮の池と日本の橋》（プリンストン大学美術館蔵）
       </p>
     </div>
